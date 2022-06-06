@@ -67,7 +67,17 @@ tbody tr td:nth-child(9) div {
 }
 
 .ced_container{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+}
+
+/* .ced{
+    display: inline;
+    width: 30px;
+    background: black;
+} */
+.select-nat{
+    height: 100%;
 }
 
 @media(max-width: 450px) {

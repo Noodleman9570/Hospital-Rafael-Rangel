@@ -20,22 +20,22 @@
                 <label for="ced" class="formulario__label">Cedula</label>
                 <input type="text" class="formulario__input" name="id" id="id">
 
-                <div class="ced_container" width=:"40px">
-                  <div class="formulario__grupo" id="grupo__edo">
-                    <select class="form-control select" name="estado" id="sel_nat" style="width: 100%;">
+                <div class="ced_container">
+                  <div class="formulario__grupo ced" id="grupo__ced">
+                    <select onchange="natChg();" class="form-control select-nat" name="estado" id="sel_nat">
                         <option value="V">V</option>
                         <option value="E">E</option>
                     </select>
                   </div>
 
 
-                <div class="formulario__grupo" id="grupo__ced">
-                  <div class="formulario__grupo-input">
-                    <input type="text" class="formulario__input" name="ced" id="ced" placeholder="26587963">
-                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                  <div class="formulario__grupo" id="grupo__ced">
+                    <div class="formulario__grupo-input">
+                      <input type="text" class="formulario__input" name="ced" id="ced" placeholder="26587963">
+                      <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                    </div>
                   </div>
                 </div>
-              </div>
               
               <!-- Grupo: Apellido -->
               <div class="formulario__grupo" id="grupo__ap">

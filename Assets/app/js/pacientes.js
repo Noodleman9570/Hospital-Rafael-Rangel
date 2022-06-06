@@ -481,3 +481,11 @@ $(document).ready(function() {
     listarMUN(idedo);
 })
 
+function natChg(){
+
+    if($("#sel_nat").val() == "E"){
+        $(".direction_container").hide();
+    }else{
+        $(".direction_container").show();
+    }
+};
