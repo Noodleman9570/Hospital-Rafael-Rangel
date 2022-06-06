@@ -66,6 +66,10 @@ tbody tr td:nth-child(9) div {
     height: 45px;
 }
 
+.ced_container{
+    display: flex;
+}
+
 @media(max-width: 450px) {
     .dt-buttons{
         width: auto;

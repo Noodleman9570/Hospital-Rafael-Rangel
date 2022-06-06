@@ -16,14 +16,24 @@
               <h5 class="id">Nro. </h5>
               <!-- Grupo: cedula -->
               
-                  <input type="text" class="formulario__input" name="id" id="id">
-        
-              
-              <div class="formulario__grupo" id="grupo__ced">
+
                 <label for="ced" class="formulario__label">Cedula</label>
-                <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="ced" id="ced" placeholder="V-26587963">
-                  <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                <input type="text" class="formulario__input" name="id" id="id">
+
+                <div class="ced_container" width=:"40px">
+                  <div class="formulario__grupo" id="grupo__edo">
+                    <select class="form-control select" name="estado" id="sel_nat" style="width: 100%;">
+                        <option value="V">V</option>
+                        <option value="E">E</option>
+                    </select>
+                  </div>
+
+
+                <div class="formulario__grupo" id="grupo__ced">
+                  <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="ced" id="ced" placeholder="26587963">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                  </div>
                 </div>
               </div>
               
