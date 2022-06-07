@@ -17,11 +17,11 @@
               <!-- Grupo: cedula -->
               
 
-                <label for="ced" class="formulario__label">Cedula</label>
+                <label for="ced" class="formulario__label label__nat">Cédula de identidad</label>
                 <input type="text" class="formulario__input" name="id" id="id">
 
                 <div class="ced_container">
-                  <div class="formulario__grupo ced" id="grupo__ced">
+                  <div class="formulario__grupo nat" id="grupo__nat">
                     <select onchange="natChg();" class="form-control select-nat" name="estado" id="sel_nat">
                         <option value="V">V</option>
                         <option value="E">E</option>
@@ -61,6 +61,10 @@
                     <option value="m">Masculino</option>
                     <option value="f">Femenino</option>
                 </select>
+              </div>
+              
+              <div class="formulario__grupo country" id="grupo__country">
+
               </div>
 
               <div class="direction_container">

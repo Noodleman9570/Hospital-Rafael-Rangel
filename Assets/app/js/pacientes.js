@@ -4,20 +4,26 @@ const inputs = document.querySelectorAll('#formRegister input');
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
-    cedula: /([V,E]-[0-9]{6,7})/,
+    cedula: /^[0-9]{7,8}$/,
+    pasaporte: /^[a-zA-Z0-9_-]{8,9}$/
 }
 
 const campos = {
 	nom: false,
 	ced: false,
 	correo: false,
-	telefono: false
+	telefono: false,
+    pasaporte: false,
 }
 
 const validarFormulario = (e) => {
 	switch (e.target.name) {
 		case "ced":
-			validarCampo(expresiones.cedula, e.target, 'ced');
+            if ($("#sel_nat").val() == "V") {
+                validarCampo(expresiones.cedula, e.target, 'ced');
+            }else{
+                validarCampo(expresiones.pasaporte, e.target, 'ced');
+            }
 		break;
 		case "ap":
 			validarCampo(expresiones.nombre, e.target, 'ap');
@@ -115,6 +121,7 @@ document.addEventListener("DOMContentLoaded",function(){
         //Datos desde el servidor
         columns:[
             {data: `id`},
+            {data: `nat`},
             {data: `ced`},
             {data: `ap`},
             {data: `no`},
@@ -285,6 +292,8 @@ $("#buttonAdd").on(
         $("#delete").hide();
         formulario.reset();
         listarEDO();
+        $(".count ").remove();
+        $("Pais").remove();
         
     }
     );
@@ -304,6 +313,8 @@ $("#tblPac tbody").on(
         document.getElementById("enviar").style.width = '13vh';
         $("#edit").show();
         $("#delete").show();
+        $(".count ").remove();
+        $("Pais").remove();
         let data_tabla = tblPac.row($(this).parents("tr")).data();
         var id = data_tabla.id
         let ced = data_tabla.ced;
@@ -484,8 +495,15 @@ $(document).ready(function() {
 function natChg(){
 
     if($("#sel_nat").val() == "E"){
-        $(".direction_container").hide();
+        $(".label__nat").text("Nº de pasaporte");
+        $("#ced").attr("placeholder", "7A8000221");
+        $("#grupo__country").append($(('<labe class="count"l>Pais de origen</labe><input class="formulario__input count"> ')));
+        $("#ced").val("");
     }else{
-        $(".direction_container").show();
+        $(".label__nat").text("Cédula de identidad");
+        $("#ced").attr("placeholder", "26587963");
+        $(".count ").remove();
+        $("Pais").remove();
+        $("#ced").val("");
     }
 };

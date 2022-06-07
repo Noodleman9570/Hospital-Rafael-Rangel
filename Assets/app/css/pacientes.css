@@ -68,14 +68,17 @@ tbody tr td:nth-child(9) div {
 
 .ced_container{
     display: grid;
-    grid-template-columns: 1fr 8fr;
+    grid-template-columns: 1fr 9fr;
 }
 
-/* .ced{
-    display: inline;
-    width: 30px;
-    background: black;
-} */
+.country{
+    margin-top: 10px;
+}
+.sorting_1{
+   display: flex;
+   justify-content: end;
+}
+
 .select-nat{
     height: 100%;
 }

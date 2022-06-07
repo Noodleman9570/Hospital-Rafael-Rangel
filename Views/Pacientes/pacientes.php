@@ -21,6 +21,7 @@
             <thead>
               <tr>
                 <th>Id</th>
+                <th>Nacionalidad</th>
                 <th>Cedúla</th>
                 <th>Apellido</th>
                 <th>Nombre</th>
