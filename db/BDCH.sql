@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2022 a las 14:42:54
+-- Tiempo de generación: 10-06-2022 a las 02:22:26
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -218,9 +218,10 @@ CREATE TABLE `tmbch_med` (
 --
 
 INSERT INTO `tmbch_med` (`TMMED_MID`, `TMMED_CI`, `TMMUN_CM`, `TMMED_DIR`, `TMMED_AP`, `TMMED_NO`, `TMMED_TF`, `TMESP_CE`) VALUES
-(1, 'V-27394396', 6, 'Centro, carrera 8, entre calles 9 y 10', 'Saavedra', 'kevin', '04165026559', 1),
+(1, 'V-27394396', 6, 'Centro, carrera 8, entre calles 9 y 10', 'Saavedraa', 'kevin', '04165026559', 1),
 (3, 'V-27364259', 2, 'Centro diagonal a al iglesia coromoto', 'Carmona', 'Maria Evita', '4265740027', 1),
-(5, 'V-24589985', 6, 'Barrio obrero', 'Zambrano Prereira', 'Camila', '04165895214', 5);
+(5, 'V-24589980', 6, 'Barrio obrero', 'Zambrano Prereiraa', 'Camilas', '04165895214', 5),
+(6, 'V-27495433', 2, 'aadsfsad', 'Lius', 'Alejandro', '432423424', 1);
 
 -- --------------------------------------------------------
 
@@ -253,12 +254,12 @@ INSERT INTO `tmbch_mun` (`TMMUN_CM`, `TMMUN_NO`, `TMEDO_CE`) VALUES
 
 CREATE TABLE `tmbch_pac` (
   `TMPAC_PID` int(11) NOT NULL,
+  `TMPAC_NAT` enum('V','E') COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_CI` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMUN_CM` int(11) NOT NULL,
   `TMPAC_NO` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_AP` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_SX` enum('m','f') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMPAC_VOE` enum('V','E') COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_DIR` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_FN` date NOT NULL,
   `TMPAC_TF` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -268,13 +269,13 @@ CREATE TABLE `tmbch_pac` (
 -- Volcado de datos para la tabla `tmbch_pac`
 --
 
-INSERT INTO `tmbch_pac` (`TMPAC_PID`, `TMPAC_CI`, `TMMUN_CM`, `TMPAC_NO`, `TMPAC_AP`, `TMPAC_SX`, `TMPAC_VOE`, `TMPAC_DIR`, `TMPAC_FN`, `TMPAC_TF`) VALUES
-(1, 'V-24589985', 4, 'Luis Alfonso', 'Zambrano Prereira', 'm', 'V', 'Centro diagonal a al iglesia coromoto', '2000-07-13', '04165026559'),
-(2, 'V-24896666', 6, 'Maria Antonieta', 'Sanchez', 'f', 'V', 'Capacho', '1998-04-17', '04248963333'),
-(5, 'V-27364259', 4, 'Camila ', 'Becerra', 'f', 'V', 'Barrio obrero', '2004-04-22', '04248965545'),
-(7, 'V-27394396', 2, 'Kevin Leonardo', 'Saavedra Carmona', 'm', 'V', 'Avenida principal', '2000-07-13', '04165026559'),
-(10, 'V-9150202', 5, 'Maria Evita', 'Carmona', 'f', 'V', 'Centro, carrera 8, entre calles 9 y 10', '1966-06-15', '4265740027'),
-(35, 'V-27456789', 6, 'John', 'Becerra', 'm', 'V', 'Barrio obrero', '1997-06-26', '04165026559');
+INSERT INTO `tmbch_pac` (`TMPAC_PID`, `TMPAC_NAT`, `TMPAC_CI`, `TMMUN_CM`, `TMPAC_NO`, `TMPAC_AP`, `TMPAC_SX`, `TMPAC_DIR`, `TMPAC_FN`, `TMPAC_TF`) VALUES
+(1, 'V', '24589985', 4, 'Luis Alfonso', 'Zambrano Prereira', 'm', 'Centro diagonal a al iglesia coromoto', '2000-07-13', '04165026559'),
+(2, 'V', '24896666', 6, 'Maria Antonieta', 'Sanchez', 'f', 'Capacho', '1998-04-17', '04248963333'),
+(5, 'V', '27364259', 4, 'Camila ', 'Becerra', 'f', 'Barrio obrero', '2004-04-22', '04248965545'),
+(7, 'V', '27394396', 2, 'Kevin Leonardo', 'Saavedra Carmona', 'm', 'Avenida principal', '2000-07-13', '04165026559'),
+(10, 'V', '9150202', 5, 'Maria Evita', 'Carmona', 'f', 'Centro, carrera 8, entre calles 9 y 10', '1966-06-15', '4265740027'),
+(35, 'V', '27456789', 6, 'John', 'Becerra', 'm', 'Barrio obrero', '1997-06-26', '04165026559');
 
 -- --------------------------------------------------------
 
@@ -557,7 +558,7 @@ ALTER TABLE `tmbch_esp`
 -- AUTO_INCREMENT de la tabla `tmbch_med`
 --
 ALTER TABLE `tmbch_med`
-  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tmbch_mun`
