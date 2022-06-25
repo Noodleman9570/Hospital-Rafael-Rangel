@@ -121,7 +121,6 @@ document.addEventListener("DOMContentLoaded",function(){
         //Datos desde el servidor
         columns:[
             {data: `id`},
-            {data: `nat`},
             {data: `ced`},
             {data: `ap`},
             {data: `no`},
@@ -305,6 +304,7 @@ $("#tblPac tbody").on(
     "button.editarFnt",
     async function()
     {
+        console.log("Hola si existo");
         openModal();
         $('#modal-header').css('background', '#FFD24C')
         $(".modal-title").text('Editar Paciente');
@@ -316,7 +316,8 @@ $("#tblPac tbody").on(
         $(".count ").remove();
         $("Pais").remove();
         let data_tabla = tblPac.row($(this).parents("tr")).data();
-        var id = data_tabla.id
+        console.log(tblPac);
+        var id = data_tabla.id;
         let ced = data_tabla.ced;
         let ap = data_tabla.ap;
         let nom = data_tabla.no;
