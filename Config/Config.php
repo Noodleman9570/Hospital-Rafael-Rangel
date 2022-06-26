@@ -39,7 +39,7 @@
     define('PLUGINS', ASSETS."/plugins");
     define('FONTS', ASSETS."/font-awesome");
     define('IMG', ASSETS."/images");
-    define('UPLOADS', IMG."/uploads");
+    define('UPLOADS', IMG."/uploads"); 
     define('FAVICON', ASSETS."/app/favicon");
     define('DATATABLE', PLUGINS."/DataTables");
 

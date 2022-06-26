@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded",function(){
                 visible:false,
                 serchable:false,
                 extend: false
-            }
+            },
+            { responsivePriority: 1, targets:  0},
+            { responsivePriority: 2, targets:  4},
         ],
         //Mostrar botones de exportacion
         responsive: "true",

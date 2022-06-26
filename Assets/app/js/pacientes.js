@@ -3,7 +3,7 @@ const inputs = document.querySelectorAll('#formRegister input');
 
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
+	telefono: /^[9|6|7][0-9]{8}$/, // 7 a 14 numeros.
     cedula: /([V,E]-[0-9]{6,7})/,
 }
 
@@ -11,7 +11,7 @@ const campos = {
 	nom: false,
 	ced: false,
 	correo: false,
-	telefono: false
+	telefono: false,
 }
 
 const validarFormulario = (e) => {
@@ -26,7 +26,7 @@ const validarFormulario = (e) => {
 			validarCampo(expresiones.nombre, e.target, 'nom');;
 		break;
 		case "tf":
-			validarCampo(expresiones.telefono, e.target, 'tf');
+			validarCampo(expresiones.nombre, e.target, 'tf');
 		break;
 	}
 }
@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded",function(){
                 defaultContent:"<div><button type='button' class='editarFnt btn btn-warning btn-xs'><i class='fa-regular fa-address-book'></i></button><button type='button' class='eliminarFnt btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></div>"
             },
         ],
+        responsive: "true",
         //Ocultar columnas
         columnDefs:[
             {
@@ -137,10 +138,11 @@ document.addEventListener("DOMContentLoaded",function(){
                 serchable:false,
                 extend: false
 
-            }
+            },
+            { responsivePriority: 1, targets:  0},
+            { responsivePriority: 2, targets:  11},
         ],
         //Mostrar botones de exportacion
-        responsive: "true",
         dom:"lBfrtip",
         buttons:[
             {
@@ -347,9 +349,8 @@ $("#tblPac tbody").on(
     "button.eliminarFnt",
     async function()
     {
-
         let data_tabla = tblPac.row($(this).parents("tr")).data();
-        let id = data_tabla.id
+        let id = data_tabla.id;
         delDialog(id);
     }
 );

@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded",function(){
                 targets:[0],
                 visible:false,
                 serchable:false,
-            }
+            },
+            { responsivePriority: 1, targets:  0},
+            { responsivePriority: 2, targets:  4},
         ],
         //Mostrar botones de exportacion
         dom:"lBfrtip",

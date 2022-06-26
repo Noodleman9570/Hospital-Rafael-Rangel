@@ -37,7 +37,9 @@ document.addEventListener("DOMContentLoaded",function(){
                 targets:[0,6,7,8],
                 visible:false,
                 serchable:false,
-            }
+            },
+            { responsivePriority: 1, targets:  0},
+            { responsivePriority: 2, targets:  12},
         ],
         //Mostrar botones de exportacion
         responsive: "true",
