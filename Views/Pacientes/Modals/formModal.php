@@ -6,7 +6,7 @@
 <div class="modal fade" id="newPaciente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div id="modal-header" class="modalsss-header" style="background: #FFD24C;">
+      <div id="modal-header" class="modal-header" style="background: #FFD24C;">
         <h5 class="modal-title" id="exampleModalLongTitle">Nuevo Paciente</h5>
         <button type="button" id="refresh" style=" margin: 0;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
