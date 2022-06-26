@@ -97,9 +97,9 @@
                     
                     if($val->isSuccess()){
                         
-                        // $pac = pacientesModel::verifyCed(clear($_POST['ced']));
+                        $pac = pacientesModel::verifyCed(clear($_POST['ced']));
                         
-                        // if (!$pac) {
+                        if (!$pac) {
                             $data = [
                                 'TMPAC_CI' => clear($_POST['ced']),
                                 'TMMUN_CM' => $_POST['mun'],
@@ -123,9 +123,9 @@
                                 echo "ERROR: ".$e->getMessage();
                             }
 
-                        // } else {
-                        //     $data = ['error'=>'La cedula ya le pertenece a otro paciente'];
-                        // }
+                        } else {
+                            $data = ['error'=>'La cedula ya le pertenece a otro paciente'];
+                        }
                     } else {
                         $data = ['error'=>$val->getErrors()];
                     }

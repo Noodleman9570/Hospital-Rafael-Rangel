@@ -16,7 +16,7 @@
 
     //Datos de conexion a base de datos
     const DB_HOST = "localhost";
-    const DB_NAME = "BDCH";
+    const DB_NAME = "bdch";
     const DB_USER = "root";
     const DB_PASSWORD = "";
     const DB_CHARSET = "charset=utf8";

@@ -16,26 +16,16 @@
               <h5 class="id">Nro. </h5>
               <!-- Grupo: cedula -->
               
-
-                <label for="ced" class="formulario__label label__nat">Cédula de identidad</label>
-                <input type="text" class="formulario__input" name="id" id="id">
-
-                <div class="ced_container">
-                  <div class="formulario__grupo nat" id="grupo__nat">
-                    <select onchange="natChg();" class="form-control select-nat" name="estado" id="sel_nat">
-                        <option value="V">V</option>
-                        <option value="E">E</option>
-                    </select>
-                  </div>
-
-
-                  <div class="formulario__grupo" id="grupo__ced">
-                    <div class="formulario__grupo-input">
-                      <input type="text" class="formulario__input" name="ced" id="ced" placeholder="26587963">
-                      <i class="formulario__validacion-estado fas fa-times-circle"></i>
-                    </div>
-                  </div>
+                  <input type="text" class="formulario__input" name="id" id="id">
+        
+              
+              <div class="formulario__grupo" id="grupo__ced">
+                <label for="ced" class="formulario__label">Cedula</label>
+                <div class="formulario__grupo-input">
+                  <input type="text" class="formulario__input" name="ced" id="ced" placeholder="V-26587963">
+                  <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
+              </div>
               
               <!-- Grupo: Apellido -->
               <div class="formulario__grupo" id="grupo__ap">
@@ -61,10 +51,6 @@
                     <option value="m">Masculino</option>
                     <option value="f">Femenino</option>
                 </select>
-              </div>
-              
-              <div class="formulario__grupo country" id="grupo__country">
-
               </div>
 
               <div class="direction_container">

@@ -100,10 +100,9 @@
 
                     //Comprobar si se Cumplen todas las validaciones
                     if($val->isSuccess()){
+                        $res = medicosModel::verifyCed(clear($_POST['ced']));
 
-                        // $res = medicosModel::verifyCed(clear($_POST['ced']));
-
-                        // if (!$res) {
+                        if (!$res) {
                             $data = [
                                 'TMMED_CI' => clear($_POST['ced']),
                                 'TMMUN_CM' => $_POST['mun'],
@@ -126,9 +125,9 @@
                                 echo "ERROR: ".$e->getMessage();
                             }
 
-                        // } else {
-                        //     $data = ['error'=>'La cedula ya le pertenece a otro paciente'];
-                        // }
+                        } else {
+                            $data = ['error'=>'La cedula ya le pertenece a otro paciente'];
+                        }
                     } else {
                         $data = ['error'=>$val->getErrors()];
                     }
