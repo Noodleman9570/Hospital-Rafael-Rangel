@@ -29,7 +29,7 @@
             
             <?php Permisos::showMenus(); ?>
             
-            <!-- <?php if(!empty($_SESSION['permisos'][DASHBOARD]['r'])): ?>
+            <?php if(!empty($_SESSION['permisos'][DASHBOARD]['r'])): ?>
             
             <?php endif ?>
 
@@ -43,7 +43,11 @@
             
             <?php if(!empty($_SESSION['permisos'][ROLES]['r'])): ?>
             
-            <?php endif ?> -->
+            <?php endif ?>
+
+            <?php if(!empty($_SESSION['permisos'][HISTORIAL_VACUNAS]['r'])): ?>
+            
+            <?php endif ?>
 
             <li>
                 <a class="app-menu__item" href="<?= ROOT; ?>/logout">

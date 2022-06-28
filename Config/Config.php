@@ -11,6 +11,7 @@
     const PERFIL = "0";
     const DASHBOARD = "1";
     const ARCHIVOS_MAESTROS = 2;
+    const HISTORIAL_VACUNAS = 15;
     const USERS = "3";
     const ROLES = "4";
 
