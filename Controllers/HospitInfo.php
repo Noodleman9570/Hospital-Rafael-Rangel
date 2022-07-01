@@ -1,43 +1,41 @@
 <?php
 
-    class HistorialVacunas extends Controllers
+    class HospitInfo extends Controllers
     {
         public function __construct()
         {
             Auth::noAuth();
-            Permisos::getPermisos(HISTORIAL_VACUNAS);
+            Permisos::getPermisos(HOSPITALIZACION);
             parent::__construct();
         }
-        public function HistorialVacunas()
+        public function HospitInfo()
         {   
             Auth::accessPage();
 
-            $data['page_name'] = "HistorialVacunas";
-            $data['page_title'] = "Hospital";
-            $data['function_js'] = "/Historialvacunas.js";
-            $data['style_css'] = "/Historialvacunas.css";
+            $data['page_name'] = "Info de Hospitalizacion";
+            $data['page_title'] = "Información";
+            $data['function_js'] = "/hospitInfo.js";
+            $data['style_css'] = "/hospitInfo.css";
 
-            $this->views->getView($this,"historialvacunas",$data);
+            $this->views->getView($this,"hospitInfo",$data);
         }
 
         public function all()
         {
             $arrJson = [];
             try {
-                $vac = vacunasModel::all();
+                $info = HospitInfoModel::all();
             } catch (Exception $e) {
                 echo "ERROR: ".$e->getMessage();
             }
-            
-            if(empty($vac)){
+            if(empty($info)){
                 $arrJson = ['msg'=>'No se encontraron registros'];
             }else{
-                $arrJson = $vac;
+                $arrJson = $info;
             }
-
-
             echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
         }
+
         public function save()
         {
             $data = [];

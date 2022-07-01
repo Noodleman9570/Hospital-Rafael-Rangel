@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="<?= CSS; ?>/style.css">
     <link rel="stylesheet" type="text/css" href="<?= APP;?>/css<?=$data['style_css']?>">
     
+    <!-- css sytle chartjs -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Font-icon css-->
   </head>
   <body class="app sidebar-mini">

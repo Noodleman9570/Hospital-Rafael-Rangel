@@ -99,6 +99,9 @@ function openModal()
 let tblPac;
 
 document.addEventListener("DOMContentLoaded",function(){
+            setTimeout(()=>{
+                $('#overlay').hide();
+            }, 700);
 
     tblPac = new DataTable("#tblPac",{
         aProcessing: true,

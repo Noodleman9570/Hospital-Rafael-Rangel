@@ -19,20 +19,33 @@
            $this->views->getView($this,"dashboard",$data);
         }
 
-        public function all()
-        {
+        // public function all()
+        // {
 
+        //     $arrJson = [];
+        //     $res = dashboardModel::all();
+        //     if(empty($res)){
+        //         $arrJson = ['msg'=>'No se encontraron registros'];
+        //     }else{
+        //         $arrJson = $res;
+        //     }
+
+
+        //     echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
+        // }
+
+        public function  LoadVaccineQuant()
+        {
             $arrJson = [];
-            $res = dashboardModel::all();
+            $res = dashboardModel::LoadVaccineQ();
             if(empty($res)){
                 $arrJson = ['msg'=>'No se encontraron registros'];
             }else{
                 $arrJson = $res;
             }
-
-
             echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
         }
+
 
     }
 ?>

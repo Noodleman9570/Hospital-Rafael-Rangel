@@ -9,11 +9,12 @@
     //Constantes Paginas de navegacion
     const HOME = "0";
     const PERFIL = "0";
-    const DASHBOARD = "1";
+    const DASHBOARD = 1;
     const ARCHIVOS_MAESTROS = 2;
-    const HISTORIAL_VACUNAS = 15;
-    const USERS = "3";
-    const ROLES = "4";
+    const HOSPITALIZACION = 7;
+    const VACUNACION = 11;
+    const USERS = 13;
+    const ROLES = 14;
 
     //Datos de conexion a base de datos
     const DB_HOST = "localhost";

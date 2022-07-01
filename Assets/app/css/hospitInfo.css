@@ -1,0 +1,192 @@
+.img {
+    z-index: 6;
+}
+
+.body {
+    max-width: 960px;
+    margin: 0 auto;
+    object-fit: cover;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+}
+.thead {
+    position: absolute;
+    background: #0ebeadb4;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    z-index: 9;
+    height: 60px;
+    box-shadow: 0.01px 2.5px 2px gray;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.thead:hover {
+    background: #0d998bb2;
+    transition: .5s ease all;
+}
+.icons {
+    color: white;
+    font-size: 2rem;
+    padding-right: 10px;
+}
+.icons:hover{
+    transform: scale(1.4);
+    transform-style: preserve-3d;
+    transition: .5s ease all;
+}
+.thead h3{
+    padding-left: 10px;
+}
+.tile {
+    border-radius: 10px;
+}
+.tile1:hover .img1{
+    transform: scale(1.3);
+    transition: .5s ease all;
+    cursor: pointer;
+}
+.tile2:hover {
+    cursor: pointer;
+    box-shadow: 2.5px 1px 24px rgb(167, 166, 166);
+}
+.tile1:hover {
+    cursor: pointer;
+    box-shadow: 2.5px 1px 24px rgb(180, 180, 180);
+}
+.tile2:hover .img2{
+    transform: scale(1.3);
+    transition: .5s ease all;
+    cursor: pointer;
+}
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.titlePage{
+    display: inline;
+}
+.icon-btn{
+    display: inline;
+}
+.subtxt {
+    position: absolute;
+    background: #ace0db6e;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 20px 10px 0 10px;
+    width: 100%;
+    z-index: 9;
+    height: 90px;
+    border-radius: 10px;
+    text-align: center;
+}
+.overlay {
+    z-index: 8 !important;
+    border-radius: 10px !important;
+}
+.tile-title{
+    height: 20px;
+}
+
+button {
+    border-radius: 5px !important;
+}
+.dataTables_length{
+    width: 1fr;
+    display: inline;
+}
+.dt-buttons{
+    display: inline;
+    margin-left: 20px;
+    width: 100%;
+}
+.dt-buttons button{
+    width: 50px;
+    margin: 10px 5px;
+}
+.dataTables_filter{
+    position: absolute;
+    top: 14px;
+    right: 0;
+    display: inline;
+}
+thead{
+    background: #ddeeed;
+    height: 60px;
+}
+
+tbody tr:nth-child(odd){
+    background-color: rgb(248, 248, 248);
+}
+tbody tr:nth-child(even){
+    background-color: rgb(238, 238, 238);
+}
+tbody tr:hover{
+    background: rgb(255, 255, 255);
+}
+
+
+tbody tr td{
+    margin: 20px 10px;
+}
+tbody tr td:nth-child(4){
+    width: 43%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+tbody tr td:nth-child(4) div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.editarFnt{
+    width: 50px;
+    height: 45px;
+}
+.eliminarFnt{
+    width: 50px;
+    height: 45px;
+}
+
+@media(max-width: 1100px) {
+    .body{
+        height: 25vh;
+    }
+    .img1 {
+        margin-top: -20px;
+        max-width: 115%;
+    }
+    .img2 {
+        max-width: 75%;
+    }
+
+}
+@media(max-width: 850px){
+    .subtxt {
+        height: auto;
+    }
+}
+
+@media(max-width: 767px){
+    .body {
+        height: auto;
+       }
+    .img{
+        margin-bottom: auto;
+    }
+    .tile{
+        width: auto;
+       }
+}
+
+

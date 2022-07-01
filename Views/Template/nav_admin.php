@@ -37,6 +37,14 @@
                 
             <?php endif ?>
 
+            <?php if(!empty($_SESSION['permisos'][VACUNACION]['r'])): ?>
+            
+            <?php endif ?>
+
+            <?php if(!empty($_SESSION['permisos'][HOSPITALIZACION]['r'])): ?>
+            
+            <?php endif ?>
+
             <?php if(!empty($_SESSION['permisos'][USERS]['r'])): ?>
             
             <?php endif ?>
@@ -45,9 +53,6 @@
             
             <?php endif ?>
 
-            <?php if(!empty($_SESSION['permisos'][HISTORIAL_VACUNAS]['r'])): ?>
-            
-            <?php endif ?>
 
             <li>
                 <a class="app-menu__item" href="<?= ROOT; ?>/logout">
