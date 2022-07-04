@@ -1,10 +1,7 @@
-const formulario = document.getElementById('formRegister');
-const inputs = document.querySelectorAll('#formRegister input');
-
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	telefono: /^[9|6|7][0-9]{8}$/, // 7 a 14 numeros.
-    cedula: /([V,E]-[0-9]{6,7})/,
+	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
+    cedula: /^[0-9]{7,8}$/,
 }
 
 const campos = {
@@ -13,9 +10,11 @@ const campos = {
 	correo: false,
 	telefono: false,
 }
+const formulario = document.getElementById('formRegister');
+const inputs = document.querySelectorAll('#formRegister input');
 
 const validarFormulario = (e) => {
-	switch (e.target.name) {
+	switch (e.target.id) {
 		case "ced":
 			validarCampo(expresiones.cedula, e.target, 'ced');
 		break;
@@ -26,7 +25,7 @@ const validarFormulario = (e) => {
 			validarCampo(expresiones.nombre, e.target, 'nom');;
 		break;
 		case "tf":
-			validarCampo(expresiones.nombre, e.target, 'tf');
+			validarCampo(expresiones.telefono, e.target, 'tf');
 		break;
 	}
 }
@@ -35,52 +34,25 @@ const validarCampo = (expresion, input, campo) => {
 	if(expresion.test(input.value)){
 		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
 		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');	
+        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-check');
+		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-times-circle');
 		campos[campo] = true;
 	} else {
 		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
 		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-xmark');
+		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-check-circle');
 		campos[campo] = false;
 	}
 }
 
-const validarPassword2 = () => {
-	const inputPassword1 = document.getElementById('password');
-	const inputPassword2 = document.getElementById('password2');
 
-	if(inputPassword1.value !== inputPassword2.value){
-		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-incorrecto');
-		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-correcto');
-		campos['password'] = false;
-	} else {
-		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
-		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
-		campos['password'] = true;
-	}
-}
 
 inputs.forEach((input) => {
 	input.addEventListener('keyup', validarFormulario);
 	input.addEventListener('blur', validarFormulario);
 });
 
-formulario.addEventListener('#enviar', (e) => {
-    event.preventDefault();
-
-	if(campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked ){
-		formulario.reset();
-
-		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-		setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
-
-		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
-		});
-	} else {
-		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
-	}
-});
 
 
 
@@ -163,6 +135,7 @@ document.addEventListener("DOMContentLoaded",function(){
             {
                 extend:"pdfHtml5",
                 text:"<i class='fa fa-file-pdf-o'><i/>",
+                orientation: 'landscape',
                 titleAttr:"Exportar a PDF",
                 className: "btn btn-danger"
             },

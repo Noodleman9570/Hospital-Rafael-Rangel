@@ -62,30 +62,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-
-      <!-- <div class="row justify-content-xl-around">
-          <div class="tile" style="width: 35rem;">
-            <a class="link" href="">
-              <i class="fa-solid fa-bed"></i>
-              <div class="card-body">
-                <h5 class="card-title">Pacientes</h5>
-              </div>
-            </a>
-          </div>
-          <div class="tile" style="width: 35rem;">
-            <a class="link" href="">
-              <i class="fa-solid fa-bed"></i>
-              <div class="card-body">
-                <h4 class="card-title">Pacientes</h4>
-              </div>
-            </a>
-          </div>
-        </div> -->
-        
-        
-       
-
+      </div>       
     </main>
     <?php footerAdmin($data); ?>

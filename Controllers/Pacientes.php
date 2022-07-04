@@ -40,25 +40,25 @@
 
                 //validar
                     $val = new Validations();
-                    $val->name('cedula')->value(clear($_POST['ced']))->required();
-                    $val->name('apellido')->value(clear($_POST['ap']))->required();
-                    $val->name('nombre')->value(clear($_POST['nom']))->required();
-                    $val->name('Fecha de nacimiento')->value(clear($_POST['fn']))->dateLimit()->required();
-                    $val->name('telefono')->value(clear($_POST['tf']))->required();
+                    $val->name('cedula')->value(clear($_POST['cedula']))->required();
+                    $val->name('apellido')->value(clear($_POST['apellido']))->required();
+                    $val->name('nombre')->value(clear($_POST['nombre']))->required();
+                    $val->name('Fecha de nacimiento')->value(clear($_POST['fechaNacimiento']))->dateLimit()->required();
+                    $val->name('telefono')->value(clear($_POST['telefono']))->pattern('tel')->required();
                     if($val->isSuccess()){
 
-                        $pac = pacientesModel::verifyCed(clear($_POST['ced']));
+                        $pac = pacientesModel::verifyCed(clear($_POST['cedula']));
 
                         if (!$pac) {
                             $data = [
-                                'TMPAC_CI' => clear($_POST['ced']),
-                                'TMMUN_CM' => $_POST['mun'],
-                                'TMPAC_NO' => clear($_POST['nom']),
-                                'TMPAC_AP' => clear($_POST['ap']),
-                                'TMPAC_SX' => $_POST['sx'],
-                                'TMPAC_DIR' => $_POST['dir'],
-                                'TMPAC_FN' => $_POST['fn'],
-                                'TMPAC_TF' => clear((string)$_POST['tf'])    
+                                'TMPAC_CI' => clear($_POST['cedula']),
+                                'TMMUN_CM' => $_POST['municipio'],
+                                'TMPAC_NO' => clear($_POST['nombre']),
+                                'TMPAC_AP' => clear($_POST['apellido']),
+                                'TMPAC_SX' => $_POST['sexo'],
+                                'TMPAC_DIR' => clear($_POST['direccion']),
+                                'TMPAC_FN' => $_POST['fechaNacimiento'],
+                                'TMPAC_TF' => clear((string)$_POST['telefono'])    
                                 //arreglar el eliminar espacios de la contraseña
                             ];
                             try {
@@ -82,6 +82,12 @@
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
 
+        public function lastInsert()
+        {
+            $idInsert = pacientesModel::SQL('SELECT MAX(TMPAC_PID) FROM TMBCH_PAC');
+            echo json_encode($idInsert);
+        }
+
         public function edit(){
 
             $data = [];
@@ -93,13 +99,10 @@
                     $val->name('apellido')->value(clear($_POST['ap']))->required();
                     $val->name('nombre')->value(clear($_POST['nom']))->required();
                     $val->name('Fecha de nacimiento')->value(clear($_POST['fn']))->dateLimit()->required();
-                    $val->name('telefono')->value(clear($_POST['tf']))->required();
+                    $val->name('tel')->value(clear($_POST['tf']))->required();
                     
                     if($val->isSuccess()){
                         
-                        $pac = pacientesModel::verifyCed(clear($_POST['ced']));
-                        
-                        if (!$pac) {
                             $data = [
                                 'TMPAC_CI' => clear($_POST['ced']),
                                 'TMMUN_CM' => $_POST['mun'],
@@ -122,10 +125,6 @@
                             } catch (Exception $e) {
                                 echo "ERROR: ".$e->getMessage();
                             }
-
-                        } else {
-                            $data = ['error'=>'La cedula ya le pertenece a otro paciente'];
-                        }
                     } else {
                         $data = ['error'=>$val->getErrors()];
                     }

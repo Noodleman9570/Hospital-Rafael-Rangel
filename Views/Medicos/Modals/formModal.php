@@ -84,10 +84,10 @@
               </div>
 
               <!-- Grupo: numero telefonico -->
-              <div class="formulario__grupo" id="grupo_tf">
+              <div class="formulario__grupo" id="grupo__tf">
                 <label for="tf" class="formulario__label">Número telefónico</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="tf" id="tf" placeholder="">
+                  <input type="text" class="formulario__input" name="tf" id="tf" placeholder=""0000-0000000>
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>

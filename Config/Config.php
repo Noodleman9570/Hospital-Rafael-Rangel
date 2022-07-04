@@ -11,9 +11,10 @@
     const PERFIL = "0";
     const DASHBOARD = 1;
     const ARCHIVOS_MAESTROS = 2;
-    const HOSPITALIZACION = 7;
+    const CONSULTA = 7;
+    const HOSPITALIZACION = 8;
     const VACUNACION = 11;
-    const USERS = 13;
+    const USERS = 15;
     const ROLES = 14;
 
     //Datos de conexion a base de datos

@@ -97,7 +97,7 @@ const inputs = document.querySelectorAll('#formRegister input');
 
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
+	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
     cedula: /([V,E]-[0-9]{6,8})/,
 }
 
@@ -434,8 +434,6 @@ function listarEsp(){
                 
             }
             $("#sel_esp").html(cadena);
-            var idedo = $("#sel_esp").val();
-            listarMUN(idedo);
         } else {
             cadena +="<option value=''>No se encontraron registros</option>";
             $("#sel_esp").html(cadena);

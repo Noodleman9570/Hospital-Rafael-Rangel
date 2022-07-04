@@ -152,6 +152,7 @@
         $datos = trim($datos);
         $datos = htmlspecialchars($datos, ENT_QUOTES, 'UTF-8');
         $datos = utf8_decode($datos);
+        $datos = utf8_encode($datos);
 
         return $datos;
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-06-2022 a las 17:46:30
+-- Tiempo de generación: 04-07-2022 a las 14:20:30
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -20,523 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bdch`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ciudades`
---
-
-CREATE TABLE `ciudades` (
-  `id_ciudad` int(11) NOT NULL,
-  `id_estado` int(11) NOT NULL,
-  `ciudad` varchar(200) NOT NULL,
-  `capital` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `ciudades`
---
-
-INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
-(1, 1, 'Maroa', 0),
-(2, 1, 'Puerto Ayacucho', 1),
-(3, 1, 'San Fernando de Atabapo', 0),
-(4, 2, 'Anaco', 0),
-(5, 2, 'Aragua de Barcelona', 0),
-(6, 2, 'Barcelona', 1),
-(7, 2, 'Boca de Uchire', 0),
-(8, 2, 'Cantaura', 0),
-(9, 2, 'Clarines', 0),
-(10, 2, 'El Chaparro', 0),
-(11, 2, 'El Pao Anzoátegui', 0),
-(12, 2, 'El Tigre', 0),
-(13, 2, 'El Tigrito', 0),
-(14, 2, 'Guanape', 0),
-(15, 2, 'Guanta', 0),
-(16, 2, 'Lechería', 0),
-(17, 2, 'Onoto', 0),
-(18, 2, 'Pariaguán', 0),
-(19, 2, 'Píritu', 0),
-(20, 2, 'Puerto La Cruz', 0),
-(21, 2, 'Puerto Píritu', 0),
-(22, 2, 'Sabana de Uchire', 0),
-(23, 2, 'San Mateo Anzoátegui', 0),
-(24, 2, 'San Pablo Anzoátegui', 0),
-(25, 2, 'San Tomé', 0),
-(26, 2, 'Santa Ana de Anzoátegui', 0),
-(27, 2, 'Santa Fe Anzoátegui', 0),
-(28, 2, 'Santa Rosa', 0),
-(29, 2, 'Soledad', 0),
-(30, 2, 'Urica', 0),
-(31, 2, 'Valle de Guanape', 0),
-(43, 3, 'Achaguas', 0),
-(44, 3, 'Biruaca', 0),
-(45, 3, 'Bruzual', 0),
-(46, 3, 'El Amparo', 0),
-(47, 3, 'El Nula', 0),
-(48, 3, 'Elorza', 0),
-(49, 3, 'Guasdualito', 0),
-(50, 3, 'Mantecal', 0),
-(51, 3, 'Puerto Páez', 0),
-(52, 3, 'San Fernando de Apure', 1),
-(53, 3, 'San Juan de Payara', 0),
-(54, 4, 'Barbacoas', 0),
-(55, 4, 'Cagua', 0),
-(56, 4, 'Camatagua', 0),
-(58, 4, 'Choroní', 0),
-(59, 4, 'Colonia Tovar', 0),
-(60, 4, 'El Consejo', 0),
-(61, 4, 'La Victoria', 0),
-(62, 4, 'Las Tejerías', 0),
-(63, 4, 'Magdaleno', 0),
-(64, 4, 'Maracay', 1),
-(65, 4, 'Ocumare de La Costa', 0),
-(66, 4, 'Palo Negro', 0),
-(67, 4, 'San Casimiro', 0),
-(68, 4, 'San Mateo', 0),
-(69, 4, 'San Sebastián', 0),
-(70, 4, 'Santa Cruz de Aragua', 0),
-(71, 4, 'Tocorón', 0),
-(72, 4, 'Turmero', 0),
-(73, 4, 'Villa de Cura', 0),
-(74, 4, 'Zuata', 0),
-(75, 5, 'Barinas', 1),
-(76, 5, 'Barinitas', 0),
-(77, 5, 'Barrancas', 0),
-(78, 5, 'Calderas', 0),
-(79, 5, 'Capitanejo', 0),
-(80, 5, 'Ciudad Bolivia', 0),
-(81, 5, 'El Cantón', 0),
-(82, 5, 'Las Veguitas', 0),
-(83, 5, 'Libertad de Barinas', 0),
-(84, 5, 'Sabaneta', 0),
-(85, 5, 'Santa Bárbara de Barinas', 0),
-(86, 5, 'Socopó', 0),
-(87, 6, 'Caicara del Orinoco', 0),
-(88, 6, 'Canaima', 0),
-(89, 6, 'Ciudad Bolívar', 1),
-(90, 6, 'Ciudad Piar', 0),
-(91, 6, 'El Callao', 0),
-(92, 6, 'El Dorado', 0),
-(93, 6, 'El Manteco', 0),
-(94, 6, 'El Palmar', 0),
-(95, 6, 'El Pao', 0),
-(96, 6, 'Guasipati', 0),
-(97, 6, 'Guri', 0),
-(98, 6, 'La Paragua', 0),
-(99, 6, 'Matanzas', 0),
-(100, 6, 'Puerto Ordaz', 0),
-(101, 6, 'San Félix', 0),
-(102, 6, 'Santa Elena de Uairén', 0),
-(103, 6, 'Tumeremo', 0),
-(104, 6, 'Unare', 0),
-(105, 6, 'Upata', 0),
-(106, 7, 'Bejuma', 0),
-(107, 7, 'Belén', 0),
-(108, 7, 'Campo de Carabobo', 0),
-(109, 7, 'Canoabo', 0),
-(110, 7, 'Central Tacarigua', 0),
-(111, 7, 'Chirgua', 0),
-(112, 7, 'Ciudad Alianza', 0),
-(113, 7, 'El Palito', 0),
-(114, 7, 'Guacara', 0),
-(115, 7, 'Guigue', 0),
-(116, 7, 'Las Trincheras', 0),
-(117, 7, 'Los Guayos', 0),
-(118, 7, 'Mariara', 0),
-(119, 7, 'Miranda', 0),
-(120, 7, 'Montalbán', 0),
-(121, 7, 'Morón', 0),
-(122, 7, 'Naguanagua', 0),
-(123, 7, 'Puerto Cabello', 0),
-(124, 7, 'San Joaquín', 0),
-(125, 7, 'Tocuyito', 0),
-(126, 7, 'Urama', 0),
-(127, 7, 'Valencia', 1),
-(128, 7, 'Vigirimita', 0),
-(129, 8, 'Aguirre', 0),
-(130, 8, 'Apartaderos Cojedes', 0),
-(131, 8, 'Arismendi', 0),
-(132, 8, 'Camuriquito', 0),
-(133, 8, 'El Baúl', 0),
-(134, 8, 'El Limón', 0),
-(135, 8, 'El Pao Cojedes', 0),
-(136, 8, 'El Socorro', 0),
-(137, 8, 'La Aguadita', 0),
-(138, 8, 'Las Vegas', 0),
-(139, 8, 'Libertad de Cojedes', 0),
-(140, 8, 'Mapuey', 0),
-(141, 8, 'Piñedo', 0),
-(142, 8, 'Samancito', 0),
-(143, 8, 'San Carlos', 1),
-(144, 8, 'Sucre', 0),
-(145, 8, 'Tinaco', 0),
-(146, 8, 'Tinaquillo', 0),
-(147, 8, 'Vallecito', 0),
-(148, 9, 'Tucupita', 1),
-(149, 24, 'Caracas', 1),
-(150, 24, 'El Junquito', 0),
-(151, 10, 'Adícora', 0),
-(152, 10, 'Boca de Aroa', 0),
-(153, 10, 'Cabure', 0),
-(154, 10, 'Capadare', 0),
-(155, 10, 'Capatárida', 0),
-(156, 10, 'Chichiriviche', 0),
-(157, 10, 'Churuguara', 0),
-(158, 10, 'Coro', 1),
-(159, 10, 'Cumarebo', 0),
-(160, 10, 'Dabajuro', 0),
-(161, 10, 'Judibana', 0),
-(162, 10, 'La Cruz de Taratara', 0),
-(163, 10, 'La Vela de Coro', 0),
-(164, 10, 'Los Taques', 0),
-(165, 10, 'Maparari', 0),
-(166, 10, 'Mene de Mauroa', 0),
-(167, 10, 'Mirimire', 0),
-(168, 10, 'Pedregal', 0),
-(169, 10, 'Píritu Falcón', 0),
-(170, 10, 'Pueblo Nuevo Falcón', 0),
-(171, 10, 'Puerto Cumarebo', 0),
-(172, 10, 'Punta Cardón', 0),
-(173, 10, 'Punto Fijo', 0),
-(174, 10, 'San Juan de Los Cayos', 0),
-(175, 10, 'San Luis', 0),
-(176, 10, 'Santa Ana Falcón', 0),
-(177, 10, 'Santa Cruz De Bucaral', 0),
-(178, 10, 'Tocopero', 0),
-(179, 10, 'Tocuyo de La Costa', 0),
-(180, 10, 'Tucacas', 0),
-(181, 10, 'Yaracal', 0),
-(182, 11, 'Altagracia de Orituco', 0),
-(183, 11, 'Cabruta', 0),
-(184, 11, 'Calabozo', 0),
-(185, 11, 'Camaguán', 0),
-(196, 11, 'Chaguaramas Guárico', 0),
-(197, 11, 'El Socorro', 0),
-(198, 11, 'El Sombrero', 0),
-(199, 11, 'Las Mercedes de Los Llanos', 0),
-(200, 11, 'Lezama', 0),
-(201, 11, 'Onoto', 0),
-(202, 11, 'Ortíz', 0),
-(203, 11, 'San José de Guaribe', 0),
-(204, 11, 'San Juan de Los Morros', 1),
-(205, 11, 'San Rafael de Laya', 0),
-(206, 11, 'Santa María de Ipire', 0),
-(207, 11, 'Tucupido', 0),
-(208, 11, 'Valle de La Pascua', 0),
-(209, 11, 'Zaraza', 0),
-(210, 12, 'Aguada Grande', 0),
-(211, 12, 'Atarigua', 0),
-(212, 12, 'Barquisimeto', 1),
-(213, 12, 'Bobare', 0),
-(214, 12, 'Cabudare', 0),
-(215, 12, 'Carora', 0),
-(216, 12, 'Cubiro', 0),
-(217, 12, 'Cují', 0),
-(218, 12, 'Duaca', 0),
-(219, 12, 'El Manzano', 0),
-(220, 12, 'El Tocuyo', 0),
-(221, 12, 'Guaríco', 0),
-(222, 12, 'Humocaro Alto', 0),
-(223, 12, 'Humocaro Bajo', 0),
-(224, 12, 'La Miel', 0),
-(225, 12, 'Moroturo', 0),
-(226, 12, 'Quíbor', 0),
-(227, 12, 'Río Claro', 0),
-(228, 12, 'Sanare', 0),
-(229, 12, 'Santa Inés', 0),
-(230, 12, 'Sarare', 0),
-(231, 12, 'Siquisique', 0),
-(232, 12, 'Tintorero', 0),
-(233, 13, 'Apartaderos Mérida', 0),
-(234, 13, 'Arapuey', 0),
-(235, 13, 'Bailadores', 0),
-(236, 13, 'Caja Seca', 0),
-(237, 13, 'Canaguá', 0),
-(238, 13, 'Chachopo', 0),
-(239, 13, 'Chiguara', 0),
-(240, 13, 'Ejido', 0),
-(241, 13, 'El Vigía', 0),
-(242, 13, 'La Azulita', 0),
-(243, 13, 'La Playa', 0),
-(244, 13, 'Lagunillas Mérida', 0),
-(245, 13, 'Mérida', 1),
-(246, 13, 'Mesa de Bolívar', 0),
-(247, 13, 'Mucuchíes', 0),
-(248, 13, 'Mucujepe', 0),
-(249, 13, 'Mucuruba', 0),
-(250, 13, 'Nueva Bolivia', 0),
-(251, 13, 'Palmarito', 0),
-(252, 13, 'Pueblo Llano', 0),
-(253, 13, 'Santa Cruz de Mora', 0),
-(254, 13, 'Santa Elena de Arenales', 0),
-(255, 13, 'Santo Domingo', 0),
-(256, 13, 'Tabáy', 0),
-(257, 13, 'Timotes', 0),
-(258, 13, 'Torondoy', 0),
-(259, 13, 'Tovar', 0),
-(260, 13, 'Tucani', 0),
-(261, 13, 'Zea', 0),
-(262, 14, 'Araguita', 0),
-(263, 14, 'Carrizal', 0),
-(264, 14, 'Caucagua', 0),
-(265, 14, 'Chaguaramas Miranda', 0),
-(266, 14, 'Charallave', 0),
-(267, 14, 'Chirimena', 0),
-(268, 14, 'Chuspa', 0),
-(269, 14, 'Cúa', 0),
-(270, 14, 'Cupira', 0),
-(271, 14, 'Curiepe', 0),
-(272, 14, 'El Guapo', 0),
-(273, 14, 'El Jarillo', 0),
-(274, 14, 'Filas de Mariche', 0),
-(275, 14, 'Guarenas', 0),
-(276, 14, 'Guatire', 0),
-(277, 14, 'Higuerote', 0),
-(278, 14, 'Los Anaucos', 0),
-(279, 14, 'Los Teques', 1),
-(280, 14, 'Ocumare del Tuy', 0),
-(281, 14, 'Panaquire', 0),
-(282, 14, 'Paracotos', 0),
-(283, 14, 'Río Chico', 0),
-(284, 14, 'San Antonio de Los Altos', 0),
-(285, 14, 'San Diego de Los Altos', 0),
-(286, 14, 'San Fernando del Guapo', 0),
-(287, 14, 'San Francisco de Yare', 0),
-(288, 14, 'San José de Los Altos', 0),
-(289, 14, 'San José de Río Chico', 0),
-(290, 14, 'San Pedro de Los Altos', 0),
-(291, 14, 'Santa Lucía', 0),
-(292, 14, 'Santa Teresa', 0),
-(293, 14, 'Tacarigua de La Laguna', 0),
-(294, 14, 'Tacarigua de Mamporal', 0),
-(295, 14, 'Tácata', 0),
-(296, 14, 'Turumo', 0),
-(297, 15, 'Aguasay', 0),
-(298, 15, 'Aragua de Maturín', 0),
-(299, 15, 'Barrancas del Orinoco', 0),
-(300, 15, 'Caicara de Maturín', 0),
-(301, 15, 'Caripe', 0),
-(302, 15, 'Caripito', 0),
-(303, 15, 'Chaguaramal', 0),
-(305, 15, 'Chaguaramas Monagas', 0),
-(307, 15, 'El Furrial', 0),
-(308, 15, 'El Tejero', 0),
-(309, 15, 'Jusepín', 0),
-(310, 15, 'La Toscana', 0),
-(311, 15, 'Maturín', 1),
-(312, 15, 'Miraflores', 0),
-(313, 15, 'Punta de Mata', 0),
-(314, 15, 'Quiriquire', 0),
-(315, 15, 'San Antonio de Maturín', 0),
-(316, 15, 'San Vicente Monagas', 0),
-(317, 15, 'Santa Bárbara', 0),
-(318, 15, 'Temblador', 0),
-(319, 15, 'Teresen', 0),
-(320, 15, 'Uracoa', 0),
-(321, 16, 'Altagracia', 0),
-(322, 16, 'Boca de Pozo', 0),
-(323, 16, 'Boca de Río', 0),
-(324, 16, 'El Espinal', 0),
-(325, 16, 'El Valle del Espíritu Santo', 0),
-(326, 16, 'El Yaque', 0),
-(327, 16, 'Juangriego', 0),
-(328, 16, 'La Asunción', 1),
-(329, 16, 'La Guardia', 0),
-(330, 16, 'Pampatar', 0),
-(331, 16, 'Porlamar', 0),
-(332, 16, 'Puerto Fermín', 0),
-(333, 16, 'Punta de Piedras', 0),
-(334, 16, 'San Francisco de Macanao', 0),
-(335, 16, 'San Juan Bautista', 0),
-(336, 16, 'San Pedro de Coche', 0),
-(337, 16, 'Santa Ana de Nueva Esparta', 0),
-(338, 16, 'Villa Rosa', 0),
-(339, 17, 'Acarigua', 0),
-(340, 17, 'Agua Blanca', 0),
-(341, 17, 'Araure', 0),
-(342, 17, 'Biscucuy', 0),
-(343, 17, 'Boconoito', 0),
-(344, 17, 'Campo Elías', 0),
-(345, 17, 'Chabasquén', 0),
-(346, 17, 'Guanare', 1),
-(347, 17, 'Guanarito', 0),
-(348, 17, 'La Aparición', 0),
-(349, 17, 'La Misión', 0),
-(350, 17, 'Mesa de Cavacas', 0),
-(351, 17, 'Ospino', 0),
-(352, 17, 'Papelón', 0),
-(353, 17, 'Payara', 0),
-(354, 17, 'Pimpinela', 0),
-(355, 17, 'Píritu de Portuguesa', 0),
-(356, 17, 'San Rafael de Onoto', 0),
-(357, 17, 'Santa Rosalía', 0),
-(358, 17, 'Turén', 0),
-(359, 18, 'Altos de Sucre', 0),
-(360, 18, 'Araya', 0),
-(361, 18, 'Cariaco', 0),
-(362, 18, 'Carúpano', 0),
-(363, 18, 'Casanay', 0),
-(364, 18, 'Cumaná', 1),
-(365, 18, 'Cumanacoa', 0),
-(366, 18, 'El Morro Puerto Santo', 0),
-(367, 18, 'El Pilar', 0),
-(368, 18, 'El Poblado', 0),
-(369, 18, 'Guaca', 0),
-(370, 18, 'Guiria', 0),
-(371, 18, 'Irapa', 0),
-(372, 18, 'Manicuare', 0),
-(373, 18, 'Mariguitar', 0),
-(374, 18, 'Río Caribe', 0),
-(375, 18, 'San Antonio del Golfo', 0),
-(376, 18, 'San José de Aerocuar', 0),
-(377, 18, 'San Vicente de Sucre', 0),
-(378, 18, 'Santa Fe de Sucre', 0),
-(379, 18, 'Tunapuy', 0),
-(380, 18, 'Yaguaraparo', 0),
-(381, 18, 'Yoco', 0),
-(382, 19, 'Abejales', 0),
-(383, 19, 'Borota', 0),
-(384, 19, 'Bramon', 0),
-(385, 19, 'Capacho', 0),
-(386, 19, 'Colón', 0),
-(387, 19, 'Coloncito', 0),
-(388, 19, 'Cordero', 0),
-(389, 19, 'El Cobre', 0),
-(390, 19, 'El Pinal', 0),
-(391, 19, 'Independencia', 0),
-(392, 19, 'La Fría', 0),
-(393, 19, 'La Grita', 0),
-(394, 19, 'La Pedrera', 0),
-(395, 19, 'La Tendida', 0),
-(396, 19, 'Las Delicias', 0),
-(397, 19, 'Las Hernández', 0),
-(398, 19, 'Lobatera', 0),
-(399, 19, 'Michelena', 0),
-(400, 19, 'Palmira', 0),
-(401, 19, 'Pregonero', 0),
-(402, 19, 'Queniquea', 0),
-(403, 19, 'Rubio', 0),
-(404, 19, 'San Antonio del Tachira', 0),
-(405, 19, 'San Cristobal', 1),
-(406, 19, 'San José de Bolívar', 0),
-(407, 19, 'San Josecito', 0),
-(408, 19, 'San Pedro del Río', 0),
-(409, 19, 'Santa Ana Táchira', 0),
-(410, 19, 'Seboruco', 0),
-(411, 19, 'Táriba', 0),
-(412, 19, 'Umuquena', 0),
-(413, 19, 'Ureña', 0),
-(414, 20, 'Batatal', 0),
-(415, 20, 'Betijoque', 0),
-(416, 20, 'Boconó', 0),
-(417, 20, 'Carache', 0),
-(418, 20, 'Chejende', 0),
-(419, 20, 'Cuicas', 0),
-(420, 20, 'El Dividive', 0),
-(421, 20, 'El Jaguito', 0),
-(422, 20, 'Escuque', 0),
-(423, 20, 'Isnotú', 0),
-(424, 20, 'Jajó', 0),
-(425, 20, 'La Ceiba', 0),
-(426, 20, 'La Concepción de Trujllo', 0),
-(427, 20, 'La Mesa de Esnujaque', 0),
-(428, 20, 'La Puerta', 0),
-(429, 20, 'La Quebrada', 0),
-(430, 20, 'Mendoza Fría', 0),
-(431, 20, 'Meseta de Chimpire', 0),
-(432, 20, 'Monay', 0),
-(433, 20, 'Motatán', 0),
-(434, 20, 'Pampán', 0),
-(435, 20, 'Pampanito', 0),
-(436, 20, 'Sabana de Mendoza', 0),
-(437, 20, 'San Lázaro', 0),
-(438, 20, 'Santa Ana de Trujillo', 0),
-(439, 20, 'Tostós', 0),
-(440, 20, 'Trujillo', 1),
-(441, 20, 'Valera', 0),
-(442, 21, 'Carayaca', 0),
-(443, 21, 'Litoral', 0),
-(444, 25, 'Archipiélago Los Roques', 0),
-(445, 22, 'Aroa', 0),
-(446, 22, 'Boraure', 0),
-(447, 22, 'Campo Elías de Yaracuy', 0),
-(448, 22, 'Chivacoa', 0),
-(449, 22, 'Cocorote', 0),
-(450, 22, 'Farriar', 0),
-(451, 22, 'Guama', 0),
-(452, 22, 'Marín', 0),
-(453, 22, 'Nirgua', 0),
-(454, 22, 'Sabana de Parra', 0),
-(455, 22, 'Salom', 0),
-(456, 22, 'San Felipe', 1),
-(457, 22, 'San Pablo de Yaracuy', 0),
-(458, 22, 'Urachiche', 0),
-(459, 22, 'Yaritagua', 0),
-(460, 22, 'Yumare', 0),
-(461, 23, 'Bachaquero', 0),
-(462, 23, 'Bobures', 0),
-(463, 23, 'Cabimas', 0),
-(464, 23, 'Campo Concepción', 0),
-(465, 23, 'Campo Mara', 0),
-(466, 23, 'Campo Rojo', 0),
-(467, 23, 'Carrasquero', 0),
-(468, 23, 'Casigua', 0),
-(469, 23, 'Chiquinquirá', 0),
-(470, 23, 'Ciudad Ojeda', 0),
-(471, 23, 'El Batey', 0),
-(472, 23, 'El Carmelo', 0),
-(473, 23, 'El Chivo', 0),
-(474, 23, 'El Guayabo', 0),
-(475, 23, 'El Mene', 0),
-(476, 23, 'El Venado', 0),
-(477, 23, 'Encontrados', 0),
-(478, 23, 'Gibraltar', 0),
-(479, 23, 'Isla de Toas', 0),
-(480, 23, 'La Concepción del Zulia', 0),
-(481, 23, 'La Paz', 0),
-(482, 23, 'La Sierrita', 0),
-(483, 23, 'Lagunillas del Zulia', 0),
-(484, 23, 'Las Piedras de Perijá', 0),
-(485, 23, 'Los Cortijos', 0),
-(486, 23, 'Machiques', 0),
-(487, 23, 'Maracaibo', 1),
-(488, 23, 'Mene Grande', 0),
-(489, 23, 'Palmarejo', 0),
-(490, 23, 'Paraguaipoa', 0),
-(491, 23, 'Potrerito', 0),
-(492, 23, 'Pueblo Nuevo del Zulia', 0),
-(493, 23, 'Puertos de Altagracia', 0),
-(494, 23, 'Punta Gorda', 0),
-(495, 23, 'Sabaneta de Palma', 0),
-(496, 23, 'San Francisco', 0),
-(497, 23, 'San José de Perijá', 0),
-(498, 23, 'San Rafael del Moján', 0),
-(499, 23, 'San Timoteo', 0),
-(500, 23, 'Santa Bárbara Del Zulia', 0),
-(501, 23, 'Santa Cruz de Mara', 0),
-(502, 23, 'Santa Cruz del Zulia', 0),
-(503, 23, 'Santa Rita', 0),
-(504, 23, 'Sinamaica', 0),
-(505, 23, 'Tamare', 0),
-(506, 23, 'Tía Juana', 0),
-(507, 23, 'Villa del Rosario', 0),
-(508, 21, 'La Guaira', 1),
-(509, 21, 'Catia La Mar', 0),
-(510, 21, 'Macuto', 0),
-(511, 21, 'Naiguatá', 0),
-(512, 25, 'Archipiélago Los Monjes', 0),
-(513, 25, 'Isla La Tortuga y Cayos adyacentes', 0),
-(514, 25, 'Isla La Sola', 0),
-(515, 25, 'Islas Los Testigos', 0),
-(516, 25, 'Islas Los Frailes', 0),
-(517, 25, 'Isla La Orchila', 0),
-(518, 25, 'Archipiélago Las Aves', 0),
-(519, 25, 'Isla de Aves', 0),
-(520, 25, 'Isla La Blanquilla', 0),
-(521, 25, 'Isla de Patos', 0),
-(522, 25, 'Islas Los Hermanos', 0);
+CREATE DATABASE IF NOT EXISTS `bdch` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `bdch`;
 
 -- --------------------------------------------------------
 
@@ -544,17 +29,18 @@ INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 -- Estructura de tabla para la tabla `pages`
 --
 
+DROP TABLE IF EXISTS `pages`;
 CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
   `menu_id` int(11) DEFAULT NULL,
-  `titulo` varchar(100) NOT NULL,
-  `page` varchar(60) NOT NULL DEFAULT '#',
-  `descripcion` varchar(255) NOT NULL,
-  `icono` varchar(70) NOT NULL,
+  `titulo` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `page` varchar(60) CHARACTER SET utf8mb4 NOT NULL DEFAULT '#',
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `icono` varchar(70) CHARACTER SET utf8mb4 NOT NULL,
   `activo` int(11) NOT NULL DEFAULT 1,
   `creado` datetime NOT NULL,
   `actualizado` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `pages`
@@ -563,13 +49,18 @@ CREATE TABLE `pages` (
 INSERT INTO `pages` (`id`, `menu_id`, `titulo`, `page`, `descripcion`, `icono`, `activo`, `creado`, `actualizado`) VALUES
 (1, NULL, 'Dashboard', 'dashboard', '', 'fa fa-dashboard', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
 (2, NULL, 'Archivos maestros', '#', '', 'fa-solid fa-book', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
-(3, NULL, 'Usuarios', 'users', '', 'fa-solid fa-users', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
-(4, NULL, 'Roles', 'roles', '', 'fa-solid fa-user-gear', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
-(9, 2, 'Pacientes', 'pacientes', '', '', 1, '2022-05-07 02:27:04', '2022-05-06 20:27:25'),
-(10, 2, 'Medicos', 'medicos', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
-(11, 2, 'Vacunas', 'vacunas', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
-(13, 2, 'Especialidades', 'especialidades', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
-(15, NULL, 'Historial de vacunas', 'HistorialVacunas', 'Historial de vacunas aplicadas', 'fa-solid fa-vial-circle-check', 1, '2022-06-28 17:43:22', '2022-06-28 11:45:18');
+(3, 2, 'Pacientes', 'pacientes', '', '', 1, '2022-05-07 02:27:04', '2022-05-06 20:27:25'),
+(4, 2, 'Medicos', 'medicos', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
+(5, 2, 'Vacunas', 'vacunas', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
+(6, 2, 'Especialidades', 'especialidades', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
+(7, NULL, 'Consulta', 'consulta', 'Sección para insertar datos de la consulta realizada', 'fa-solid fa-stethoscope', 1, '2022-07-01 18:13:35', '2022-07-01 12:16:14'),
+(8, NULL, 'Hospitalization', '#', 'Ingreso chequeo diario y alta del paciente', 'fa-solid fa-hospital-user', 1, '2022-06-30 01:49:28', '2022-06-29 20:03:52'),
+(9, 8, 'Información', 'hospitInfo', 'Datos de ingreso de un paciente a hospitalizacion por covid', '', 1, '2022-06-30 02:04:49', '2022-06-29 20:06:09'),
+(10, 8, 'Chequeo diario', 'chequeo diario', 'Seguimiento del estado del paciente', '', 1, '2022-06-30 02:06:26', '2022-06-29 20:08:25'),
+(11, 8, 'Alta de paciente', 'alta de paciente', 'Fecha de alta de paciente y estado del mismo', '', 1, '2022-06-30 02:08:32', '2022-06-29 20:09:14'),
+(12, NULL, 'Vacunacion', '#', '', 'fa-solid fa-vial-circle-check', 1, '2022-06-28 17:43:22', '2022-06-28 11:45:18'),
+(14, NULL, 'Roles', 'roles', '', 'fa-solid fa-user-gear', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
+(15, NULL, 'Usuarios', 'users', '', 'fa-solid fa-users', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35');
 
 -- --------------------------------------------------------
 
@@ -577,6 +68,7 @@ INSERT INTO `pages` (`id`, `menu_id`, `titulo`, `page`, `descripcion`, `icono`, 
 -- Estructura de tabla para la tabla `permisos`
 --
 
+DROP TABLE IF EXISTS `permisos`;
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL,
@@ -587,7 +79,7 @@ CREATE TABLE `permisos` (
   `d` int(11) NOT NULL DEFAULT 0,
   `creado` datetime NOT NULL,
   `actualizado` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -596,16 +88,17 @@ CREATE TABLE `permisos` (
 INSERT INTO `permisos` (`id`, `id_rol`, `id_page`, `c`, `r`, `u`, `d`, `creado`, `actualizado`) VALUES
 (1, 1, 1, 1, 1, 1, 1, '2022-04-30 20:18:15', '2022-04-30 14:18:25'),
 (2, 1, 2, 1, 1, 1, 1, '2022-04-30 20:18:15', '2022-04-30 14:18:25'),
-(3, 1, 4, 1, 1, 1, 1, '2022-05-01 16:10:24', '2022-05-01 10:10:56'),
-(4, 1, 3, 1, 1, 1, 1, '2022-05-01 04:26:24', '2022-04-30 22:26:41'),
-(5, 2, 1, 0, 0, 0, 0, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
-(6, 2, 2, 0, 1, 1, 0, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
-(7, 2, 3, 0, 0, 0, 0, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
-(8, 2, 4, 0, 0, 0, 0, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
-(9, 3, 1, 1, 1, 1, 1, '2022-05-01 19:16:19', '2022-05-01 13:17:19'),
-(10, 3, 2, 0, 0, 0, 0, '2022-05-01 19:16:19', '2022-05-01 13:17:19'),
-(11, 3, 3, 0, 0, 0, 0, '2022-05-01 19:16:19', '2022-05-01 13:17:19'),
-(12, 1, 15, 1, 1, 1, 1, '2022-06-28 17:45:28', '2022-06-28 11:45:59');
+(3, 1, 7, 1, 1, 1, 1, '2022-05-01 16:10:24', '2022-05-01 10:10:56'),
+(4, 1, 8, 1, 1, 1, 1, '2022-05-01 04:26:24', '2022-04-30 22:26:41'),
+(5, 1, 12, 1, 1, 1, 1, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
+(6, 1, 14, 1, 1, 1, 1, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
+(7, 1, 15, 1, 1, 1, 1, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
+(8, 2, 1, 0, 1, 0, 0, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
+(9, 2, 2, 0, 0, 0, 0, '2022-05-01 19:16:19', '2022-05-01 13:17:19'),
+(10, 2, 7, 0, 0, 0, 0, '2022-05-01 19:16:19', '2022-05-01 13:17:19'),
+(11, 3, 8, 0, 0, 0, 0, '2022-05-01 19:16:19', '2022-05-01 13:17:19'),
+(12, 3, 12, 1, 1, 1, 1, '2022-06-28 17:45:28', '2022-06-28 11:45:59'),
+(13, 3, 14, 1, 1, 1, 1, '2022-06-30 02:10:29', '2022-06-29 20:11:02');
 
 -- --------------------------------------------------------
 
@@ -613,12 +106,13 @@ INSERT INTO `permisos` (`id`, `id_rol`, `id_page`, `c`, `r`, `u`, `d`, `creado`,
 -- Estructura de tabla para la tabla `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
-  `nombre_rol` varchar(100) NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
+  `nombre_rol` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -635,10 +129,25 @@ INSERT INTO `roles` (`id_rol`, `nombre_rol`, `descripcion`, `status`) VALUES
 -- Estructura de tabla para la tabla `TMBCH_CAM`
 --
 
+DROP TABLE IF EXISTS `TMBCH_CAM`;
 CREATE TABLE `TMBCH_CAM` (
   `TMCAM_NC` int(11) NOT NULL,
   `TMCTO_NC` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `TMBCH_CAM`
+--
+
+INSERT INTO `TMBCH_CAM` (`TMCAM_NC`, `TMCTO_NC`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2);
 
 -- --------------------------------------------------------
 
@@ -646,10 +155,20 @@ CREATE TABLE `TMBCH_CAM` (
 -- Estructura de tabla para la tabla `TMBCH_CTO`
 --
 
+DROP TABLE IF EXISTS `TMBCH_CTO`;
 CREATE TABLE `TMBCH_CTO` (
-  `TMCTO_NC` int(11) NOT NULL,
-  `TMPIS_NP` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `TMCTO_NC` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `TMBCH_CTO`
+--
+
+INSERT INTO `TMBCH_CTO` (`TMCTO_NC`) VALUES
+(1),
+(2),
+(3),
+(4);
 
 -- --------------------------------------------------------
 
@@ -657,11 +176,12 @@ CREATE TABLE `TMBCH_CTO` (
 -- Estructura de tabla para la tabla `TMBCH_EDO`
 --
 
+DROP TABLE IF EXISTS `TMBCH_EDO`;
 CREATE TABLE `TMBCH_EDO` (
   `TMEDO_CE` int(11) NOT NULL,
-  `TMEDO_NO` varchar(250) NOT NULL,
-  `iso_3166-2` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TMEDO_NO` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `iso_3166-2` varchar(4) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_EDO`
@@ -697,57 +217,16 @@ INSERT INTO `TMBCH_EDO` (`TMEDO_CE`, `TMEDO_NO`, `iso_3166-2`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `TMBCH_EDOS`
---
-
-CREATE TABLE `TMBCH_EDOS` (
-  `TMEDO_CE` int(11) NOT NULL,
-  `TMEDO_NO` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `TMBCH_EDOS`
---
-
-INSERT INTO `TMBCH_EDOS` (`TMEDO_CE`, `TMEDO_NO`) VALUES
-(1, 'Amazonas'),
-(2, 'Anzoátegui'),
-(3, 'Apure'),
-(4, 'Aragua'),
-(5, 'Barinas'),
-(6, 'Bolívar'),
-(7, 'Carabobo'),
-(8, 'Cojedes'),
-(9, 'Delta Amacuro'),
-(10, 'Distrito Capital	'),
-(11, 'Falcón'),
-(12, 'Guárico'),
-(13, 'Lara'),
-(14, 'Mérida'),
-(15, 'Miranda'),
-(16, 'Monagas'),
-(17, 'Nueva Esparta'),
-(18, 'Portuguesa'),
-(19, 'Sucre'),
-(20, 'Táchira'),
-(21, 'Trujillo'),
-(22, 'Vargas'),
-(23, 'Yaracuy'),
-(24, 'Zulia'),
-(27, 'Arauca');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `TMBCH_ESP`
 --
 
+DROP TABLE IF EXISTS `TMBCH_ESP`;
 CREATE TABLE `TMBCH_ESP` (
   `TMESP_ID` int(11) NOT NULL,
-  `TMESP_CE` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMESP_NO` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMESP_DE` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `TMESP_CE` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMESP_NO` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMESP_DE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_ESP`
@@ -764,26 +243,28 @@ INSERT INTO `TMBCH_ESP` (`TMESP_ID`, `TMESP_CE`, `TMESP_NO`, `TMESP_DE`) VALUES
 -- Estructura de tabla para la tabla `TMBCH_MED`
 --
 
+DROP TABLE IF EXISTS `TMBCH_MED`;
 CREATE TABLE `TMBCH_MED` (
   `TMMED_MID` int(11) NOT NULL,
-  `TMMED_CI` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMMED_CI` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMUN_CM` int(11) NOT NULL,
-  `TMMED_DIR` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMMED_AP` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMMED_NO` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMMED_TF` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMESP_CE` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `TMMED_DIR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMMED_AP` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMMED_NO` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMMED_TF` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMESP_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_MED`
 --
 
-INSERT INTO `TMBCH_MED` (`TMMED_MID`, `TMMED_CI`, `TMMUN_CM`, `TMMED_DIR`, `TMMED_AP`, `TMMED_NO`, `TMMED_TF`, `TMESP_CE`) VALUES
+INSERT INTO `TMBCH_MED` (`TMMED_MID`, `TMMED_CI`, `TMMUN_CM`, `TMMED_DIR`, `TMMED_AP`, `TMMED_NO`, `TMMED_TF`, `TMESP_ID`) VALUES
 (1, 'V-27394396', 6, 'Centro, carrera 8, entre calles 9 y 10', 'Saavedraa', 'kevin', '04165026559', 1),
 (3, 'V-27364259', 2, 'Centro diagonal a al iglesia coromoto', 'Carmona', 'Maria Evita', '4265740027', 1),
 (5, 'V-24589980', 6, 'Barrio obrero', 'Zambrano Prereiraa', 'Camilas', '04165895214', 5),
-(6, 'V-27495433', 2, 'aadsfsad', 'Lius', 'Alejandro', '432423424', 1);
+(6, 'V-27495433', 2, 'aadsfsad', 'Lius', 'Alejandro', '432423424', 1),
+(7, 'V-32594658', 350, 'El abejal vereda 10 parte alta, sector la flores', 'Paredes Jacome', 'Orlando JosÃ©', '657857', 1);
 
 -- --------------------------------------------------------
 
@@ -791,11 +272,12 @@ INSERT INTO `TMBCH_MED` (`TMMED_MID`, `TMMED_CI`, `TMMUN_CM`, `TMMED_DIR`, `TMME
 -- Estructura de tabla para la tabla `TMBCH_MUN`
 --
 
+DROP TABLE IF EXISTS `TMBCH_MUN`;
 CREATE TABLE `TMBCH_MUN` (
   `TMMUN_CM` int(11) NOT NULL,
   `TMEDO_CE` int(11) NOT NULL,
-  `TMMUN_NO` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `TMMUN_NO` varchar(100) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_MUN`
@@ -1141,67 +623,39 @@ INSERT INTO `TMBCH_MUN` (`TMMUN_CM`, `TMEDO_CE`, `TMMUN_NO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `TMBCH_MUNS`
---
-
-CREATE TABLE `TMBCH_MUNS` (
-  `TMMUN_CM` int(11) NOT NULL,
-  `TMMUN_NO` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TMEDO_CE` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `TMBCH_MUNS`
---
-
-INSERT INTO `TMBCH_MUNS` (`TMMUN_CM`, `TMMUN_NO`, `TMEDO_CE`) VALUES
-(2, 'Andrés Bello', 20),
-(3, 'Antonio Rómulo Costa', 20),
-(4, 'Ayacucho', 20),
-(5, 'Bolívar', 20),
-(6, 'San Cristóbal', 20);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `TMBCH_PAC`
 --
 
+DROP TABLE IF EXISTS `TMBCH_PAC`;
 CREATE TABLE `TMBCH_PAC` (
   `TMPAC_PID` int(11) NOT NULL,
-  `TMPAC_CI` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMPAC_CI` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMUN_CM` int(11) NOT NULL,
-  `TMPAC_NO` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMPAC_AP` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMPAC_SX` enum('m','f') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMPAC_DIR` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMPAC_NO` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMPAC_AP` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMPAC_SX` enum('m','f') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMPAC_DIR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_FN` date NOT NULL,
-  `TMPAC_TF` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `TMPAC_TF` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_PAC`
 --
 
 INSERT INTO `TMBCH_PAC` (`TMPAC_PID`, `TMPAC_CI`, `TMMUN_CM`, `TMPAC_NO`, `TMPAC_AP`, `TMPAC_SX`, `TMPAC_DIR`, `TMPAC_FN`, `TMPAC_TF`) VALUES
-(1, '24589983', 4, 'Luis Alfonso', 'Zambrano Prereira', 'm', 'Centro diagonal a al iglesia coromoto', '2000-07-13', '04165026559'),
 (2, '24896666', 6, 'Maria Antonieta', 'Sanchez', 'f', 'Capacho', '1998-04-17', '04248963333'),
 (5, '27364259', 4, 'Camila ', 'Becerra', 'f', 'Barrio obrero', '2004-04-22', '04248965545'),
 (7, '27394396', 2, 'Kevin Leonardo', 'Saavedra Carmona', 'm', 'Avenida principal', '2000-07-13', '04165026559'),
 (35, '27456789', 6, 'John', 'Becerra', 'm', 'Barrio obrero', '1997-06-26', '04165026559'),
-(50, '27394391', 194, 'Andra', 'Sanchez', 'm', 'Calle del hambre', '2000-06-21', '04248965545'),
-(51, '26548693', 370, 'Morbius', 'Michael', 'm', 'Centro, carrera 8, entre calles 9 y 10', '1980-06-18', '04165895214');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `TMBCH_PIS`
---
-
-CREATE TABLE `TMBCH_PIS` (
-  `TMPIS_NP` int(11) NOT NULL,
-  `TMARE_CA` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(51, '26548693', 370, 'Morbius', 'Michael', 'm', 'Centro, carrera 8, entre calles 9 y 10', '1980-06-18', '04165895214'),
+(60, 'V-32594658', 1, 'Orlando José', 'Paredes Jacome', 'm', 'El abejal vereda 10 parte alta, sector la flores', '2007-12-08', '54564564'),
+(61, 'V-27395367', 1, 'Fermina', 'Michael', 'f', 'Centro, carrera 8, entre calles 9 y 10', '1995-07-13', '0416-5026559'),
+(62, 'V-26548693', 370, 'Morbius', 'Michael', 'm', 'Centro, carrera 8, entre calles 9 y 10', '1980-06-18', '0416-5895214'),
+(63, '2244862', 85, 'William', 'Hopkins', 'm', 'sdfasf', '1998-08-19', '0414-8579632'),
+(67, '22589368', 149, 'Orlando', 'Hopkins', 'm', 'sdafasfd', '1992-07-01', '0414-8965742'),
+(89, '24896145', 29, 'asfsaf', 'asfasf', 'm', 'asfasef', '2004-06-10', '0414-8885552'),
+(90, '2457896', 1, 'safdasf', 'asfsafd', 'm', 'asfasf', '1998-07-22', '0412-5577224');
 
 -- --------------------------------------------------------
 
@@ -1209,12 +663,13 @@ CREATE TABLE `TMBCH_PIS` (
 -- Estructura de tabla para la tabla `TMBCH_VAE`
 --
 
+DROP TABLE IF EXISTS `TMBCH_VAE`;
 CREATE TABLE `TMBCH_VAE` (
   `TMVAE_CV` int(11) NOT NULL,
-  `TMVAE_NO` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMVAE_DE` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TMVAE_NO` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMVAE_DE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TMVAE_FE` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_VAE`
@@ -1228,40 +683,74 @@ INSERT INTO `TMBCH_VAE` (`TMVAE_CV`, `TMVAE_NO`, `TMVAE_DE`, `TMVAE_FE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `TTBCH_CON`
+-- Estructura de tabla para la tabla `TTBCH_ADP`
 --
 
-CREATE TABLE `TTBCH_CON` (
-  `TTCON_CC` int(11) NOT NULL,
-  `TTCON_FE` date NOT NULL,
-  `TTCON_HR` time NOT NULL,
-  `TTCON-PC` enum('positivo','negativo') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TTCON_TP` float NOT NULL,
-  `TTCON_PE` float NOT NULL,
-  `TTCON_SI` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TTCON_DI` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TTCON_TM` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMPAC_PID` int(11) NOT NULL,
-  `TMMED_CCI` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `TTBCH_ADP`;
+CREATE TABLE `TTBCH_ADP` (
+  `TTADP_FE` datetime NOT NULL,
+  `TTADP_EST` text CHARACTER SET utf8mb4 NOT NULL,
+  `TTHOS_CDH` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `TTBCH_HOS`
+-- Estructura de tabla para la tabla `TTBCH_CHD`
 --
 
-CREATE TABLE `TTBCH_HOS` (
+DROP TABLE IF EXISTS `TTBCH_CHD`;
+CREATE TABLE `TTBCH_CHD` (
   `TTHOS_HC` time NOT NULL,
-  `TTHOS_FE` date NOT NULL,
   `TTHOS_TA` int(11) NOT NULL,
   `TTHOS-TP` float NOT NULL,
   `TTHOS_OX` int(11) NOT NULL,
-  `TTHOS_OB` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TTCON_CC` int(11) DEFAULT NULL,
-  `TMMED_CI` int(11) DEFAULT NULL,
-  `TMCAM_NC` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `TTHOS_OB` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TTHOS_CDH` int(11) NOT NULL,
+  `TMMED_MID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TTBCH_CON`
+--
+
+DROP TABLE IF EXISTS `TTBCH_CON`;
+CREATE TABLE `TTBCH_CON` (
+  `TTCON_CC` int(11) NOT NULL,
+  `TMPAC_PID` int(11) NOT NULL,
+  `TTCON_FE` datetime NOT NULL DEFAULT current_timestamp(),
+  `TTCON_PC` enum('positivo','negativo') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TTCON_TP` float NOT NULL,
+  `TTCON_PE` float NOT NULL,
+  `TTCON_SI` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TTCON_DI` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TTCON_TM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMMED_MID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `TTBCH_CON`
+--
+
+INSERT INTO `TTBCH_CON` (`TTCON_CC`, `TMPAC_PID`, `TTCON_FE`, `TTCON_PC`, `TTCON_TP`, `TTCON_PE`, `TTCON_SI`, `TTCON_DI`, `TTCON_TM`, `TMMED_MID`) VALUES
+(19, 2, '2022-07-03 18:40:57', 'positivo', 38, 66, 'Dolor de cabeza y diarrea', 'Tiene Covid', 'Cama reposo oxigeno y un unguento', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TTBCH_HIFO`
+--
+
+DROP TABLE IF EXISTS `TTBCH_HIFO`;
+CREATE TABLE `TTBCH_HIFO` (
+  `TTHIFO_CDH` int(11) NOT NULL,
+  `TTHIFO_FI` datetime NOT NULL,
+  `TTHIFO_NC` int(11) NOT NULL,
+  `TTCON_CC` int(11) NOT NULL,
+  `TTHIFO_ST` enum('HOSPITALIZADO','DE ALTA') CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -1269,12 +758,48 @@ CREATE TABLE `TTBCH_HOS` (
 -- Estructura de tabla para la tabla `TTBCH_VAP`
 --
 
+DROP TABLE IF EXISTS `TTBCH_VAP`;
 CREATE TABLE `TTBCH_VAP` (
-  `TTVAP_FA` date NOT NULL,
+  `TTVAP_FA` date NOT NULL DEFAULT current_timestamp(),
   `TTVAP_ND` int(11) DEFAULT NULL,
   `TMVAE_CV` int(11) DEFAULT NULL,
-  `TMPAC_ACI` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `TMPAC_PID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Disparadores `TTBCH_VAP`
+--
+DROP TRIGGER IF EXISTS `vacunaApl`;
+DELIMITER $$
+CREATE TRIGGER `vacunaApl` AFTER INSERT ON `TTBCH_VAP` FOR EACH ROW BEGIN
+DECLARE idV int DEFAULT 0;
+DECLARE uintV int DEFAULT 0;
+SET @idV=new.TMVAE_CV;
+UPDATE TTBCH_VSTK SET TTVST_VQT = TTVST_VQT-1 WHERE TMVAE_CV = @idV;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TTBCH_VSTK`
+--
+
+DROP TABLE IF EXISTS `TTBCH_VSTK`;
+CREATE TABLE `TTBCH_VSTK` (
+  `TMVAE_CV` int(11) NOT NULL,
+  `TTVST_VQT` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `TTBCH_VSTK`
+--
+
+INSERT INTO `TTBCH_VSTK` (`TMVAE_CV`, `TTVST_VQT`) VALUES
+(44, 848),
+(42, 469),
+(41, 763);
 
 -- --------------------------------------------------------
 
@@ -1282,14 +807,15 @@ CREATE TABLE `TTBCH_VAP` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `Id_rol` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nombre` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `telefono` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -1299,18 +825,12 @@ INSERT INTO `usuarios` (`id_usuario`, `Id_rol`, `nombre`, `email`, `telefono`, `
 (11, 1, 'kevin', 'kevinsaavedra55@gmail.com', '04165026559', '9a76db68a30bebc9d0b74caff652000fb2aa9ea301f915388efb590035ab6404'),
 (12, 2, 'Maria Evita', 'mariaevita06@gmail.com', '04265740027', '5260b47cf81aa8cf442431536dd516f05254d2be64e6037dd99c67c93e008c16'),
 (13, 3, 'Oriany', 'oriany9570@gmail.com', '04265702722', 'a61d357b8275d2c738f9aa7c58e79316c8d82edc18044c09698ebbfaae5ac5e9'),
-(14, 1, 'Admin', 'admin@admin.com', '04165026559', '41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb');
+(14, 1, 'Admin', 'admin@admin.com', '04165026559', '41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb'),
+(15, 1, 'Orlando', 'tatoparedes0812@gmail.com', '0416852468', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `ciudades`
---
-ALTER TABLE `ciudades`
-  ADD PRIMARY KEY (`id_ciudad`),
-  ADD KEY `id_estado` (`id_estado`);
 
 --
 -- Indices de la tabla `pages`
@@ -1344,19 +864,12 @@ ALTER TABLE `TMBCH_CAM`
 -- Indices de la tabla `TMBCH_CTO`
 --
 ALTER TABLE `TMBCH_CTO`
-  ADD PRIMARY KEY (`TMCTO_NC`),
-  ADD KEY `TMPIS-NP_idx` (`TMPIS_NP`);
+  ADD PRIMARY KEY (`TMCTO_NC`);
 
 --
 -- Indices de la tabla `TMBCH_EDO`
 --
 ALTER TABLE `TMBCH_EDO`
-  ADD PRIMARY KEY (`TMEDO_CE`);
-
---
--- Indices de la tabla `TMBCH_EDOS`
---
-ALTER TABLE `TMBCH_EDOS`
   ADD PRIMARY KEY (`TMEDO_CE`);
 
 --
@@ -1374,7 +887,7 @@ ALTER TABLE `TMBCH_MED`
   ADD UNIQUE KEY `TMMED_IC` (`TMMED_CI`),
   ADD UNIQUE KEY `TMMED_CI` (`TMMED_CI`),
   ADD UNIQUE KEY `TMMED_CI_2` (`TMMED_CI`),
-  ADD KEY `TMESP-CE_idx` (`TMESP_CE`),
+  ADD KEY `TMESP-CE_idx` (`TMESP_ID`),
   ADD KEY `TMMUN-CM` (`TMMUN_CM`);
 
 --
@@ -1383,13 +896,6 @@ ALTER TABLE `TMBCH_MED`
 ALTER TABLE `TMBCH_MUN`
   ADD PRIMARY KEY (`TMMUN_CM`),
   ADD KEY `id_estado` (`TMEDO_CE`);
-
---
--- Indices de la tabla `TMBCH_MUNS`
---
-ALTER TABLE `TMBCH_MUNS`
-  ADD PRIMARY KEY (`TMMUN_CM`),
-  ADD KEY `TMEDO-CE_idx` (`TMEDO_CE`);
 
 --
 -- Indices de la tabla `TMBCH_PAC`
@@ -1401,17 +907,24 @@ ALTER TABLE `TMBCH_PAC`
   ADD KEY `TMMUN-CM` (`TMMUN_CM`);
 
 --
--- Indices de la tabla `TMBCH_PIS`
---
-ALTER TABLE `TMBCH_PIS`
-  ADD PRIMARY KEY (`TMPIS_NP`),
-  ADD KEY `TMARE-CA_idx` (`TMARE_CA`);
-
---
 -- Indices de la tabla `TMBCH_VAE`
 --
 ALTER TABLE `TMBCH_VAE`
   ADD PRIMARY KEY (`TMVAE_CV`);
+
+--
+-- Indices de la tabla `TTBCH_ADP`
+--
+ALTER TABLE `TTBCH_ADP`
+  ADD KEY `TTHOS_CH` (`TTHOS_CDH`);
+
+--
+-- Indices de la tabla `TTBCH_CHD`
+--
+ALTER TABLE `TTBCH_CHD`
+  ADD KEY `TMMED-HCI_idx` (`TMMED_MID`),
+  ADD KEY `TMMED_MID` (`TMMED_MID`),
+  ADD KEY `TTHOS_CDH` (`TTHOS_CDH`);
 
 --
 -- Indices de la tabla `TTBCH_CON`
@@ -1419,22 +932,29 @@ ALTER TABLE `TMBCH_VAE`
 ALTER TABLE `TTBCH_CON`
   ADD PRIMARY KEY (`TTCON_CC`),
   ADD KEY `TMPAC-CI_idx` (`TMPAC_PID`),
-  ADD KEY `TMMED-CCI_idx` (`TMMED_CCI`);
+  ADD KEY `TMMED-CCI_idx` (`TMMED_MID`),
+  ADD KEY `TMMED_MID` (`TMMED_MID`);
 
 --
--- Indices de la tabla `TTBCH_HOS`
+-- Indices de la tabla `TTBCH_HIFO`
 --
-ALTER TABLE `TTBCH_HOS`
-  ADD KEY `TMMED-HCI_idx` (`TMMED_CI`),
-  ADD KEY `TMCAM-NC_idx` (`TMCAM_NC`),
-  ADD KEY `TTCON-CC_idx` (`TTCON_CC`);
+ALTER TABLE `TTBCH_HIFO`
+  ADD PRIMARY KEY (`TTHIFO_CDH`),
+  ADD KEY `TTCON_CC` (`TTCON_CC`),
+  ADD KEY `TTHOS_NC` (`TTHIFO_NC`);
 
 --
 -- Indices de la tabla `TTBCH_VAP`
 --
 ALTER TABLE `TTBCH_VAP`
   ADD KEY `TMVAE-CV_idx` (`TMVAE_CV`),
-  ADD KEY `TMPAC-CI_idx` (`TMPAC_ACI`);
+  ADD KEY `TMPAC-CI_idx` (`TMPAC_PID`);
+
+--
+-- Indices de la tabla `TTBCH_VSTK`
+--
+ALTER TABLE `TTBCH_VSTK`
+  ADD KEY `VMVAE_CV` (`TMVAE_CV`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -1448,22 +968,16 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `ciudades`
---
-ALTER TABLE `ciudades`
-  MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
-
---
 -- AUTO_INCREMENT de la tabla `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -1475,25 +989,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `TMBCH_CAM`
 --
 ALTER TABLE `TMBCH_CAM`
-  MODIFY `TMCAM_NC` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TMCAM_NC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `TMBCH_CTO`
 --
 ALTER TABLE `TMBCH_CTO`
-  MODIFY `TMCTO_NC` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TMCTO_NC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `TMBCH_EDO`
 --
 ALTER TABLE `TMBCH_EDO`
   MODIFY `TMEDO_CE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_EDOS`
---
-ALTER TABLE `TMBCH_EDOS`
-  MODIFY `TMEDO_CE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `TMBCH_ESP`
@@ -1505,7 +1013,7 @@ ALTER TABLE `TMBCH_ESP`
 -- AUTO_INCREMENT de la tabla `TMBCH_MED`
 --
 ALTER TABLE `TMBCH_MED`
-  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `TMBCH_MUN`
@@ -1514,22 +1022,10 @@ ALTER TABLE `TMBCH_MUN`
   MODIFY `TMMUN_CM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=463;
 
 --
--- AUTO_INCREMENT de la tabla `TMBCH_MUNS`
---
-ALTER TABLE `TMBCH_MUNS`
-  MODIFY `TMMUN_CM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de la tabla `TMBCH_PAC`
 --
 ALTER TABLE `TMBCH_PAC`
-  MODIFY `TMPAC_PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_PIS`
---
-ALTER TABLE `TMBCH_PIS`
-  MODIFY `TMPIS_NP` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TMPAC_PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT de la tabla `TMBCH_VAE`
@@ -1541,13 +1037,19 @@ ALTER TABLE `TMBCH_VAE`
 -- AUTO_INCREMENT de la tabla `TTBCH_CON`
 --
 ALTER TABLE `TTBCH_CON`
-  MODIFY `TTCON_CC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `TTCON_CC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `TTBCH_HIFO`
+--
+ALTER TABLE `TTBCH_HIFO`
+  MODIFY `TTHIFO_CDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
@@ -1573,17 +1075,11 @@ ALTER TABLE `TMBCH_CAM`
   ADD CONSTRAINT `TMBCH_CAM_ibfk_1` FOREIGN KEY (`TMCTO_NC`) REFERENCES `TMBCH_CTO` (`TMCTO_NC`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `TMBCH_CTO`
---
-ALTER TABLE `TMBCH_CTO`
-  ADD CONSTRAINT `TMBCH_CTO_ibfk_1` FOREIGN KEY (`TMPIS_NP`) REFERENCES `TMBCH_PIS` (`TMPIS_NP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `TMBCH_MED`
 --
 ALTER TABLE `TMBCH_MED`
-  ADD CONSTRAINT `TMBCH_MED_ibfk_2` FOREIGN KEY (`TMESP_CE`) REFERENCES `TMBCH_ESP` (`TMESP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `TMBCH_MED_ibfk_3` FOREIGN KEY (`TMMUN_CM`) REFERENCES `TMBCH_MUN` (`TMMUN_CM`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `TMBCH_MED_ibfk_3` FOREIGN KEY (`TMMUN_CM`) REFERENCES `TMBCH_MUN` (`TMMUN_CM`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `TMBCH_MED_ibfk_4` FOREIGN KEY (`TMESP_ID`) REFERENCES `TMBCH_ESP` (`TMESP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `TMBCH_MUN`
@@ -1592,36 +1088,50 @@ ALTER TABLE `TMBCH_MUN`
   ADD CONSTRAINT `TMBCH_MUN_ibfk_1` FOREIGN KEY (`TMEDO_CE`) REFERENCES `TMBCH_EDO` (`TMEDO_CE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `TMBCH_MUNS`
---
-ALTER TABLE `TMBCH_MUNS`
-  ADD CONSTRAINT `TMBCH_MUNS_ibfk_1` FOREIGN KEY (`TMEDO_CE`) REFERENCES `TMBCH_EDOS` (`TMEDO_CE`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `TMBCH_PAC`
 --
 ALTER TABLE `TMBCH_PAC`
   ADD CONSTRAINT `TMBCH_PAC_ibfk_1` FOREIGN KEY (`TMMUN_CM`) REFERENCES `TMBCH_MUN` (`TMMUN_CM`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `TTBCH_ADP`
+--
+ALTER TABLE `TTBCH_ADP`
+  ADD CONSTRAINT `TTBCH_ADP_ibfk_1` FOREIGN KEY (`TTHOS_CDH`) REFERENCES `TTBCH_HIFO` (`TTHIFO_CDH`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `TTBCH_CHD`
+--
+ALTER TABLE `TTBCH_CHD`
+  ADD CONSTRAINT `TTBCH_CHD_ibfk_1` FOREIGN KEY (`TTHOS_CDH`) REFERENCES `TTBCH_HIFO` (`TTHIFO_CDH`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `TTBCH_CHD_ibfk_2` FOREIGN KEY (`TMMED_MID`) REFERENCES `TMBCH_MED` (`TMMED_MID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `TTBCH_CON`
 --
 ALTER TABLE `TTBCH_CON`
-  ADD CONSTRAINT `TTBCH_CON_ibfk_1` FOREIGN KEY (`TMPAC_PID`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `TTBCH_CON_ibfk_2` FOREIGN KEY (`TMMED_MID`) REFERENCES `TMBCH_MED` (`TMMED_MID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `TTBCH_CON_ibfk_3` FOREIGN KEY (`TMPAC_PID`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `TTBCH_HOS`
+-- Filtros para la tabla `TTBCH_HIFO`
 --
-ALTER TABLE `TTBCH_HOS`
-  ADD CONSTRAINT `TTBCH_HOS_ibfk_1` FOREIGN KEY (`TMCAM_NC`) REFERENCES `TMBCH_CAM` (`TMCAM_NC`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `TTBCH_HOS_ibfk_2` FOREIGN KEY (`TTCON_CC`) REFERENCES `TTBCH_CON` (`TTCON_CC`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `TTBCH_HIFO`
+  ADD CONSTRAINT `TTBCH_HIFO_ibfk_2` FOREIGN KEY (`TTHIFO_NC`) REFERENCES `TMBCH_CAM` (`TMCAM_NC`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `TTBCH_HIFO_ibfk_3` FOREIGN KEY (`TTCON_CC`) REFERENCES `TTBCH_CON` (`TTCON_CC`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `TTBCH_VAP`
 --
 ALTER TABLE `TTBCH_VAP`
-  ADD CONSTRAINT `TTBCH_VAP_ibfk_1` FOREIGN KEY (`TMPAC_ACI`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `TTBCH_VAP_ibfk_2` FOREIGN KEY (`TMVAE_CV`) REFERENCES `TMBCH_VAE` (`TMVAE_CV`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `TTBCH_VAP_ibfk_2` FOREIGN KEY (`TMVAE_CV`) REFERENCES `TMBCH_VAE` (`TMVAE_CV`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `TTBCH_VAP_ibfk_3` FOREIGN KEY (`TMPAC_PID`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `TTBCH_VSTK`
+--
+ALTER TABLE `TTBCH_VSTK`
+  ADD CONSTRAINT `TTBCH_VSTK_ibfk_1` FOREIGN KEY (`TMVAE_CV`) REFERENCES `TMBCH_VAE` (`TMVAE_CV`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuarios`

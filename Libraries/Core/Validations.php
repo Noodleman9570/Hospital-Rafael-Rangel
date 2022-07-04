@@ -10,11 +10,12 @@ class Validations
   public $patterns = array(
     'email'    => '[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}',
     'text'     => '[\p{L}0-9\s-.,;:!"%&()?+\'°#\/@]+',
-    'tel'      => '[0-9+\s()-]+',
+    'tel'      => '[01246]{4}-[0-9]{7}',
     'int'      => '[0-9]+',
     'words'    => '[\p{L}\s]+',
     'alphanum' => '[\p{L}0-9]+',
     'alpha'    => '[\p{L}]+',
+    'temp' => '[3][5-9]',
   );
 
 
@@ -62,6 +63,7 @@ class Validations
         }
         return $this;
   }
+
 
   /**
    *
@@ -111,13 +113,25 @@ class Validations
       }
     } else {
       if ($this->value < $length) {
-        $this->errors[] = nl2br('El campo ' . $this->name . ' es inferior al valor minimo permitido');
+        $this->errors[] = nl2br('El campo ' . $this->name . ' es inferior al valor minimo permitio');
       }
     }
 
     return $this;
   }
 
+
+  public function rangeNum($min, $max)
+  {
+    if($this->value < $min || $this->value > $max) {
+      $this->errors[] = nl2br('El valor del campo '. $this->name . ' esta fuera del rango posible['.$min.'-'.$max.']');
+    }
+    return $this;
+  }
+
+
+
+  
   /**
    *
    * Validar el minimo de un campo
@@ -268,6 +282,8 @@ class Validations
   {
     if (!$this->isSuccess()) {
       return $this->errors[0];
+    }else{
+      return $this->errors;
     }
   }
 
