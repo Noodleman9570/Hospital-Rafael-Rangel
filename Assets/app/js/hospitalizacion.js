@@ -130,3 +130,70 @@ $("#buttonAdd").on(
             }
             );
     
+            function listarCTO(){
+                $.ajax({
+                    url:`${base_url}/hospitalizacion/listarCTO`,
+                    type:'POST'
+                }).done(function(resp){
+                    var data = JSON.parse(resp)
+                    var cadena = "";
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            cadena +="<option value='"+data[i]["TMEDO_CE"]+"'>"+data[i]["TMEDO_NO"]+"</option>";
+                            
+                        }
+                        $("#sel_cuarto").html(cadena);
+                        var idedo = $("#sel_cuarto").val();
+                        listarMUN(idedo);
+                    } else {
+                        cadena +="<option value=''>No se encontraron registros</option>";
+                        $("#sel_cuarto").html(cadena);
+                    }
+                })
+            }
+            
+            function listarCAM(idedo, mun){
+                $.ajax({
+                    url:`${base_url}/hospitalizacion/listarCAM`,
+                    type:'POST',
+                    data:{
+                        idedo:idedo
+                    }
+                }).done(function(resp){
+                    var data = JSON.parse(resp)
+                    var cadena = "";
+            
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            cadena +="<option value='"+data[i]["TMMUN_CTO"]+"'>"+data[i]["TMMUN_CTO"]+"</option>";
+                            
+                        }
+                        $("#sel_cama").html(cadena);
+                    } else {
+                        cadena +="<option value=''>No se encontraron registros</option>";
+                        $("#sel_cama").html(cadena);
+                    }
+                    if(mun){ $("#sel_cama").val(mun); }
+                })
+            
+            }
+            
+            
+            function changeCTO(mun){
+                   
+                var idedo = $("#sel_cuarto").val();
+                listarMUN(idedo, mun);
+                
+                
+            }
+            
+            
+            $(document).ready(function() {
+                listarCTO();
+            });
+                $("#sel_cuarto").change(function(){
+                var idedo= $("#sel_cuarto").val();
+                listarMUN(idedo);
+            })
+            
+            

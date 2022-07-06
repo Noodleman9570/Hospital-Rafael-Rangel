@@ -122,6 +122,16 @@
             // Alertas::new(sprintf("Se ha eliminado el usuario %s", $pac[0]['nombre']), "success");
             
         }
+        public function listarPac()
+        {
+            try {
+                $consulta = ConsultaModel::SQL("SELECT * FROM TMBCH_CAM");
+            } catch (Exception $e) {
+                echo "ERROR: ".$e->getMessage();
+            }
+            
+            echo json_encode($consulta);
+        }
     }
 
 ?>

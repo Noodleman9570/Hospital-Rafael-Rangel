@@ -24,7 +24,7 @@
               </div>
               <br>
               <h7 class="formulario__label" id="exampleModalLongTitle">Ubicar paciente</h7>
-              <div class="direction_container">
+              <div class="location_container">
 
                 <div class="formulario__grupo" id="grupo__cuarto">
                   <label for="cuarto">Cuarto:</label>
