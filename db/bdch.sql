@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-07-2022 a las 14:20:30
+-- Tiempo de generación: 06-07-2022 a las 14:50:59
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -30,8 +30,8 @@ USE `bdch`;
 --
 
 DROP TABLE IF EXISTS `pages`;
-CREATE TABLE `pages` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_id` int(11) DEFAULT NULL,
   `titulo` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `page` varchar(60) CHARACTER SET utf8mb4 NOT NULL DEFAULT '#',
@@ -39,8 +39,10 @@ CREATE TABLE `pages` (
   `icono` varchar(70) CHARACTER SET utf8mb4 NOT NULL,
   `activo` int(11) NOT NULL DEFAULT 1,
   `creado` datetime NOT NULL,
-  `actualizado` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `actualizado` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `menu_submenu` (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `pages`
@@ -54,10 +56,7 @@ INSERT INTO `pages` (`id`, `menu_id`, `titulo`, `page`, `descripcion`, `icono`, 
 (5, 2, 'Vacunas', 'vacunas', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
 (6, 2, 'Especialidades', 'especialidades', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
 (7, NULL, 'Consulta', 'consulta', 'Sección para insertar datos de la consulta realizada', 'fa-solid fa-stethoscope', 1, '2022-07-01 18:13:35', '2022-07-01 12:16:14'),
-(8, NULL, 'Hospitalization', '#', 'Ingreso chequeo diario y alta del paciente', 'fa-solid fa-hospital-user', 1, '2022-06-30 01:49:28', '2022-06-29 20:03:52'),
-(9, 8, 'Información', 'Hospitalizacion', 'Datos de ingreso de un paciente a hospitalizacion por covid', '', 1, '2022-06-30 02:04:49', '2022-06-29 20:06:09'),
-(10, 8, 'Chequeo diario', 'chequeo diario', 'Seguimiento del estado del paciente', '', 1, '2022-06-30 02:06:26', '2022-06-29 20:08:25'),
-(11, 8, 'Alta de paciente', 'alta de paciente', 'Fecha de alta de paciente y estado del mismo', '', 1, '2022-06-30 02:08:32', '2022-06-29 20:09:14'),
+(8, NULL, 'Hospitalization', 'hospitalizacion', 'Ingreso, chequeo diario y alta del paciente', 'fa-solid fa-hospital-user', 1, '2022-06-30 01:49:28', '2022-06-29 20:03:52'),
 (12, NULL, 'Vacunacion', '#', '', 'fa-solid fa-vial-circle-check', 1, '2022-06-28 17:43:22', '2022-06-28 11:45:18'),
 (14, NULL, 'Roles', 'roles', '', 'fa-solid fa-user-gear', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
 (15, NULL, 'Usuarios', 'users', '', 'fa-solid fa-users', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35');
@@ -69,8 +68,8 @@ INSERT INTO `pages` (`id`, `menu_id`, `titulo`, `page`, `descripcion`, `icono`, 
 --
 
 DROP TABLE IF EXISTS `permisos`;
-CREATE TABLE `permisos` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `permisos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_rol` int(11) NOT NULL,
   `id_page` int(11) NOT NULL,
   `c` int(11) NOT NULL DEFAULT 0,
@@ -78,8 +77,11 @@ CREATE TABLE `permisos` (
   `u` int(11) NOT NULL DEFAULT 0,
   `d` int(11) NOT NULL DEFAULT 0,
   `creado` datetime NOT NULL,
-  `actualizado` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `actualizado` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `id_rol` (`id_rol`),
+  KEY `id_modulo` (`id_page`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -107,12 +109,13 @@ INSERT INTO `permisos` (`id`, `id_rol`, `id_page`, `c`, `r`, `u`, `d`, `creado`,
 --
 
 DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles` (
-  `id_rol` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_rol` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id_rol`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -130,10 +133,12 @@ INSERT INTO `roles` (`id_rol`, `nombre_rol`, `descripcion`, `status`) VALUES
 --
 
 DROP TABLE IF EXISTS `TMBCH_CAM`;
-CREATE TABLE `TMBCH_CAM` (
-  `TMCAM_NC` int(11) NOT NULL,
-  `TMCTO_NC` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+CREATE TABLE IF NOT EXISTS `TMBCH_CAM` (
+  `TMCAM_NC` int(11) NOT NULL AUTO_INCREMENT,
+  `TMCTO_NC` int(11) NOT NULL,
+  PRIMARY KEY (`TMCAM_NC`),
+  KEY `TMCTO-NC_idx` (`TMCTO_NC`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_CAM`
@@ -156,9 +161,10 @@ INSERT INTO `TMBCH_CAM` (`TMCAM_NC`, `TMCTO_NC`) VALUES
 --
 
 DROP TABLE IF EXISTS `TMBCH_CTO`;
-CREATE TABLE `TMBCH_CTO` (
-  `TMCTO_NC` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+CREATE TABLE IF NOT EXISTS `TMBCH_CTO` (
+  `TMCTO_NC` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`TMCTO_NC`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_CTO`
@@ -177,11 +183,12 @@ INSERT INTO `TMBCH_CTO` (`TMCTO_NC`) VALUES
 --
 
 DROP TABLE IF EXISTS `TMBCH_EDO`;
-CREATE TABLE `TMBCH_EDO` (
-  `TMEDO_CE` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TMBCH_EDO` (
+  `TMEDO_CE` int(11) NOT NULL AUTO_INCREMENT,
   `TMEDO_NO` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `iso_3166-2` varchar(4) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `iso_3166-2` varchar(4) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`TMEDO_CE`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_EDO`
@@ -221,12 +228,14 @@ INSERT INTO `TMBCH_EDO` (`TMEDO_CE`, `TMEDO_NO`, `iso_3166-2`) VALUES
 --
 
 DROP TABLE IF EXISTS `TMBCH_ESP`;
-CREATE TABLE `TMBCH_ESP` (
-  `TMESP_ID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TMBCH_ESP` (
+  `TMESP_ID` int(11) NOT NULL AUTO_INCREMENT,
   `TMESP_CE` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMESP_NO` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMESP_DE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TMESP_DE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`TMESP_ID`),
+  UNIQUE KEY `TMESP_CC` (`TMESP_CE`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_ESP`
@@ -244,16 +253,22 @@ INSERT INTO `TMBCH_ESP` (`TMESP_ID`, `TMESP_CE`, `TMESP_NO`, `TMESP_DE`) VALUES
 --
 
 DROP TABLE IF EXISTS `TMBCH_MED`;
-CREATE TABLE `TMBCH_MED` (
-  `TMMED_MID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TMBCH_MED` (
+  `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT,
   `TMMED_CI` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMUN_CM` int(11) NOT NULL,
   `TMMED_DIR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMED_AP` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMED_NO` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMED_TF` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMESP_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TMESP_ID` int(11) NOT NULL,
+  PRIMARY KEY (`TMMED_MID`),
+  UNIQUE KEY `TMMED_IC` (`TMMED_CI`),
+  UNIQUE KEY `TMMED_CI` (`TMMED_CI`),
+  UNIQUE KEY `TMMED_CI_2` (`TMMED_CI`),
+  KEY `TMESP-CE_idx` (`TMESP_ID`),
+  KEY `TMMUN-CM` (`TMMUN_CM`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_MED`
@@ -273,11 +288,13 @@ INSERT INTO `TMBCH_MED` (`TMMED_MID`, `TMMED_CI`, `TMMUN_CM`, `TMMED_DIR`, `TMME
 --
 
 DROP TABLE IF EXISTS `TMBCH_MUN`;
-CREATE TABLE `TMBCH_MUN` (
-  `TMMUN_CM` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TMBCH_MUN` (
+  `TMMUN_CM` int(11) NOT NULL AUTO_INCREMENT,
   `TMEDO_CE` int(11) NOT NULL,
-  `TMMUN_NO` varchar(100) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TMMUN_NO` varchar(100) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`TMMUN_CM`),
+  KEY `id_estado` (`TMEDO_CE`)
+) ENGINE=InnoDB AUTO_INCREMENT=463 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_MUN`
@@ -627,8 +644,8 @@ INSERT INTO `TMBCH_MUN` (`TMMUN_CM`, `TMEDO_CE`, `TMMUN_NO`) VALUES
 --
 
 DROP TABLE IF EXISTS `TMBCH_PAC`;
-CREATE TABLE `TMBCH_PAC` (
-  `TMPAC_PID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TMBCH_PAC` (
+  `TMPAC_PID` int(11) NOT NULL AUTO_INCREMENT,
   `TMPAC_CI` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMUN_CM` int(11) NOT NULL,
   `TMPAC_NO` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -636,8 +653,12 @@ CREATE TABLE `TMBCH_PAC` (
   `TMPAC_SX` enum('m','f') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_DIR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_FN` date NOT NULL,
-  `TMPAC_TF` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TMPAC_TF` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`TMPAC_PID`),
+  UNIQUE KEY `TMPAC_CI` (`TMPAC_CI`),
+  UNIQUE KEY `TMPAC_CI_2` (`TMPAC_CI`),
+  KEY `TMMUN-CM` (`TMMUN_CM`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_PAC`
@@ -664,12 +685,13 @@ INSERT INTO `TMBCH_PAC` (`TMPAC_PID`, `TMPAC_CI`, `TMMUN_CM`, `TMPAC_NO`, `TMPAC
 --
 
 DROP TABLE IF EXISTS `TMBCH_VAE`;
-CREATE TABLE `TMBCH_VAE` (
-  `TMVAE_CV` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TMBCH_VAE` (
+  `TMVAE_CV` int(11) NOT NULL AUTO_INCREMENT,
   `TMVAE_NO` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMVAE_DE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TMVAE_FE` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TMVAE_FE` date NOT NULL,
+  PRIMARY KEY (`TMVAE_CV`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TMBCH_VAE`
@@ -687,10 +709,11 @@ INSERT INTO `TMBCH_VAE` (`TMVAE_CV`, `TMVAE_NO`, `TMVAE_DE`, `TMVAE_FE`) VALUES
 --
 
 DROP TABLE IF EXISTS `TTBCH_ADP`;
-CREATE TABLE `TTBCH_ADP` (
+CREATE TABLE IF NOT EXISTS `TTBCH_ADP` (
   `TTADP_FE` datetime NOT NULL,
   `TTADP_EST` text CHARACTER SET utf8mb4 NOT NULL,
-  `TTHOS_CDH` int(11) NOT NULL
+  `TTHOS_CDH` int(11) NOT NULL,
+  KEY `TTHOS_CH` (`TTHOS_CDH`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -700,14 +723,17 @@ CREATE TABLE `TTBCH_ADP` (
 --
 
 DROP TABLE IF EXISTS `TTBCH_CHD`;
-CREATE TABLE `TTBCH_CHD` (
+CREATE TABLE IF NOT EXISTS `TTBCH_CHD` (
   `TTHOS_HC` time NOT NULL,
   `TTHOS_TA` int(11) NOT NULL,
   `TTHOS-TP` float NOT NULL,
   `TTHOS_OX` int(11) NOT NULL,
   `TTHOS_OB` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TTHOS_CDH` int(11) NOT NULL,
-  `TMMED_MID` int(11) DEFAULT NULL
+  `TMMED_MID` int(11) DEFAULT NULL,
+  KEY `TMMED-HCI_idx` (`TMMED_MID`),
+  KEY `TMMED_MID` (`TMMED_MID`),
+  KEY `TTHOS_CDH` (`TTHOS_CDH`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -717,8 +743,8 @@ CREATE TABLE `TTBCH_CHD` (
 --
 
 DROP TABLE IF EXISTS `TTBCH_CON`;
-CREATE TABLE `TTBCH_CON` (
-  `TTCON_CC` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TTBCH_CON` (
+  `TTCON_CC` int(11) NOT NULL AUTO_INCREMENT,
   `TMPAC_PID` int(11) NOT NULL,
   `TTCON_FE` datetime NOT NULL DEFAULT current_timestamp(),
   `TTCON_PC` enum('positivo','negativo') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -727,8 +753,12 @@ CREATE TABLE `TTBCH_CON` (
   `TTCON_SI` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TTCON_DI` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TTCON_TM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMMED_MID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TMMED_MID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`TTCON_CC`),
+  KEY `TMPAC-CI_idx` (`TMPAC_PID`),
+  KEY `TMMED-CCI_idx` (`TMMED_MID`),
+  KEY `TMMED_MID` (`TMMED_MID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `TTBCH_CON`
@@ -744,13 +774,16 @@ INSERT INTO `TTBCH_CON` (`TTCON_CC`, `TMPAC_PID`, `TTCON_FE`, `TTCON_PC`, `TTCON
 --
 
 DROP TABLE IF EXISTS `TTBCH_HIFO`;
-CREATE TABLE `TTBCH_HIFO` (
-  `TTHIFO_CDH` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `TTBCH_HIFO` (
+  `TTHIFO_CDH` int(11) NOT NULL AUTO_INCREMENT,
   `TTHIFO_FI` datetime NOT NULL,
   `TTHIFO_NC` int(11) NOT NULL,
   `TTCON_CC` int(11) NOT NULL,
-  `TTHIFO_ST` enum('HOSPITALIZADO','DE ALTA') CHARACTER SET utf8mb4 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `TTHIFO_ST` enum('HOSPITALIZADO','DE ALTA') CHARACTER SET utf8mb4 NOT NULL,
+  PRIMARY KEY (`TTHIFO_CDH`),
+  KEY `TTCON_CC` (`TTCON_CC`),
+  KEY `TTHOS_NC` (`TTHIFO_NC`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -759,11 +792,13 @@ CREATE TABLE `TTBCH_HIFO` (
 --
 
 DROP TABLE IF EXISTS `TTBCH_VAP`;
-CREATE TABLE `TTBCH_VAP` (
+CREATE TABLE IF NOT EXISTS `TTBCH_VAP` (
   `TTVAP_FA` date NOT NULL DEFAULT current_timestamp(),
   `TTVAP_ND` int(11) DEFAULT NULL,
   `TMVAE_CV` int(11) DEFAULT NULL,
-  `TMPAC_PID` int(11) DEFAULT NULL
+  `TMPAC_PID` int(11) DEFAULT NULL,
+  KEY `TMVAE-CV_idx` (`TMVAE_CV`),
+  KEY `TMPAC-CI_idx` (`TMPAC_PID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -787,9 +822,10 @@ DELIMITER ;
 --
 
 DROP TABLE IF EXISTS `TTBCH_VSTK`;
-CREATE TABLE `TTBCH_VSTK` (
+CREATE TABLE IF NOT EXISTS `TTBCH_VSTK` (
   `TMVAE_CV` int(11) NOT NULL,
-  `TTVST_VQT` int(11) NOT NULL
+  `TTVST_VQT` int(11) NOT NULL,
+  KEY `VMVAE_CV` (`TMVAE_CV`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -808,14 +844,16 @@ INSERT INTO `TTBCH_VSTK` (`TMVAE_CV`, `TTVST_VQT`) VALUES
 --
 
 DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `Id_rol` int(11) NOT NULL,
   `nombre` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `telefono` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  KEY `Id_rol` (`Id_rol`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -827,229 +865,6 @@ INSERT INTO `usuarios` (`id_usuario`, `Id_rol`, `nombre`, `email`, `telefono`, `
 (13, 3, 'Oriany', 'oriany9570@gmail.com', '04265702722', 'a61d357b8275d2c738f9aa7c58e79316c8d82edc18044c09698ebbfaae5ac5e9'),
 (14, 1, 'Admin', 'admin@admin.com', '04165026559', '41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb'),
 (15, 1, 'Orlando', 'tatoparedes0812@gmail.com', '0416852468', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `menu_submenu` (`menu_id`);
-
---
--- Indices de la tabla `permisos`
---
-ALTER TABLE `permisos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_rol` (`id_rol`),
-  ADD KEY `id_modulo` (`id_page`);
-
---
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id_rol`);
-
---
--- Indices de la tabla `TMBCH_CAM`
---
-ALTER TABLE `TMBCH_CAM`
-  ADD PRIMARY KEY (`TMCAM_NC`),
-  ADD KEY `TMCTO-NC_idx` (`TMCTO_NC`);
-
---
--- Indices de la tabla `TMBCH_CTO`
---
-ALTER TABLE `TMBCH_CTO`
-  ADD PRIMARY KEY (`TMCTO_NC`);
-
---
--- Indices de la tabla `TMBCH_EDO`
---
-ALTER TABLE `TMBCH_EDO`
-  ADD PRIMARY KEY (`TMEDO_CE`);
-
---
--- Indices de la tabla `TMBCH_ESP`
---
-ALTER TABLE `TMBCH_ESP`
-  ADD PRIMARY KEY (`TMESP_ID`),
-  ADD UNIQUE KEY `TMESP_CC` (`TMESP_CE`);
-
---
--- Indices de la tabla `TMBCH_MED`
---
-ALTER TABLE `TMBCH_MED`
-  ADD PRIMARY KEY (`TMMED_MID`),
-  ADD UNIQUE KEY `TMMED_IC` (`TMMED_CI`),
-  ADD UNIQUE KEY `TMMED_CI` (`TMMED_CI`),
-  ADD UNIQUE KEY `TMMED_CI_2` (`TMMED_CI`),
-  ADD KEY `TMESP-CE_idx` (`TMESP_ID`),
-  ADD KEY `TMMUN-CM` (`TMMUN_CM`);
-
---
--- Indices de la tabla `TMBCH_MUN`
---
-ALTER TABLE `TMBCH_MUN`
-  ADD PRIMARY KEY (`TMMUN_CM`),
-  ADD KEY `id_estado` (`TMEDO_CE`);
-
---
--- Indices de la tabla `TMBCH_PAC`
---
-ALTER TABLE `TMBCH_PAC`
-  ADD PRIMARY KEY (`TMPAC_PID`),
-  ADD UNIQUE KEY `TMPAC_CI` (`TMPAC_CI`),
-  ADD UNIQUE KEY `TMPAC_CI_2` (`TMPAC_CI`),
-  ADD KEY `TMMUN-CM` (`TMMUN_CM`);
-
---
--- Indices de la tabla `TMBCH_VAE`
---
-ALTER TABLE `TMBCH_VAE`
-  ADD PRIMARY KEY (`TMVAE_CV`);
-
---
--- Indices de la tabla `TTBCH_ADP`
---
-ALTER TABLE `TTBCH_ADP`
-  ADD KEY `TTHOS_CH` (`TTHOS_CDH`);
-
---
--- Indices de la tabla `TTBCH_CHD`
---
-ALTER TABLE `TTBCH_CHD`
-  ADD KEY `TMMED-HCI_idx` (`TMMED_MID`),
-  ADD KEY `TMMED_MID` (`TMMED_MID`),
-  ADD KEY `TTHOS_CDH` (`TTHOS_CDH`);
-
---
--- Indices de la tabla `TTBCH_CON`
---
-ALTER TABLE `TTBCH_CON`
-  ADD PRIMARY KEY (`TTCON_CC`),
-  ADD KEY `TMPAC-CI_idx` (`TMPAC_PID`),
-  ADD KEY `TMMED-CCI_idx` (`TMMED_MID`),
-  ADD KEY `TMMED_MID` (`TMMED_MID`);
-
---
--- Indices de la tabla `TTBCH_HIFO`
---
-ALTER TABLE `TTBCH_HIFO`
-  ADD PRIMARY KEY (`TTHIFO_CDH`),
-  ADD KEY `TTCON_CC` (`TTCON_CC`),
-  ADD KEY `TTHOS_NC` (`TTHIFO_NC`);
-
---
--- Indices de la tabla `TTBCH_VAP`
---
-ALTER TABLE `TTBCH_VAP`
-  ADD KEY `TMVAE-CV_idx` (`TMVAE_CV`),
-  ADD KEY `TMPAC-CI_idx` (`TMPAC_PID`);
-
---
--- Indices de la tabla `TTBCH_VSTK`
---
-ALTER TABLE `TTBCH_VSTK`
-  ADD KEY `VMVAE_CV` (`TMVAE_CV`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `Id_rol` (`Id_rol`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT de la tabla `permisos`
---
-ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT de la tabla `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_CAM`
---
-ALTER TABLE `TMBCH_CAM`
-  MODIFY `TMCAM_NC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_CTO`
---
-ALTER TABLE `TMBCH_CTO`
-  MODIFY `TMCTO_NC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_EDO`
---
-ALTER TABLE `TMBCH_EDO`
-  MODIFY `TMEDO_CE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_ESP`
---
-ALTER TABLE `TMBCH_ESP`
-  MODIFY `TMESP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_MED`
---
-ALTER TABLE `TMBCH_MED`
-  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_MUN`
---
-ALTER TABLE `TMBCH_MUN`
-  MODIFY `TMMUN_CM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=463;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_PAC`
---
-ALTER TABLE `TMBCH_PAC`
-  MODIFY `TMPAC_PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
-
---
--- AUTO_INCREMENT de la tabla `TMBCH_VAE`
---
-ALTER TABLE `TMBCH_VAE`
-  MODIFY `TMVAE_CV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
-
---
--- AUTO_INCREMENT de la tabla `TTBCH_CON`
---
-ALTER TABLE `TTBCH_CON`
-  MODIFY `TTCON_CC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT de la tabla `TTBCH_HIFO`
---
-ALTER TABLE `TTBCH_HIFO`
-  MODIFY `TTHIFO_CDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
@@ -1118,7 +933,7 @@ ALTER TABLE `TTBCH_CON`
 --
 ALTER TABLE `TTBCH_HIFO`
   ADD CONSTRAINT `TTBCH_HIFO_ibfk_2` FOREIGN KEY (`TTHIFO_NC`) REFERENCES `TMBCH_CAM` (`TMCAM_NC`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `TTBCH_HIFO_ibfk_3` FOREIGN KEY (`TTCON_CC`) REFERENCES `TTBCH_CON` (`TTCON_CC`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `TTBCH_HIFO_ibfk_3` FOREIGN KEY (`TTCON_CC`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `TTBCH_VAP`
