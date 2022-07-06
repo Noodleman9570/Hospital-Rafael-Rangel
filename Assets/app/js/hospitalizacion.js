@@ -1,6 +1,6 @@
-let tblHospitInfo;
+let tblHospitalizacion;
 document.addEventListener("DOMContentLoaded",function(){
-    tblHospitInfo = new DataTable("#tblHospitInfo",{
+    tblHospitalizacion = new DataTable("#tblHospitalizacion",{
         aProcessing: true,
         aServerSide: true,
         //Opciones de lenguaje
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded",function(){
         },
         //Consultar los datos a la api
         ajax:{
-            url:`${base_url}/HospitInfo/all`,
+            url:`${base_url}/Hospitalizacion/all`,
             dataSrc:"",
         },
         //Datos desde el servidor
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded",function(){
 //abrir los modales
 function openModal()
     {   
-        $('#newHospitInfo').modal('show');     
+        $('#newHospitalizacion').modal('show');     
     }
 
     //agregar
@@ -75,19 +75,21 @@ $("#buttonAdd").on(
     }
     );
 
-    $('#overlay').hide();
     $('#overlay1').hide();
+    $('#overlay2').hide();
+    $('#overlay3').hide();
+    $('#overlay4').hide();
 
     $("#tile1").on(
         "click",
         function(){
-            $('#overlay').show();
+            $('#overlay1').show();
             setTimeout(()=>{
                 openModal();
                 console.log("1 Segundo esperado")
             }, 700);
             setTimeout(()=>{
-                $('#overlay').hide();
+                $('#overlay1').hide();
                 console.log("1 Segundo esperado")
             },700);
             
@@ -98,7 +100,29 @@ $("#buttonAdd").on(
             "click",
             function(){
                 event.preventDefault();
-                $('#overlay1').show();
+                $('#overlay2').show();
+                setTimeout(()=>{
+                    window.location.href = base_url+"/medicos";
+                    console.log("1 Segundo esperado")
+                }, 1000);
+            }
+            );
+            $("#tile3").on(
+            "click",
+            function(){
+                event.preventDefault();
+                $('#overlay3').show();
+                setTimeout(()=>{
+                    window.location.href = base_url+"/medicos";
+                    console.log("1 Segundo esperado")
+                }, 1000);
+            }
+            );
+            $("#tile4").on(
+            "click",
+            function(){
+                event.preventDefault();
+                $('#overlay4').show();
                 setTimeout(()=>{
                     window.location.href = base_url+"/medicos";
                     console.log("1 Segundo esperado")

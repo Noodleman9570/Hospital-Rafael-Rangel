@@ -1,6 +1,6 @@
 <?php 
 
-    class HospitInfoModel extends Mysql
+    class HospitalizacionModel extends Mysql
     {
         public function __construct()
         {

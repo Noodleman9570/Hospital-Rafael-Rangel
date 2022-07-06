@@ -1,6 +1,6 @@
 <?php
 
-    class HospitInfo extends Controllers
+    class Hospitalizacion extends Controllers
     {
         public function __construct()
         {
@@ -8,23 +8,23 @@
             Permisos::getPermisos(HOSPITALIZACION);
             parent::__construct();
         }
-        public function HospitInfo()
+        public function Hospitalizacion()
         {   
             Auth::accessPage();
 
             $data['page_name'] = "Info de Hospitalizacion";
             $data['page_title'] = "Información";
-            $data['function_js'] = "/hospitInfo.js";
-            $data['style_css'] = "/hospitInfo.css";
+            $data['function_js'] = "/hospitalizacion.js";
+            $data['style_css'] = "/hospitalizacion.css";
 
-            $this->views->getView($this,"hospitInfo",$data);
+            $this->views->getView($this,"hospitalizacion",$data);
         }
 
         public function all()
         {
             $arrJson = [];
             try {
-                $info = HospitInfoModel::all();
+                $info = HospitalizacionModel::all();
             } catch (Exception $e) {
                 echo "ERROR: ".$e->getMessage();
             }
