@@ -5,16 +5,6 @@ function openModal()
         $('#newHospitalizacion').modal('show');     
     }
 
-function openModal2()
-    {   
-        $('#newVacunaQt').modal('show');     
-    }
-
-function openModal3()
-    {   
-        $('#aplicarVacuna').modal('show');     
-    }
-
     //agregar
 $("#buttonAdd").on(
     "click",
@@ -34,22 +24,22 @@ $("#buttonAdd").on(
 
     $('#overlay1').hide();
     $('#overlay2').hide();
-    $('#overlay3').hide();
-    $('#overlay4').hide();
 
     $("#tile1").on(
         "click",
-            function(){
-                $('#overlay1').show();
-                setTimeout(()=>{
-                    openModal();
-                    console.log("1 Segundo esperado")
-                }, 700);
-                setTimeout(()=>{
-                    $('#overlay1').hide();
-                    console.log("1 Segundo esperado")
-                },700);               
-             }
+        function(){
+            $('#overlay1').show();
+            setTimeout(()=>{
+                openModal();
+                console.log("1 Segundo esperado")
+            }, 700);
+            setTimeout(()=>{
+                $('#overlay1').hide();
+                console.log("1 Segundo esperado")
+            },700);
+            
+        }
+        
         );
         $("#tile2").on(
             "click",
@@ -57,41 +47,11 @@ $("#buttonAdd").on(
                 event.preventDefault();
                 $('#overlay2').show();
                 setTimeout(()=>{
-                    window.location.href = base_url+"/hospitList";
+                    window.location.href = base_url+"/medicos";
                     console.log("1 Segundo esperado")
                 }, 1000);
             }
             );
-
-            $("#tile3").on(
-                "click",
-                    function(){
-                        $('#overlay3').show();
-                        setTimeout(()=>{
-                            openModal3();
-                            console.log("1 Segundo esperado")
-                        }, 700);
-                        setTimeout(()=>{
-                            $('#overlay3').hide();
-                            console.log("1 Segundo esperado")
-                        },700);               
-                     }
-                );
-
-                $("#tile4").on(
-                    "click",
-                        function(){
-                            $('#overlay4').show();
-                            setTimeout(()=>{
-                                openModal2();
-                                console.log("1 Segundo esperado")
-                            }, 700);
-                            setTimeout(()=>{
-                                $('#overlay4').hide();
-                                console.log("1 Segundo esperado")
-                            },700);               
-                         }
-                    );
     
         function listarCTO(){
                 $.ajax({
@@ -156,7 +116,7 @@ $("#buttonAdd").on(
             });
                 $("#sel_cuarto").change(function(){
                 var idedo= $("#sel_cuarto").val();
-                listarCAM(idedo);
+                listarMUN(idedo);
             })
             
 
@@ -173,7 +133,7 @@ async function save(e){
             method: "POST",
             body: datos,
         });
-        console.log(respuesta);
+    
         const result = await respuesta.json();
 
         if (result.status) {
@@ -205,49 +165,3 @@ async function save(e){
 
 }
             
-
- //Agregar vacunas
- async function addVaccine(e){
-    event.preventDefault();
-    formRegister2 = document.querySelector('#addVaccine');
-    let datos = new FormData(formRegister2);
-
-    try {
-        const url = `${base_url}/hospitalizacion/addVaccine`;
-
-        const respuesta = await fetch(url,{
-            method: "POST",
-            body: datos,
-        });
-        console.log(respuesta);
-        const result = await respuesta.json();
-
-
-        if (result.status) {
-            console.log(result);
-            new Noty({
-                type: 'success',
-                theme: 'metroui',
-                text: `${result.msg}`,
-                timeout: 2000,
-            }).show();
-            formRegister2.reset(); 
-            setTimeout(function(){
-                window.location.href = `${base_url}/pacientes`;        
-            },2500);       
-        } else {
-            new Noty({
-                type: 'error',
-                theme: 'metroui',
-                text: `${result.error}`,
-                timeout: 2000,
-            }).show(); 
-        }
-  
-    } catch (err) {
-        console.log(err);
-    }
-
-
-
-}

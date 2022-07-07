@@ -5,7 +5,7 @@
         public function __construct()
         {
             Auth::noAuth();
-            Permisos::getPermisos(VACUNACION);
+            Permisos::getPermisos(HOSPITALIZACION);
             parent::__construct();
         }
         public function Vacunacion()
@@ -14,10 +14,10 @@
 
             $data['page_name'] = "Vacunas";
             $data['page_title'] = "Hospital";
-            $data['function_js'] = "/Historialvacunas.js";
-            $data['style_css'] = "/Historialvacunas.css";
+            $data['function_js'] = "/vacunacion.js";
+            $data['style_css'] = "/vacunacion.css";
 
-            $this->views->getView($this,"Vacunacion",$data);
+            $this->views->getView($this,"vacunacion",$data);
         }
 
         public function all()

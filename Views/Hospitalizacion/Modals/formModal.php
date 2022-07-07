@@ -12,7 +12,7 @@
       </div>
       <div class="modal-body">
         <div class="tile-body">
-            <form action="" class="formulario" id="formRegister" method="POST">
+            <form action="" class="formulario" id="formHospit" method="POST">
               <!-- Grupo: cedula -->
 
               <div class="formulario__grupo" id="grupo__hospitCedula">
@@ -22,20 +22,19 @@
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
-              <br>
               <h7 class="formulario__label" id="exampleModalLongTitle">Ubicar paciente</h7>
-              <div class="location_container">
+              <div class="direction_container">
 
                 <div class="formulario__grupo" id="grupo__cuarto">
                   <label for="cuarto">Cuarto:</label>
-                    <select onchange="changeEDO();" class="form-control select" name="estado" id="sel_cuarto" style="width: 100%;">
+                    <select onchange="changeCTO();" class="form-control select" name="cuarto" id="sel_cuarto" style="width: 100%;">
                       
                     </select>
                 </div>
 
                 <div class="formulario__grupo" id="grupo__cama">
                   <label for="cama">Cama:</label>
-                    <select class="form-control select" name="municipio" id="sel_cama" style="width: 100%;">
+                    <select class="form-control select" name="cama" id="sel_cama" style="width: 100%;">
                       
                     </select>
                 </div>

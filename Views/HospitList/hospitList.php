@@ -11,14 +11,14 @@
 
       <div class="tile">
         <div id="buttonAdd" class="tile-title-w-btn">
-          <h3 class="title">Pacientes</h3>
-          <button class="btn btn-primary" id="newPaciente" type="button"><i class="fa-solid fa-plus"></i> Agregar</button>
+          <h3 class="title">Gestión de la hospitalización</h3>
+          <button class="btn btn-primary" id="addPac" type="button"><i class="fa-solid fa-plus"></i> Agregar a hospitalización</button>
         </div>
         <div class="tile-body">
         <?php echo Alertas::mostrarAlerta(); ?>
         <div class="table-responsive">
-          <table id="tblPac" class="display resposive" style="width:100%">
-          <div id="overlayP" class="overlay" style="z-index: 5;" >
+          <table id="tblHPac" class="display resposive" style="width:100%">
+          <div id="overlayHl" class="overlay" style="z-index: 5;" >
               <div class="m-loader mr-4">
                 <svg class="m-circular" viewBox="25 25 50 50">
                 	<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
@@ -32,14 +32,9 @@
                 <th>Cedúla</th>
                 <th>Apellido</th>
                 <th>Nombre</th>
-                <th>Sexo</th>
-                <th>Codigo Estado</th>
-                <th>Codigo Municipio</th>
-                <th>Municipio</th>
-                <th>Dirección</th>
-                <th>Fecha de nacimiento</th>
-                <th>Número telefónico</th>
-                <th>Acciones</th>               
+                <th>Fecha y hora de ingreso</th>
+                <th>Nro de cama</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>

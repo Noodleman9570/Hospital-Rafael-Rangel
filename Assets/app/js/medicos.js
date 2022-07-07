@@ -1,6 +1,9 @@
 let tblMed;
 
 document.addEventListener("DOMContentLoaded",function(){
+            setTimeout(()=>{
+                $('#overlayM').hide();
+            }, 700);
     tblMed = new DataTable("#tblMed",{
         aProcessing: true,
         aServerSide: true,

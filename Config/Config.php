@@ -13,7 +13,7 @@
     const ARCHIVOS_MAESTROS = 2;
     const CONSULTA = 7;
     const HOSPITALIZACION = 8;
-    const VACUNACION = 11;
+    const VACUNACION = 12;
     const USERS = 15;
     const ROLES = 14;
 

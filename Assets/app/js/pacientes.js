@@ -55,7 +55,7 @@ inputs.forEach((input) => {
 
 
 
-
+//Renrizado de la tabla de Pacientes
 let refresh = document.getElementById('refresh');
 refresh.addEventListener('click', _ => {
             formulario.reset();
@@ -72,7 +72,7 @@ let tblPac;
 
 document.addEventListener("DOMContentLoaded",function(){
             setTimeout(()=>{
-                $('#overlay').hide();
+                $('#overlayP').hide();
             }, 700);
 
     tblPac = new DataTable("#tblPac",{
@@ -282,7 +282,7 @@ $("#tblPac tbody").on(
         document.getElementById("enviar").style.width = '13vh';
         $("#edit").show();
         $("#delete").show();
-        let data_tabla = tblPac.row($(this).parents("tr")).data();
+        let la = tblPac.row($(this).parents("tr")).data();
         var id = data_tabla.id
         let ced = data_tabla.ced;
         let ap = data_tabla.ap;
@@ -390,8 +390,6 @@ function delDialog(id){
 
 
 //Combo para listar Estado Municipio
-
-
 function listarEDO(){
     $.ajax({
         url:`${base_url}/Pacientes/listarEDO`,

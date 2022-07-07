@@ -18,15 +18,6 @@
             </div>
         </div>
         <ul class="app-menu">
-
-            
-            <li>
-                <a class="app-menu__item" href="<?= ROOT; ?>/perfil">
-                    <i class="app-menu__icon fa fa-cogs"></i>
-                    <span class="app-menu__label">Perfil</span>
-                </a>
-            </li>
-            
             <?php Permisos::showMenus(); ?>
             
             <?php if(!empty($_SESSION['permisos'][DASHBOARD]['r'])): ?>

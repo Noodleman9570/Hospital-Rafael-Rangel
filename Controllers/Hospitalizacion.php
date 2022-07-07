@@ -44,88 +44,129 @@
                 
                 //validar
                     $val = new Validations();
-                    $val->name('nombre')->value(clear($_POST['nombre']))->required();
-                    $val->name('nombre')->value(clear($_POST['description']))->required();
-                    $val->name('fecha')->value(clear($_POST['fe']))->required();
-                    
-                    if($val->isSuccess()){
+                    $val->name('cedula')->value(clear($_POST['hospitCedula']))->required();
+                    $pac = hospitalizacionModel::verifyCed($_POST['hospitCedula']);
 
-                        $data = [
-                                'TMVAE_NO' => clear($_POST['nombre']),
-                                'TMVAE_DE' => $_POST['description'],  
-                                'TMVAE_FE' => clear($_POST['fe']),
-                                //arreglar el eliminar espacios de la contraseña
-                            ];
-                            try {
-                                $idInsert = vacunasModel::insert('TMBCH_VAE', $data);
-                                $data = ['status' => true, 'msg'=>'Registro guardado'];
-                            } catch (Exception $e) {
-                                echo "ERROR: ".$e->getMessage();
-                            }  
-                    }else{
-                        $data = ['error'=>$val->getErrors()];
-                    }        
+                    if ($pac) {                                        
+                        if($val->isSuccess()){
+
+                            $data = [
+                                    'TMPAC_PID' => $pac[0]['TMPAC_PID'],
+                                    'TTHIFO_NC' => $_POST['cama'],  
+                                    //arreglar el eliminar espacios de la contraseña
+                                ];
+                                try {
+                                    $idInsert = hospitalizacionModel::insert('TTBCH_HIFO', $data);
+                                    $data = ['status' => true, 'msg'=>'Paciente en estado de hospitalización'];
+                                } catch (Exception $e) {
+                                    echo "ERROR: ".$e->getMessage();
+                                }  
+                        }else{
+                            $data = ['error'=>$val->getErrors()];
+                        }        
+
+                } else {
+                    $data = ['error'=>'La cedula es incorrecta o el paciente no se encuentra registrado'];
+                }       
 
             }
 
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
-        public function edit(){
-
-
+        public function vacunacion()
+        {
             $data = [];
             
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                //validar
-                $val = new Validations();
-                $val->name('nombre')->value(clear($_POST['nombre']))->required();
-                $val->name('nombre')->value(clear($_POST['description']))->required();
-                $val->name('fecha')->value(clear($_POST['fe']))->required();
                 
-                if($val->isSuccess()){
+                //validar
+                    $val = new Validations();
+                    $val->name('cedula')->value(clear($_POST['hospitCedula']))->required();
+                    $pac = hospitalizacionModel::verifyCed($_POST['hospitCedula']);
 
-                        $data = [
-                            'TMVAE_NO' => clear($_POST['nombre']),
-                            'TMVAE_DE' => $_POST['description'],  
-                            'TMVAE_FE' => clear($_POST['fe']),
-                            //arreglar el eliminar espacios de la contraseña
-                        ];
-                        $ids = array(
-                            'TMVAE_CV' => $_POST['id'],
-                        );
+                    if ($pac) {                                        
+                        if($val->isSuccess()){
 
-                        try {
-                            $idInsert = vacunasModel::update('TMBCH_VAE', $data, $ids);
-                            $data = ['status' => true, 'msg'=>'Registro guardado'];
-                        } catch (Exception $e) {
-                            echo "ERROR: ".$e->getMessage();
-                        }
+                            $data = [
+                                    'TMPAC_PID' => $pac[0]['TMPAC_PID'],
+                                    'TTHIFO_NC' => $_POST['cama'],  
+                                    //arreglar el eliminar espacios de la contraseña
+                                ];
+                                try {
+                                    $idInsert = hospitalizacionModel::insert('TTBCH_HIFO', $data);
+                                    $data = ['status' => true, 'msg'=>'Paciente en estado de hospitalización'];
+                                } catch (Exception $e) {
+                                    echo "ERROR: ".$e->getMessage();
+                                }  
+                        }else{
+                            $data = ['error'=>$val->getErrors()];
+                        }        
 
                 } else {
-                    $data = ['error'=>$val->getErrors()];
-                }
+                    $data = ['error'=>'La cedula es incorrecta o el paciente no se encuentra registrado'];
+                }       
+
             }
 
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
-        public function delete()
+        public function addVaccine()
         {
-            $id = intval($_POST['id']);
-            $res = vacunasModel::oneRegist($id);
-            if(empty($res)){
-                Alertas::new("No se encontro el registro", "danger");
-                header('Location:'.BASE_URL.'/Vacunas');
+            $data = [];
+            
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $oldValue = hospitalizacionModel::SQL("SELECT TTVST_VQT, v.TMVAE_NO FROM TTBCH_VSTK s INNER JOIN TMBCH_VAE v ON s.TMVAE_CV = v.TMVAE_CV WHERE s.TMVAE_CV = ".$_POST['vacuna']);
+                //validar
+                    $val = new Validations();
+                    $val->name('cantidad')->value(clear($_POST['cantidad']))->required()->rangeNum(20, 300);
+                    $suma = $oldValue[0]['TTVST_VQT'] + $_POST['cantidad'];
+
+                                 
+                        if($val->isSuccess()){
+
+                                try {
+                                    $idInsert = hospitalizacionModel::SQL("UPDATE TTBCH_VSTK SET TTVST_VQT = ".$suma." where TMVAE_CV = ".$_POST['vacuna']);
+                                    $data = ['status' => true, 'msg'=>'Se agregaron '.$suma. ' A la vacuna '.$oldValue[0]['TMVAE_NO']];
+                                } catch (Exception $e) {
+                                    echo "ERROR: ".$e->getMessage();
+                                }  
+                        }else{
+                            $data = ['error'=>$val->getErrors()];
+                        }        
+
             }
 
-            vacunasModel::deleteRegist($id);
-            echo json_encode(['msg' => 'El registro ha sido eliminado'],JSON_UNESCAPED_UNICODE);
-            // Alertas::new(sprintf("Se ha eliminado el usuario %s", $pac[0]['nombre']), "success");
-            
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
+        
         public function listarPac()
         {
             try {
                 $consulta = ConsultaModel::SQL("SELECT * FROM TMBCH_CAM");
+            } catch (Exception $e) {
+                echo "ERROR: ".$e->getMessage();
+            }
+            
+            echo json_encode($consulta);
+        }
+
+        public function listarCTO()
+        {
+            try {
+                $consulta = hospitalizacionModel::SQL("SELECT * FROM TMBCH_CTO ORDER BY TMCTO_NC ASC");
+            } catch (Exception $e) {
+                echo "ERROR: ".$e->getMessage();
+            }
+            
+            echo json_encode($consulta);
+        }
+
+        public function listarCAM()
+        {
+            try {
+                $idedo = $_POST['idedo'];
+                $consulta = hospitalizacionModel::SQL("SELECT * FROM TMBCH_CAM WHERE TMCTO_NC = ".$idedo.";");
             } catch (Exception $e) {
                 echo "ERROR: ".$e->getMessage();
             }
