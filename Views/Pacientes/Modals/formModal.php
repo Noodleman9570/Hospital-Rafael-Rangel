@@ -16,13 +16,14 @@
               <h5 class="id">Nro. </h5>
               <!-- Grupo: cedula -->
               
-                  <input type="text" class="formulario__input" name="id" id="id">
+              <input type="text" class="formulario__input" name="id" id="id">
         
               
               <div class="formulario__grupo" id="grupo__ced">
                 <label for="ced" class="formulario__label">Cedula</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="cedula" id="ced" placeholder="V-26587963">
+                  <input type="text" value="V-" style="width: 10%; padding: 9px 0 9px 15px; font-weight: bold;" disabled>
+                  <input type="text" class="formulario__input" style=" width: 89%;"  name="cedula" id="ced" placeholder="26587963">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>

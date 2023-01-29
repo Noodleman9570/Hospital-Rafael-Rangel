@@ -74,6 +74,7 @@
         }
         public function edit(){
 
+            echo $_POST['nombre'];
 
             $data = [];
             

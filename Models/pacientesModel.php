@@ -25,9 +25,9 @@
             return $respuesta;
         }
 
-        public static function deletePaciente($idUser)
+        public static function deletePaciente($idPac)
         {
-            $iddelete = Mysql::delete('TMBCH_PAC', ['TMPAC_PID' => $idUser]);
+            $iddelete = Mysql::delete('TMBCH_PAC', ['TMPAC_PID' => $idPac]);
             return $iddelete;
         }
         

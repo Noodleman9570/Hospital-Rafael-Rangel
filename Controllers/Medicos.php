@@ -92,23 +92,23 @@
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 //validar
                     $val = new Validations();
-                    $val->name('cedula')->value(clear($_POST['ced']))->required();
-                    $val->name('apellido')->value(clear($_POST['ap']))->required();
-                    $val->name('nombre')->value(clear($_POST['nom']))->required();
-                    $val->name('telefono')->value(clear($_POST['tf']))->required();
-                    $val->name('direccion')->value(clear($_POST['dir']))->required();
+                    $val->name('cedula')->value(clear($_POST['cedula']))->required();
+                    $val->name('apellido')->value(clear($_POST['apellido']))->required();
+                    $val->name('nombre')->value(clear($_POST['nombre']))->required();
+                    $val->name('telefono')->value(clear($_POST['telefono']))->required();
+                    $val->name('direccion')->value(clear($_POST['direccion']))->required();
 
                     //Comprobar si se Cumplen todas las validaciones
                     if($val->isSuccess()){
                        
                             $data = [
-                                'TMMED_CI' => clear($_POST['ced']),
-                                'TMMUN_CM' => $_POST['mun'],
-                                'TMMED_AP' => clear($_POST['ap']),
-                                'TMMED_NO' => clear($_POST['nom']),
-                                'TMMED_DIR' => $_POST['dir'],
-                                'TMMED_TF' => clear((string)$_POST['tf']),    
-                                'TMESP_CE' => clear($_POST['esp']),
+                                'TMMED_CI' => clear($_POST['cedula']),
+                                'TMMUN_CM' => $_POST['municipio'],
+                                'TMMED_AP' => clear($_POST['apellido']),
+                                'TMMED_NO' => clear($_POST['nombre']),
+                                'TMMED_DIR' => $_POST['direccion'],
+                                'TMMED_TF' => clear((string)$_POST['telefono']),    
+                                'TMESP_ID' => clear($_POST['especialidad']),
                                 //arreglar el eliminar espacios de la contraseña
                             ];
 

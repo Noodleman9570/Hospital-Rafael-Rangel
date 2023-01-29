@@ -151,10 +151,20 @@
     {
         $datos = trim($datos);
         $datos = htmlspecialchars($datos, ENT_QUOTES, 'UTF-8');
-        $datos = utf8_decode($datos);
-        $datos = utf8_encode($datos);
+        $datos = mb_convert_encoding($datos, 'UTF-8');
 
         return $datos;
+    }
+
+    function generatePassword($length)
+    {
+        $key = "";
+        $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+        $max = strlen($pattern)-1;
+        for($i = 0; $i < $length; $i++){
+            $key .= substr($pattern, mt_rand(0,$max), 1);
+        }
+        return $key;
     }
 
 ?>

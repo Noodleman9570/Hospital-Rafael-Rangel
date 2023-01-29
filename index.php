@@ -1,7 +1,9 @@
 <?php
 
     session_start();
+
     // session_destroy();
+    require_once("vendor/autoload.php");
     require_once("Config/Config.php");
     require_once("Helpers/Helpers.php");
     $url = !empty($_GET['url']) ? $_GET['url'] : CONTROLLER_DEFAULT."/".METHOD_DEFAULT;

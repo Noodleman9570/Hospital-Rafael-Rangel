@@ -21,7 +21,7 @@
               <div class="formulario__grupo" id="grupo__ced">
                 <label for="ced" class="formulario__label">Cedula</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="ced" id="ced" placeholder="V-26587963">
+                  <input type="text" class="formulario__input" name="cedula" id="ced" placeholder="V-26587963">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
@@ -30,7 +30,7 @@
               <div class="formulario__grupo" id="grupo__ap">
                 <label for="ap" class="formulario__label">Apellido</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="ap" id="ap" placeholder="Doe" required>
+                  <input type="text" class="formulario__input" name="apellido" id="ap" placeholder="Doe" required>
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
@@ -39,7 +39,7 @@
               <div class="formulario__grupo" id="grupo__nom">
                 <label for="nom" class="formulario__label">Nombre</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="nom" id="nom" placeholder="John">
+                  <input type="text" class="formulario__input" name="nombre" id="nom" placeholder="John">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
@@ -49,7 +49,7 @@
                         <label for="Pais">Especialidad</label>
                         <a href="<?= BASE_URL; ?>/Especialidades"> <i class="fas fa-plus"></i> Añadir especializacion</a>
                     </div>
-                        <select class="form-control select" name="esp" id="sel_esp" style="width: 100%;">
+                        <select class="form-control select" name="especialidad" id="sel_esp" style="width: 100%;">
                         
                         </select>
                 </div>
@@ -67,7 +67,7 @@
 
                 <div class="formulario__grupo" id="grupo__mun">
                   <label for="Pais">Municipio</label>
-                    <select class="form-control select" name="mun" id="sel_mun" style="width: 100%;">
+                    <select class="form-control select" name="municipio" id="sel_mun" style="width: 100%;">
                       
                     </select>
                 </div>
@@ -78,7 +78,7 @@
               <div class="formulario__grupo" id="grupo__direccion">
                 <label for="dir" class="formulario__label">Direccion</label>
                 <div class="formulario__grupo-input">
-                  <input type="textarea" title="Breve descripcion" class="formulario__input" name="dir" id="dir" placeholder="Avienida principal">
+                  <input type="textarea" title="Breve descripcion" class="formulario__input" name="direccion" id="dir" placeholder="Avienida principal">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
@@ -87,7 +87,7 @@
               <div class="formulario__grupo" id="grupo__tf">
                 <label for="tf" class="formulario__label">Número telefónico</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="tf" id="tf" placeholder=""0000-0000000>
+                  <input type="text" class="formulario__input" name="telefono" id="tf" placeholder=""0000-0000000>
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>

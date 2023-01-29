@@ -14,7 +14,7 @@
     const CONSULTA = 7;
     const HOSPITALIZACION = 8;
     const VACUNACION = 12;
-    const USERS = 15;
+    const USERS = 9;
     const ROLES = 14;
 
     //Datos de conexion a base de datos
@@ -67,6 +67,12 @@
 
     define('CONTROLLER_DEFAULT', 'login');
     define('METHOD_DEFAULT', 'login');
+
+    // Servidor de mails
+    define('HOST', 'smtp.gmail.com');
+    define('PORT', 456);
+    define('MAILSENDER', 'kevinsaavedra55@gmail.com');
+    define('PASS', 'mvmsmhhrjqsnecno');
 
     //Deliminadores decimal y millar Ej. 24,1345.00
     const SPD = ",";

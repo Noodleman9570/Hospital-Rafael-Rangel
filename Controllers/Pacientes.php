@@ -95,23 +95,23 @@
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 //validar
                     $val = new Validations();
-                    $val->name('cedula')->value(clear($_POST['ced']))->required();
-                    $val->name('apellido')->value(clear($_POST['ap']))->required();
-                    $val->name('nombre')->value(clear($_POST['nom']))->required();
-                    $val->name('Fecha de nacimiento')->value(clear($_POST['fn']))->dateLimit()->required();
-                    $val->name('tel')->value(clear($_POST['tf']))->required();
+                    $val->name('cedula')->value(clear($_POST['cedula']))->required();
+                    $val->name('apellido')->value(clear($_POST['apellido']))->required();
+                    $val->name('nombre')->value(clear($_POST['nombre']))->required();
+                    $val->name('Fecha de nacimiento')->value(clear($_POST['fechaNacimiento']))->dateLimit()->required();
+                    $val->name('tel')->value(clear($_POST['telefono']))->required();
                     
                     if($val->isSuccess()){
                         
                             $data = [
-                                'TMPAC_CI' => clear($_POST['ced']),
-                                'TMMUN_CM' => $_POST['mun'],
-                                'TMPAC_NO' => clear($_POST['nom']),
-                                'TMPAC_AP' => clear($_POST['ap']),
-                                'TMPAC_SX' => $_POST['sx'],
-                                'TMPAC_DIR' => $_POST['dir'],
-                                'TMPAC_FN' => $_POST['fn'],
-                                'TMPAC_TF' => clear((string)$_POST['tf'])    
+                                'TMPAC_CI' => clear($_POST['cedula']),
+                                'TMMUN_CM' => $_POST['municipio'],
+                                'TMPAC_NO' => clear($_POST['nombre']),
+                                'TMPAC_AP' => clear($_POST['apellido']),
+                                'TMPAC_SX' => $_POST['sexo'],
+                                'TMPAC_DIR' => $_POST['direccion'],
+                                'TMPAC_FN' => $_POST['fechaNacimiento'],
+                                'TMPAC_TF' => clear((string)$_POST['telefono'])    
                                 //arreglar el eliminar espacios de la contraseña
                             ];
 
@@ -139,7 +139,7 @@
             $pac = pacientesModel::onePaciente($id);
 
             if(empty($pac)){
-                Alertas::new("No se encontro el usuario", "danger");
+                Alertas::new("No se encontro el paciente", "danger");
                 header('Location:'.BASE_URL.'/Pacientes');
             }
 

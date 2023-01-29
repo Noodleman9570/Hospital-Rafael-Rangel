@@ -1,72 +1,3 @@
-const expresiones = {
-    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
-    cedula: /^[0-9]{7,8}$/,
-}
-
-const campos = {
-	nom: false,
-	ced: false,
-	correo: false,
-	telefono: false,
-}
-const formulario = document.getElementById('formRegister');
-const inputs = document.querySelectorAll('#formRegister input');
-
-const validarFormulario = (e) => {
-	switch (e.target.id) {
-		case "ced":
-			validarCampo(expresiones.cedula, e.target, 'ced');
-		break;
-		case "ap":
-			validarCampo(expresiones.nombre, e.target, 'ap');
-		break;
-		case "nom":
-			validarCampo(expresiones.nombre, e.target, 'nom');;
-		break;
-		case "tf":
-			validarCampo(expresiones.telefono, e.target, 'tf');
-		break;
-	}
-}
-
-const validarCampo = (expresion, input, campo) => {
-	if(expresion.test(input.value)){
-		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
-		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');	
-        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-check');
-		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-times-circle');
-		campos[campo] = true;
-	} else {
-		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
-		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
-        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-xmark');
-		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-check-circle');
-		campos[campo] = false;
-	}
-}
-
-
-
-inputs.forEach((input) => {
-	input.addEventListener('keyup', validarFormulario);
-	input.addEventListener('blur', validarFormulario);
-});
-
-
-
-//Renrizado de la tabla de Pacientes
-let refresh = document.getElementById('refresh');
-refresh.addEventListener('click', _ => {
-            formulario.reset();
-})
-
-$("#id").hide();
-
-function openModal()
-    {   
-        $('#newPaciente').modal('show');     
-    }
 
 let tblPac;
 
@@ -151,6 +82,100 @@ document.addEventListener("DOMContentLoaded",function(){
 },false);
 
 
+//validacion del formulario
+const formulario = document.getElementById('formRegister');
+const inputs = document.querySelectorAll('#formRegister input');
+
+const expresiones = {
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
+    cedula: /^[0-9]{7,8}$/
+}
+
+const campos = {
+	nom: false,
+	ced: false,
+	correo: false,
+	telefono: false,
+}
+
+
+const validarFormulario = (e) => {
+	switch (e.target.id) {
+		case "ced":
+			validarCampo(expresiones.cedula, e.target, 'ced');
+		break;
+		case "ap":
+			validarCampo(expresiones.nombre, e.target, 'ap');
+		break;
+		case "nom":
+			validarCampo(expresiones.nombre, e.target, 'nom');;
+		break;
+		case "tf":
+			validarCampo(expresiones.telefono, e.target, 'tf');
+		break;
+	}
+}
+
+const validarCampo = (expresion, input, campo) => {
+	if(expresion.test(input.value)){
+		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
+		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');	
+        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-check');
+		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-times-circle');
+		campos[campo] = true;
+	} else {
+		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
+		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-xmark');
+		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-check-circle');
+		campos[campo] = false;
+	}
+}
+
+
+
+inputs.forEach((input) => {
+	input.addEventListener('keyup', validarFormulario);
+	input.addEventListener('blur', validarFormulario);
+});
+
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	const terminos = document.getElementById('terminos');
+	if(campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked ){
+		formulario.reset();
+
+		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+		setTimeout(() => {
+			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+		}, 5000);
+
+		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+			icono.classList.remove('formulario__grupo-correcto');
+		});
+	} else {
+		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+	}
+});
+
+
+//Renrizado de la tabla de Pacientes
+let refresh = document.getElementById('refresh');
+refresh.addEventListener('click', _ => {
+            formulario.reset();
+})
+
+//Ocultar el campo id del form
+$("#id").hide();
+
+//abrir los modales
+function openModal()
+    {   
+        $('#newPaciente').modal('show');     
+    }
+
 
 //Nuevo registro
 async function save(e){
@@ -198,21 +223,34 @@ async function save(e){
 }
 
 
+//Editar
+
+$("#formRegister").on(
+    "click",
+    "#edit",function(){
+        event.preventDefault();
+        edit();
+    
+    }
+);
+
 async function edit(e){
     event.preventDefault();
     formRegister = document.querySelector('#formRegister');
     let datos = new FormData(formRegister);
 
+    
     try {
         const url = `${base_url}/Pacientes/edit`;
-    
+        
         const respuesta = await fetch(url,{
             method: "POST",
             body: datos,
         });
         
-
+        
         const result = await respuesta.json();
+    
 
         if (result.status) {
             console.log(result);
@@ -239,15 +277,6 @@ async function edit(e){
         console.log(err);
     }
 }
-
-$("#formRegister").on(
-    "click",
-    "#edit",function(){
-        event.preventDefault();
-        edit();
-    
-    }
-);
 
 //agregar
 $("#buttonAdd").on(
@@ -282,7 +311,7 @@ $("#tblPac tbody").on(
         document.getElementById("enviar").style.width = '13vh';
         $("#edit").show();
         $("#delete").show();
-        let la = tblPac.row($(this).parents("tr")).data();
+        let data_tabla = tblPac.row($(this).parents("tr")).data();
         var id = data_tabla.id
         let ced = data_tabla.ced;
         let ap = data_tabla.ap;

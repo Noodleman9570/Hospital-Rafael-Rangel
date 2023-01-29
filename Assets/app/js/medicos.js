@@ -1,9 +1,9 @@
 let tblMed;
 
 document.addEventListener("DOMContentLoaded",function(){
-            setTimeout(()=>{
-                $('#overlayM').hide();
-            }, 700);
+    setTimeout(()=>{
+        $('#overlayM').hide();
+    }, 700);
     tblMed = new DataTable("#tblMed",{
         aProcessing: true,
         aServerSide: true,
@@ -101,7 +101,7 @@ const inputs = document.querySelectorAll('#formRegister input');
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
-    cedula: /([V,E]-[0-9]{6,8})/,
+    cedula: /([0-9]{6,8})/,
 }
 
 const campos = {
@@ -132,28 +132,32 @@ const validarCampo = (expresion, input, campo) => {
 	if(expresion.test(input.value)){
 		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
 		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');	
+        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-check');
+		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-times-circle');
 		campos[campo] = true;
 	} else {
 		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
 		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+        document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('fa-circle-xmark');
+		document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('fa-check-circle');
 		campos[campo] = false;
 	}
 }
 
-const validarPassword2 = () => {
-	const inputPassword1 = document.getElementById('password');
-	const inputPassword2 = document.getElementById('password2');
+// const validarPassword2 = () => {
+// 	const inputPassword1 = document.getElementById('password');
+// 	const inputPassword2 = document.getElementById('password2');
 
-	if(inputPassword1.value !== inputPassword2.value){
-		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-incorrecto');
-		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-correcto');
-		campos['password'] = false;
-	} else {
-		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
-		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
-		campos['password'] = true;
-	}
-}
+// 	if(inputPassword1.value !== inputPassword2.value){
+// 		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-incorrecto');
+// 		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-correcto');
+// 		campos['password'] = false;
+// 	} else {
+// 		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
+// 		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
+// 		campos['password'] = true;
+// 	}
+// }
 
 inputs.forEach((input) => {
 	input.addEventListener('keyup', validarFormulario);
@@ -178,6 +182,10 @@ formulario.addEventListener('#enviar', (e) => {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
 	}
 });
+
+
+
+
 
 
 async function save(e){
@@ -223,6 +231,8 @@ async function save(e){
 
 
 }
+
+
 
 
 //Editar

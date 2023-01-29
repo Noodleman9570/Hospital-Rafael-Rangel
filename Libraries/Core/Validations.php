@@ -1,6 +1,9 @@
 <?php
 class Validations
 {
+  public $name;
+  public $value;
+  
 
   /**
    *
