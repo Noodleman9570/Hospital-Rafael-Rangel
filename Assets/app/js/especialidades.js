@@ -147,7 +147,7 @@ inputs.forEach((input) => {
 formulario.addEventListener('#enviar', (e) => {
     event.preventDefault();
 
-	if(campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked ){
+	if(campos.nombre && campos.password && campos.correo && campos.telefono){
 		formulario.reset();
 
 		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
@@ -320,6 +320,7 @@ $("#formRegister").on(
     "click",
     "#delete",async function(e){
         event.preventDefault();
+        id = $("#id").val();
         delDialog(id);
     }
 );

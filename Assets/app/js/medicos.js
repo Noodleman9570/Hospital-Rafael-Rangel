@@ -186,6 +186,25 @@ formulario.addEventListener('#enviar', (e) => {
 
 
 
+//agregar
+
+$("#buttonAdd").on(
+    "click",
+    "button.btn",function(){
+        openModal();
+        $('#modal-header').css('background', '#4FCFC3')
+        $(".modal-title").text('Agregar Medico');
+        $(".id").hide();
+        $("#enviar").show();
+        document.getElementById("enviar").style.width = '100vh';
+        $("#edit").hide();
+        $("#delete").hide();
+        formulario.reset();
+        
+    }
+);
+
+
 
 
 async function save(e){
@@ -236,6 +255,44 @@ async function save(e){
 
 
 //Editar
+
+$("#tblMed tbody").on(
+    "click",
+    "button.editarFnt",
+    async function()
+    {
+        openModal();
+        $('#modal-header').css('background', '#FFD24C')
+        $(".modal-title").text('Editar Medico');
+        $(".id").show();
+        $("#enviar").hide();
+        document.getElementById("enviar").style.width = '13vh';
+        $("#edit").show();
+        $("#delete").show();
+        let data_tabla = tblMed.row($(this).parents("tr")).data();
+        var id = data_tabla.id
+        let ced = data_tabla.ced;
+        let ap = data_tabla.ap;
+        let nom = data_tabla.no;
+        let esp = data_tabla.code;
+        let edo = data_tabla.cedo;
+        let mun = data_tabla.cmun;
+        let dir = data_tabla.dir;
+        let tf = data_tabla.tf
+
+        $(".id").text('Paciente Nro '+id);
+        $("#id").val(id);
+        $("#ced").val(ced);
+        $("#ap").val(ap);
+        $("#nom").val(nom);
+        $("#sel_esp").val(esp); 
+        $("#sel_edo").val(edo);
+        changeEDO(mun);
+        $("#dir").val(dir);
+        $("#tf").val(tf);
+
+    }
+);
 
 $("#formRegister").on(
     "click",
@@ -291,63 +348,6 @@ async function edit(e){
 
 
 
-//agregar
-$("#buttonAdd").on(
-    "click",
-    "button.btn",function(){
-        openModal();
-        $('#modal-header').css('background', '#4FCFC3')
-        $(".modal-title").text('Agregar Medico');
-        $(".id").hide();
-        $("#enviar").show();
-        document.getElementById("enviar").style.width = '100vh';
-        $("#edit").hide();
-        $("#delete").hide();
-        formulario.reset();
-        
-    }
-);
-
-
-//editar
-$("#tblMed tbody").on(
-    "click",
-    "button.editarFnt",
-    async function()
-    {
-        openModal();
-        $('#modal-header').css('background', '#FFD24C')
-        $(".modal-title").text('Editar Medico');
-        $(".id").show();
-        $("#enviar").hide();
-        document.getElementById("enviar").style.width = '13vh';
-        $("#edit").show();
-        $("#delete").show();
-        let data_tabla = tblMed.row($(this).parents("tr")).data();
-        var id = data_tabla.id
-        let ced = data_tabla.ced;
-        let ap = data_tabla.ap;
-        let nom = data_tabla.no;
-        let esp = data_tabla.code;
-        let edo = data_tabla.cedo;
-        let mun = data_tabla.cmun;
-        let dir = data_tabla.dir;
-        let tf = data_tabla.tf
-
-        $(".id").text('Paciente Nro '+id);
-        $("#id").val(id);
-        $("#ced").val(ced);
-        $("#ap").val(ap);
-        $("#nom").val(nom);
-        $("#sel_esp").val(esp); 
-        $("#sel_edo").val(edo);
-        changeEDO(mun);
-        $("#dir").val(dir);
-        $("#tf").val(tf);
-
-    }
-);
-
 
 //Eliminar
 
@@ -355,6 +355,7 @@ $("#formRegister").on(
     "click",
     "#delete",async function(e){
         event.preventDefault();
+        id = $("#id").val();
         delDialog(id);
     }
 );

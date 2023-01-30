@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	setTimeout(()=>{
 		$('#overlayU').hide();
 	}, 700);
-	tblPac = new DataTable("#tblUser",{
+	tblUser = new DataTable("#tblUser",{
 		aProcessing: true,
 		aServerSide: true,
 		//Opciones de lenguaje
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded",function(){
 		columns:[
 			{data: `id`},
 			{data: `idrol`},
-			{data: `nom`},
+			{data: `usuario`},
 			{data: `email`},
 			{data: `rol`},
 			{data: `tf`},
@@ -82,28 +82,19 @@ const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-	telefono: /^\d{7,14}$/ // 7 a 14 numeros.
+	telefono: /^[01246]{4}-[0-9]{7}$/ // 7 a 14 numeros.
 }
 
 const campos = {
-	usuario: false,
 	nombre: false,
-	password: false,
 	correo: false,
 	telefono: false
 }
 
 const validarFormulario = (e) => {
 	switch (e.target.name) {
-		case "nombre":
-			validarCampo(expresiones.nombre, e.target, 'nombre');
-		break;
-		case "password":
-			validarCampo(expresiones.password, e.target, 'password');
-			validarPassword2();
-		break;
-		case "password2":
-			validarPassword2();
+		case "usuario":
+			validarCampo(expresiones.usuario, e.target, 'usuario');
 		break;
 		case "correo":
 			validarCampo(expresiones.correo, e.target, 'correo');
@@ -135,25 +126,7 @@ inputs.forEach((input) => {
 	input.addEventListener('blur', validarFormulario);
 });
 
-formulario.addEventListener('submit', (e) => {
-	e.preventDefault();
 
-	const terminos = document.getElementById('terminos');
-	if(campos.nombre && campos.password && campos.correo && campos.telefono && terminos.checked ){
-		formulario.reset();
-
-		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-		setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
-
-		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
-		});
-	} else {
-		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
-	}
-});
 
 
 
@@ -164,6 +137,9 @@ function(){
 },
 false
 );
+
+//Ocultar el campo id del form
+$("#id").hide();
 
 //agregar
 $("#buttonAdd").on(
@@ -178,13 +154,18 @@ $("#buttonAdd").on(
         $("#edit").hide();
         $("#delete").hide();
         formulario.reset();
-        listarEDO();
         
     }
     );
 
 
-async function save(){
+let refresh = document.getElementById('refresh');
+refresh.addEventListener('click', _ => {
+            formulario.reset();
+})
+
+
+async function save(e){
     event.preventDefault();
     formRegister = document.querySelector('#formulario');
     let datos = new FormData(formRegister);
@@ -238,15 +219,6 @@ function openModal()
     }
 
 
-	$("#formRegister").on(
-		"click",
-		"#edit",function(){
-			event.preventDefault();
-			edit();
-		
-		}
-	);
-	
 
 
 //editar
@@ -257,44 +229,110 @@ $("#tblUser tbody").on(
     {
         openModal();
         $('#modal-header').css('background', '#FFD24C')
-        $(".modal-title").text('Editar Medico');
+        $(".modal-title").text('Editar Usuario');
         $(".id").show();
         $("#enviar").hide();
         document.getElementById("enviar").style.width = '13vh';
         $("#edit").show();
         $("#delete").show();
-        let data_tabla = tblMed.row($(this).parents("tr")).data();
+        let data_tabla = tblUser.row($(this).parents("tr")).data();
         var id = data_tabla.id
-        let ced = data_tabla.ced;
-        let ap = data_tabla.ap;
-        let nom = data_tabla.no;
-        let esp = data_tabla.code;
-        let edo = data_tabla.cedo;
-        let mun = data_tabla.cmun;
-        let dir = data_tabla.dir;
-        let tf = data_tabla.tf
+        let idrol = data_tabla.idrol;
+        let usuario = data_tabla.usuario;
+        let email = data_tabla.email;
+        currEmail = email;
+        let tf = data_tabla.tf;
 
-        $(".id").text('Paciente Nro '+id);
+        $(".id").text('Usuario Nro '+id);
         $("#id").val(id);
-        $("#ced").val(ced);
-        $("#ap").val(ap);
-        $("#nom").val(nom);
-        $("#sel_esp").val(esp); 
-        $("#sel_edo").val(edo);
-        changeEDO(mun);
-        $("#dir").val(dir);
-        $("#tf").val(tf);
+        $("#rol").val(idrol);
+        $("#usuario").val(usuario);
+        $("#correo").val(email); 
+        $("#telefono").val(tf);
 
     }
 );
 
+$("#formulario").on(
+    "click",
+    "#edit",function(e){
+        e.preventDefault();
+        edit();
+    }
+);
+
+
+async function edit(e){
+    event.preventDefault();
+        
+    formRegister = document.querySelector('#formulario');
+    let datos = new FormData(formRegister);
+
+    datos.append('currEmail', currEmail);
+
+    
+    try {
+        const url = `${base_url}/Users/edit`;
+        
+        const respuesta = await fetch(url,{
+            method: "POST",
+            body: datos,
+        });
+        
+        
+        const result = await respuesta.json();
+
+        if (result.mailStatus && result.status) {
+            var n = new Noty({
+                text: `${result.msg} <br> Se ha enviado la contraseña al nuevo correo electronico`,
+                type: "success",
+                layout: "center",
+                modal: "true",
+                buttons: [
+                    Noty.button('YES', 'btn btn-success', async function () {
+                    window.location.href = `${base_url}/Users`;  
+                    }, {id: 'button1', 'data-status': 'ok'}),
+                ]
+            });
+            n.show();
+        } else {
+            if (result.status) {
+                console.log(result);
+                new Noty({
+                    type: 'success',
+                    theme: 'metroui',
+                    text: `${result.msg}`,
+                    timeout: 2000,
+                }).show();
+                formRegister.reset();
+                setTimeout(function(){
+                    window.location.href = `${base_url}/Users`;        
+                },2500);           
+            } else {
+                new Noty({
+                    type: 'error',
+                    theme: 'metroui',
+                    text: `${result.error}`,
+                    timeout: 2000,
+                }).show(); 
+            }
+        }
+
+        
+        
+    } catch (err) {
+        console.log(err);
+    }
+
+}
 
 //Eliminar
 
-$("#formRegister").on(
+$("#formulario").on(
     "click",
     "#delete",async function(e){
-        event.preventDefault();
+        e.preventDefault();
+        id = $("#id").val();
         delDialog(id);
     }
 );
@@ -305,7 +343,7 @@ $("#tblUser tbody").on(
     "button.eliminarFnt",
     async function()
     {
-        let data_tabla = tblPac.row($(this).parents("tr")).data();
+        let data_tabla = tblUser.row($(this).parents("tr")).data();
         let id = data_tabla.id;
         delDialog(id);
     }
@@ -365,4 +403,30 @@ function delDialog(id){
         ]
       });
       n.show();
+}
+
+
+$(document).ready(function() {
+    rolList();
+});
+
+function rolList(){
+    $.ajax({
+        url:`${base_url}/Users/rolList`,
+        type:'POST'
+    }).done(function(resp){
+        
+        var data = JSON.parse(resp)
+        var cadena = "";
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                cadena +="<option title='"+data[i]["descripcion"]+"' value='"+data[i]["id_rol"]+"'>"+data[i]["nombre_rol"]+"</option>";
+                
+            }
+            $("#rol").html(cadena);
+        } else {
+            cadena +="<option value=''>No se encontraron registros</option>";
+            $("#rol").html(cadena);
+        }
+    })
 }

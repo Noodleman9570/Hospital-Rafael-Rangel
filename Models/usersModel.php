@@ -11,7 +11,7 @@ class usersModel extends Mysql
         
         public static function all()
         {
-            $res = Mysql::SQL("SELECT u.id_usuario AS id, u.id_rol AS idrol, u.nombre AS nom, r.nombre_rol AS rol, u.email, u.telefono AS tf FROM usuarios u INNER JOIN roles r ON r.id_rol = u.id_rol;");
+            $res = Mysql::SQL("SELECT u.id_usuario AS id, u.id_rol AS idrol, u.usuario, r.nombre_rol AS rol, u.email, u.telefono AS tf FROM usuarios u INNER JOIN roles r ON r.id_rol = u.id_rol;");
             return $res;
         }
 

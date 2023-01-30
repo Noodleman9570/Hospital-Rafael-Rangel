@@ -31,7 +31,7 @@ getModal('Users', 'formModal', $data);
             <tr>
               <th>ID</th>
               <th>id_rol</th>
-              <th>Nombre</th>
+              <th>Usuario</th>
               <th>Email</th>
               <th>Rol</th>
               <th>Teléfono</th>

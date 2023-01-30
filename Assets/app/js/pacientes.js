@@ -344,6 +344,7 @@ $("#formRegister").on(
     "click",
     "#delete",async function(e){
         event.preventDefault();
+        id = $("#id").val();
         delDialog(id);
     }
 );

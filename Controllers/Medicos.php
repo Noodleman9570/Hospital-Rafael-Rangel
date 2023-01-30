@@ -169,6 +169,7 @@
             
             echo json_encode($consulta);
         }
+        
         public function listarEsp()
         {
             try {
