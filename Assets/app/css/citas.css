@@ -1,3 +1,33 @@
+.toggle {
+    display: none;
+    transition: .5s ease all;
+}
+
+.togg {
+    color: green;
+    border: 3px solid green;
+}
+.btn-c {
+    height: 55px ;
+}
+
+.btn-e {
+    display: none;
+    height: 55px ;
+}
+
+.pull-left{
+    transition: .5s ease all;
+}
+
+@media (max-width: 992) {
+    .consultForm{
+        width: 2000px !important;
+    }
+}
+
+
+
 .tile{
     border-radius: 10px;
     position: relative;
@@ -22,7 +52,19 @@ button {
     position: absolute;
     top: 14px;
     right: 0;
-    display: inline;
+}   
+.esp{
+    margin-top: 5px;
+}
+
+#sel_esp option{
+    display: flex;
+    justify-content: space-between;
+}
+
+.lable__button{
+    display: flex;
+    justify-content: space-between;
 }
 thead{
     background: #ddeeed;
@@ -39,25 +81,22 @@ tbody tr:hover{
     background: rgb(255, 255, 255);
 }
 
-
 tbody tr td{
     margin: 20px 10px;
+    height: 55px;
 }
 
-tbody tr td:nth-child(3){
-    padding-left: 50px;
-}
-
-tbody tr td:nth-child(4){
+tbody tr td:nth-child(8){
     width: 6.5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-tbody tr td:nth-child(4) div {
+tbody tr td:nth-child(8) div {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    gap: 15px;
 }
 
 .editarFnt{

@@ -1,7 +1,7 @@
 <?php
 
     // define("BASE_URL", "http://localhost/Curso%20POO%20Abel%20OS/Hospital")
-    const BASE_URL = "http://192.168.43.149/Hospital";
+    const BASE_URL = "http://192.168.1.2/Hospital";
 
     //Zona horaria
     date_default_timezone_set('America/Caracas');
@@ -11,11 +11,12 @@
     const PERFIL = "0";
     const DASHBOARD = 1;
     const ARCHIVOS_MAESTROS = 2;
-    const CONSULTA = 7;
+    const CITAS = 7;
     const HOSPITALIZACION = 8;
     const VACUNACION = 12;
     const USERS = 9;
     const ROLES = 14;
+    const CONSULTAS = 10;
 
     //Datos de conexion a base de datos
     const DB_HOST = "localhost";

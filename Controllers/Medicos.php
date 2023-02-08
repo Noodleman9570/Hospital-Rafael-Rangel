@@ -38,6 +38,24 @@
 
             echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
         }
+
+        public function onePaciente()
+        {
+            $arrJason = [];
+            
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $id = intval($_POST['id']);
+            $med = MedicosModel::oneMedico($id);
+
+            if(empty($med)){
+                $arrJson = ['msg'=>'No se encontraron registros'];
+            }else{
+                $arrJson = $med;
+            }
+                echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
+            }
+        }
+
         public function save()
         {
             $data = [];
@@ -46,37 +64,68 @@
                 
                 //validar
                     $val = new Validations();
-                    $val->name('cedula')->value(clear($_POST['ced']))->required();
-                    $val->name('apellido')->value(clear($_POST['ap']))->required();
-                    $val->name('nombre')->value(clear($_POST['nom']))->required();
-                    $val->name('telefono')->value(clear($_POST['tf']))->pattern('tel')->required();
-                    $val->name('direccion')->value(clear($_POST['dir']))->required();
+                    $val->name('cedula')->value(clear($_POST['cedula']))->required();
+                    $val->name('apellido')->value(clear($_POST['apellido']))->required();
+                    $val->name('nombre')->value(clear($_POST['nombre']))->required();
+                    $val->name('telefono')->value(clear($_POST['telefono']))->pattern('tel')->required();
+                    $val->name('direccion')->value(clear($_POST['direccion']))->required();
 
                     //Comprobar si se Cumplen todas las validaciones
                     if($val->isSuccess()){
-                        $res = MedicosModel::verifyCed(clear($_POST['ced']));
+                        $email = MedicosModel::verifyEmail(clear($_POST['correo']));
+                        $res = MedicosModel::verifyCed(clear($_POST['cedula']));
 
-                        if (!$res) {
-                            $data = [
-                                'TMMED_CI' => clear($_POST['ced']),
-                                'TMMUN_CM' => $_POST['mun'],
-                                'TMMED_AP' => clear($_POST['ap']),
-                                'TMMED_NO' => clear($_POST['nom']),
-                                'TMMED_DIR' => clear($_POST['dir']),
-                                'TMMED_TF' => clear((string)$_POST['tf']),    
-                                'TMESP_CE' => clear($_POST['esp']),
-                                //arreglar el eliminar espacios de la contraseña
-                            ];
-                            try {
-                                $idInsert = MedicosModel::insert('TMBCH_MED', $data);
-                                $data = ['status' => true, 'msg'=>'Registro guardado'];
-                            } catch (Exception $e) {
-                                echo "ERROR: ".$e->getMessage();
-                            }
+                        if (!$email) {
+
+                            if (!$res) {
+
+
+                                $pass = passGenerator();
+                        
+                                $passHash = hash("sha256", $pass);
+
+                                $data = [
+                                    'id_rol' => '3',
+                                    'usuario' => clear($_POST['usuario']),
+                                    'email' => clear($_POST['correo']),
+                                    'telefono' => clear((string)$_POST['telefono']),
+                                    'password' => $passHash,
+            
+                                    //arreglar el eliminar espacios de la contraseña
+                                ];
     
+
+                                $idUInsert = MedicosModel::insert('usuarios', $data);
+
+
+                                $data = [
+                                    'TMMED_CI' => clear($_POST['cedula']),
+                                    'id_usuario' => $idUInsert,
+                                    'TMMUN_CM' => $_POST['municipio'],
+                                    'TMMED_AP' => clear($_POST['apellido']),
+                                    'TMMED_NO' => clear($_POST['nombre']),
+                                    'TMMED_DIR' => clear($_POST['direccion']),
+                                    'TMMED_TF' => clear((string)$_POST['telefono']),    
+                                    'TMESP_ID' => clear($_POST['especialidad']),
+                                    //arreglar el eliminar espacios de la contraseña
+                                ];
+                                try {
+                                    $idInsert = MedicosModel::insert('TMBCH_MED', $data);
+                                    MedicosModel::sendEmail($_POST['correo'], $_POST['usuario'], 'Clave aleatoria para Hospital', 'Tu Clave de acceso es: <strong>'.$pass.'</strong> Te recomendamos que inicies session y la cambies en el apartado de perfil', true);
+                                    $data = ['status' => true, 'msg'=>'Registro guardado'];
+                                } catch (Exception $e) {
+                                    echo "ERROR: ".$e->getMessage();
+                                }
+
+                            } else {
+                                $data = ['error'=>'La cedula ya le pertenece a otro medico'];
+                            } 
+                        
                         } else {
-                            $data = ['error'=>'La cedula ya le pertenece a otro medico'];
-                        }       
+                            $data = ['error'=>'El correo electronico ya se encuentra en uso'];
+                        }
+
+
                     }else{
                         $data = ['error'=>$val->getErrors()];
                     }        

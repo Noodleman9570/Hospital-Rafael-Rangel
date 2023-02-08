@@ -32,6 +32,25 @@
 
             echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
         }
+
+
+        public function onePaciente()
+        {
+            $arrJason = [];
+            
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $id = intval($_POST['id']);
+            $pac = pacientesModel::onePaciente($id);
+
+            if(empty($pac)){
+                $arrJson = ['msg'=>'No se encontraron registros'];
+            }else{
+                $arrJson = $pac;
+            }
+                echo json_encode($arrJson,JSON_UNESCAPED_UNICODE);
+            }
+        }
+
         public function save()
         {
             $data = [];
@@ -43,6 +62,7 @@
                     $val->name('cedula')->value(clear($_POST['cedula']))->required();
                     $val->name('apellido')->value(clear($_POST['apellido']))->required();
                     $val->name('nombre')->value(clear($_POST['nombre']))->required();
+                    $val->name('email')->value(clear($_POST['correo']))->pattern('email')->required();
                     $val->name('Fecha de nacimiento')->value(clear($_POST['fechaNacimiento']))->dateLimit()->required();
                     $val->name('telefono')->value(clear($_POST['telefono']))->pattern('tel')->required();
                     if($val->isSuccess()){
@@ -58,6 +78,7 @@
                                 'TMPAC_SX' => $_POST['sexo'],
                                 'TMPAC_DIR' => clear($_POST['direccion']),
                                 'TMPAC_FN' => $_POST['fechaNacimiento'],
+                                'TMPAC_COR' => $_POST['correo'],
                                 'TMPAC_TF' => clear((string)$_POST['telefono'])    
                                 //arreglar el eliminar espacios de la contraseña
                             ];
@@ -74,9 +95,7 @@
                     }else{
                         $data = ['error'=>$val->getErrors()];
                     }
-          
-                        
-
+              
             }
 
             echo json_encode($data, JSON_UNESCAPED_UNICODE);

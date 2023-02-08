@@ -1,5 +1,5 @@
 <?php
-    class Perfil extends Controllers{
+    class Settings extends Controllers{
         public function __construct()
         {
             Auth::noAuth();
@@ -14,6 +14,7 @@
             $data['page_title'] = "Hospital";
             $data['function_js'] = '/perfil.js';
             $data['style_css'] = "/medico.css";
+            
             $this->views->getView($this,"perfil",$data);
         }
 

@@ -20,29 +20,7 @@
         <ul class="app-menu">
             <?php Permisos::showMenus(); ?>
             
-            <?php if(!empty($_SESSION['permisos'][DASHBOARD]['r'])): ?>
             
-            <?php endif ?>
-
-            <?php if(!empty($_SESSION['permisos'][ARCHIVOS_MAESTROS]['r'])): ?>
-                
-            <?php endif ?>
-
-            <?php if(!empty($_SESSION['permisos'][VACUNACION]['r'])): ?>
-            
-            <?php endif ?>
-
-            <?php if(!empty($_SESSION['permisos'][HOSPITALIZACION]['r'])): ?>
-            
-            <?php endif ?>
-
-            <?php if(!empty($_SESSION['permisos'][USERS]['r'])): ?>
-            
-            <?php endif ?>
-            
-            <?php if(!empty($_SESSION['permisos'][ROLES]['r'])): ?>
-            
-            <?php endif ?>
 
 
             <li>

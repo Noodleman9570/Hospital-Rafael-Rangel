@@ -2,6 +2,8 @@
 
     class Permisos
     {
+  
+
         public static function getPermisos($idPagina)
         {            
             if(!empty($_SESSION['userData'])){
@@ -43,7 +45,8 @@
                         'id' => $row['id'],
                         'titulo' => $row['titulo'],
                         'page' => $row['page'],
-                        'icono' => $row['icono']
+                        'icono' => $row['icono'],
+                        'activo' => $row['activo']
                     ];
                 } else {
                     $id = $row['id'];
@@ -51,7 +54,8 @@
                         'id' => $row['id'],
                         'titulo' => $row['titulo'],
                         'page' => $row['page'],
-                        'icono' => $row['icono']
+                        'icono' => $row['icono'],
+                        'activo' => $row['activo']
                     ];
                 }
             }
@@ -62,6 +66,7 @@
         public static function showMenus()
         {
             $menus = self::getMenus();
+
             if (!$menus) {
                 return 'No existe ningun menu en la base de datos';
             }
@@ -71,7 +76,7 @@
             foreach ($menus as $menu){
                 if (isset($menu['submenu'])) {
                     //title del menu
-                    if (!empty($_SESSION['permisos'][$menu['id']]['r'])) {
+                    if (!empty($_SESSION['permisos'][$menu['id']]['r']) && $menu['activo'] == 1) {
                         if ($menu['page']) {
                           $html .= "
                             <li class='treeview'>
@@ -102,16 +107,17 @@
                           $html .= "<ul class='treeview-menu'>";
               
                           foreach ($menu['submenu'] as $submenu) {
-                            if ($submenu['page']) {
+                            if ($submenu['page'] && $submenu['activo'] == 1) {
                               $html .= "<li><a class='treeview-item' href='".BASE_URL."/".$submenu['page']."'><i class='icon fa fa-circle-o'></i> ".$submenu['titulo']."</a></li>";
-                            } else {
-                              $html .= "<li><a class='treeview-item' href='#'><i class='icon fa fa-circle-o'></i> ".$submenu['titulo']."</a></li>";
-                            }
+                            } 
                           }
                           $html .= '</ul>';
                           $html .= '</li>';
                         }
                       }
+
+
+
                       /* 
                        end Item de submenu
                       */
@@ -119,7 +125,7 @@
                       /* 
                        Menu principal
                       */
-                      if (!empty($_SESSION['permisos'][$menu['id']]['r'])) {
+                      if (!empty($_SESSION['permisos'][$menu['id']]['r']) && $menu['activo'] == 1) {
                         if ($menu['page']) {
                           $html .= "
                             <li>

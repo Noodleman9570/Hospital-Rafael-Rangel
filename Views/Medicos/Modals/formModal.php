@@ -21,7 +21,8 @@
               <div class="formulario__grupo" id="grupo__ced">
                 <label for="ced" class="formulario__label">Cedula</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="cedula" id="ced" placeholder="V-26587963">
+                  <input type="text" value="V-" style="width: 10%; padding: 9px 0 9px 15px; font-weight: bold;" disabled>
+                  <input type="text" class="formulario__input" style=" width: 89%;"  name="cedula" id="ced" placeholder="26587963">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
@@ -43,6 +44,26 @@
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
+
+              <!-- Grupo: Usuario -->
+          <div class="formulario__grupo" id="grupo__usuario">
+            <label for="nombre" class="formulario__label">Usuario</label>
+            <div class="formulario__grupo-input">
+              <input type="text" class="formulario__input" name="usuario" id="usuario" placeholder="John Doe">
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+          </div>
+
+          <!-- Grupo: Correo Electronico -->
+          <div class="formulario__grupo" id="grupo__correo">
+            <label for="correo" class="formulario__label">Correo Electrónico</label>
+            <div class="formulario__grupo-input">
+              <input type="email" class="formulario__input" name="correo" id="correo" placeholder="correo@correo.com">
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.</p>
+          </div>
+
 
                 <div class="formulario__grupo esp" id="grupo__esp">
                     <div class="lable__button">
@@ -76,9 +97,9 @@
               
                    <!-- Grupo: Direccion -->
               <div class="formulario__grupo" id="grupo__direccion">
-                <label for="dir" class="formulario__label">Direccion</label>
+                <label for="direccion" class="formulario__label">Direccion</label>
                 <div class="formulario__grupo-input">
-                  <input type="textarea" title="Breve descripcion" class="formulario__input" name="direccion" id="dir" placeholder="Avienida principal">
+                  <input type="textarea" title="Breve descripcion" class="formulario__input" name="direccion" id="direccion" placeholder="Avenida principal">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
@@ -87,7 +108,7 @@
               <div class="formulario__grupo" id="grupo__tf">
                 <label for="tf" class="formulario__label">Número telefónico</label>
                 <div class="formulario__grupo-input">
-                  <input type="text" class="formulario__input" name="telefono" id="tf" placeholder=""0000-0000000>
+                  <input type="text" class="formulario__input" name="telefono" id="tf" placeholder="0000-0000000">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>

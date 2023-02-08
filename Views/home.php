@@ -21,7 +21,7 @@
             
             <div class="carousel-inner" >
               <div class="carousel-item active">
-                <img src="<?=HOME_IMG?>/entrance.jpeg"  class="d-block w-100" alt="camilla">
+                <img src="<?=HOME_IMG?>/entrance.jpeg"  class="d-block w-50" alt="camilla">
                 <div class="carousel-caption d-none d-md-block">
                   <h5>First slide label</h5>
                 </div>

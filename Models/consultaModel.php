@@ -9,7 +9,7 @@
 
         public static function all()
         {
-            $res = Mysql::SQL("SELECT m.TMMED_MID AS id, m.TMMED_CI AS ced, m.TMMED_AP AS ap, m.TMMED_NO AS no, es.TMESP_CE AS esp,es.TMESP_NO AS nesp, es.TMESP_ID AS code, e.TMEDO_CE AS cedo, mu.TMMUN_CM AS cmun, mu.TMMUN_NO AS mnom, m.TMMED_DIR AS dir, m.TMMED_TF AS tf FROM TMBCH_MED m INNER JOIN TMBCH_MUN mu ON m.TMMUN_CM = mu.TMMUN_CM INNER JOIN TMBCH_EDO e ON mu.TMEDO_CE = e.TMEDO_CE INNER JOIN TMBCH_ESP es ON es.TMESP_ID = m.TMESP_CE;");
+            $res = Mysql::SQL("SELECT con.TTCON_CC AS id, p.TMPAC_CI cedula, p.TMPAC_NO AS nombre, c.title AS asunto, con.TTCON_DI AS diag, con.TTCON_TM AS tratamiento, c.date_at FROM TTBCH_CON con INNER JOIN citas c ON c.id_cita = con.id_cita INNER JOIN TMBCH_PAC p ON p.TMPAC_PID = c.id_paciente WHERE c.id_medic = 11 AND c.status = 1");
             return $res;
         }
         public static function verifyCed($ced)

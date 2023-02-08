@@ -34,12 +34,7 @@
                   <th>Apellido</th>
                   <th>Nombre</th>
                   <th>Especialidad</th>
-                  <th>Código Especialidad</th>
-                  <th>Codigo especialidad</th>
-                  <th>Codigo Estado</th>
-                  <th>Codigo Municipio</th>
                   <th>Municipio</th>
-                  <th>Dirección</th>
                   <th>Número telefónico</th>
                   <th>Acciones</th>               
                 </tr>

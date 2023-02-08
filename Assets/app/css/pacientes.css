@@ -45,13 +45,13 @@ tbody tr:hover{
 tbody tr td{
     margin: 20px 10px;
 }
-tbody tr td:nth-child(9){
+tbody tr td:nth-child(6){
     width: 6.5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-tbody tr td:nth-child(9) div {
+tbody tr td:nth-child(6) div {
     width: 100%;
     display: flex;
     justify-content: space-around;

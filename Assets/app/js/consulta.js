@@ -30,48 +30,39 @@ if(pixels < 500){
 
   //Listar pacientes
   $(document).ready(function() {
-    listarPac();
-    listarMed();
+    listarCitas();
 });
 
-function listarPac(){
+
+
+
+
+
+
+
+function listarCitas(){
     $.ajax({
-        url:`${base_url}/consulta/listarPac`,
+        url:`${base_url}/consulta/listarCitas`,
         type:'POST'
     }).done(function(resp){
         var data = JSON.parse(resp)
         var cadena = "";
         if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
-                cadena +="<option value='"+data[i]["TMPAC_PID"]+"'>Cédula: "+data[i]["TMPAC_CI"]+' &nbsp;&nbsp; Nombre: '+data[i]["TMPAC_NO"]+"&nbsp;&nbsp;"+data[i]["TMPAC_AP"]+"</option>";
+                cadena +="<option value='"+data[i]["id_cita"]+"'>Cédula: "+data[i]["TMPAC_CI"]+' &nbsp;&nbsp; Nombre: '+data[i]["TMPAC_NO"]+"&nbsp;&nbsp;"+data[i]["TMPAC_AP"]+"&nbsp;&nbsp;&nbsp;&nbsp; Asunto:"+data[i]["title"]+"</option>";
                 
             }
-            $("#pac_select").html(cadena);
+            $("#cita").html(cadena);
         } else {
             cadena +="<option value=''>No se encontraron registros</option>";
-            $("#pac_select").html(cadena);
+            $("#cita").html(cadena);
         }
     })
 }
-function listarMed(){
-    $.ajax({
-        url:`${base_url}/consulta/listarMed`,
-        type:'POST'
-    }).done(function(resp){
-        var data = JSON.parse(resp)
-        var cadena = "";
-        if (data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-                cadena +="<option value='"+data[i]["TMMED_MID"]+"'>Cédula: "+data[i]["TMMED_CI"]+' &nbsp;&nbsp; Nombre: '+data[i]["TMMED_NO"]+"&nbsp;&nbsp;"+data[i]["TMMED_AP"]+"&nbsp;&nbsp; Especialidad: "+data[i]["TMESP_NO"]+"</option>";
-                
-            }
-            $("#med_select").html(cadena);
-        } else {
-            cadena +="<option value=''>No se encontraron registros</option>";
-            $("#med_select").html(cadena);
-        }
-    })
-}
+
+
+
+
 
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -173,7 +164,7 @@ $("#pac_select").on(
 
 //Nuevo registro
 async function saveC(e){
-    
+    event.preventDefault();
     formNewPaciente = document.querySelector('#consultForm');
     let datos = new FormData(formNewPaciente);
     console.log("registrando consulta");
@@ -230,129 +221,87 @@ async function fetchLastInsert()
     })
 }
 
-//SaveAll
-async function saveP(e){
-    event.preventDefault();
-    
-    formNewPaciente = document.querySelector('#formNewPaciente');
-    let datos = new FormData(formNewPaciente);
 
-    try {
-        const url = `${base_url}/pacientes/save`;
-    
-        const respuesta = await fetch(url,{
-            method: "POST",
-            body: datos,
-        });
-    
-        const result = await respuesta.json();
+/////////////////////////////////////////////////////////////////////////////////////////////
 
-        if (result.status) {
-            console.log(result);
-            new Noty({
-                type: 'success',
-                theme: 'metroui',
-                text: `${result.msg}`,
-                timeout: 2000,
-            }).show();
-            setTimeout(function(){
-                $('.npac-form')
-                .addClass('toggle')
-                $('#cosultFormIn')
-                .animate({opacity: '1'})
-                .removeClass('col-lg-4')
-                .addClass('col-lg-12');  
-                $('#cosultFormIn input ,#cosultFormIn select, #cosultFormIn textarea')
-                .attr('disabled', false)
-                $('.btn-c')
-                .attr("onclick","saveC()");
-                $('#newPacBtn').show()
-                formulario2.reset();
-                listarPac();
-                fetchLastInsert();
-            },2000);       
-        } else {
-            new Noty({
-                type: 'error',
-                theme: 'metroui',
-                text: `${result.error}`,
-                timeout: 2000,
-            }).show(); 
-        }
-  
-    } catch (err) {
-        console.log(err);
-    }
-}
+let tblConsultas;
 
+document.addEventListener("DOMContentLoaded",function(){
 
+	setTimeout(()=>{
+		$('#overlayU').hide();
+	}, 700);
 
+	tblConsultas = new DataTable("#tblConsultas",{
+        
+		aProcessing: true,
+		aServerSide: true,
+		//Opciones de lenguaje
+		language: {
+			url: `${base_url}/Assets/app/js/dataTables.spanish.json`
+		},
+		//Consultar los datos a la api
+		ajax:{
+			url:`${base_url}/Consulta/all`,
+			dataSrc:"",
+		},
+		//Datos desde el servidor
+		columns:[
+			{data: `id`},
+            {data: `asunto`},
+			{data: `cedula`},
+			{data: `nombre`},
+			{data: `diag`},
+			{data: `tratamiento`},
+            {data: `date_at`}
+		],
+		//Ocultar columnas
+        columnDefs:[
+            {
+                targets:[0],
+                visible:false,
+                serchable:false,
+            },
+            { responsivePriority: 1, targets:  0},
+            { responsivePriority: 2, targets:  6},
+        ],
+        //Mostrar botones de exportacion
+        responsive: "true",
+        dom:"lBfrtip",
+        buttons:[
+            {
+                extend:"print",    
+                text:"<i class='fa fa-print'><i/>",
+                titleAttr:"Imprimir",
+                className: "btn btn-info"
+            },
+            {
+                extend:"excelHtml5",
+                text:"<i class='fa fa-file-excel-o'><i/>",
+                titleAttr:"Exportar a Excel",
+                className: "btn btn-success"
+            },
+            {
+                extend:"pdfHtml5",
+                text:"<i class='fa fa-file-pdf-o'><i/>",
+                titleAttr:"Exportar a PDF",
+                className: "btn btn-danger"
+            },
+        ],
+        lengthMenu:[
+            [5,10,25,50,-1],
+            [5,10,25,50,"All"],
+        ],
+		iDisplayLength:5,
+		order:[[1,"asc"]],
+	});
 
-
-
-//Combo para listar Estado Municipio
-function listarEDO(){
-    $.ajax({
-        url:`${base_url}/Pacientes/listarEDO`,
-        type:'POST'
-    }).done(function(resp){
-        var data = JSON.parse(resp)
-        var cadena = "";
-        if (data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-                cadena +="<option value='"+data[i]["TMEDO_CE"]+"'>"+data[i]["TMEDO_NO"]+"</option>";
-                
-            }
-            $("#sel_estado").html(cadena);
-            var idedo = $("#sel_estado").val();
-            listarMUN(idedo);
-        } else {
-            cadena +="<option value=''>No se encontraron registros</option>";
-            $("#sel_estado").html(cadena);
-        }
-    })
-}
-
-function listarMUN(idedo, mun){
-    $.ajax({
-        url:`${base_url}/Pacientes/listarMUN`,
-        type:'POST',
-        data:{
-            idedo:idedo
-        }
-    }).done(function(resp){
-        var data = JSON.parse(resp)
-        var cadena = "";
-
-        if (data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-                cadena +="<option value='"+data[i]["TMMUN_CM"]+"'>"+data[i]["TMMUN_NO"]+"</option>";
-                
-            }
-            $("#sel_municipio").html(cadena);
-        } else {
-            cadena +="<option value=''>No se encontraron registros</option>";
-            $("#sel_municipio").html(cadena);
-        }
-        if(mun){ $("#sel_municipio").val(mun); }
-    })
-
-}
+},false);
 
 
-function changeEDO(mun){
-       
-    var idedo = $("#sel_estado").val();
-    listarMUN(idedo, mun);
-    
-    
-}
 
 
-$(document).ready(function() {
-    listarEDO();
-});
-    $("#sel_estado").change(function(){
-    var idedo= $("#sel_estado").val();
-    listarMUN(idedo);
-})
+
+
+
+

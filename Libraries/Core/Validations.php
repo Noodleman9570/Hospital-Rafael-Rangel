@@ -138,17 +138,18 @@ class Validations
   /**
    *
    * Validar el minimo de un campo
-   * @param int $min
+   * @param int $minRge
+   * @param int $maxRge
    * @return this
    */
 
-   public function dateLimit()
+   public function yearLimit($minRge, $maxRge)
    {
       $dateU = explode('-',$this->value);
       $dateU[0] = (int)$dateU[0];
 
       $datem = (int)date('Y');
-      $dateM = $datem - 9;
+      $dateM = $datem - $minRge;
       $datem = $datem-105;
 
 
@@ -157,6 +158,73 @@ class Validations
         $this->errors[] = nl2br('El campo '.$this->name.' esta fuera del rango');
       }
       return $this;
+   }
+
+    /**
+   *
+   * Validar el minimo de un campo
+   * @param int $minRge
+   * @param int $maxRge
+   * @return this
+   */
+
+   public function monthLimit($minRge, $maxRge)
+   {
+      $dateU = explode('-',$this->value);
+      $dateU[1] = (int)$dateU[1];
+
+      $datem = (int)date('Y');
+      $dateM = $datem - $minRge;
+      $datem = $datem-$maxRge;
+
+
+      if($dateU[1]<$datem || $dateU[1]>$dateM)
+      {
+        $this->errors[] = nl2br('El campo '.$this->name.' esta fuera del rango');
+      }
+      return $this;
+   }
+
+    /**
+   *
+   * Validar el minimo de un campo
+   * @param int $minRge
+   * @param int $maxRge
+   * @return this
+   */
+
+   public function dayLimit($minRge, $maxRge)
+   {
+      $dateU = explode('-',$this->value);
+      $dateU[2] = (int)$dateU[2];
+
+      $datem = (int)date('Y');
+      $dateM = $datem - $minRge;
+      $datem = $datem-$maxRge;
+
+
+      if($dateU[2]<$datem || $dateU[2]>$dateM)
+      {
+        $this->errors[] = nl2br('El campo '.$this->name.' esta fuera del rango');
+      }
+      return $this;
+   }
+
+    /**
+   *
+   * Validar el minimo de un campo
+   * @param int $minRge
+   * @param int $maxRge
+   * @return this
+   */
+
+   public function hourLimit($from, $to)
+   {
+    
+    if($this->value > '06:00' AND $this->value < '16:00'){
+
+    }
+
    }
 
   /**

@@ -21,20 +21,23 @@
         {
             $arrJson = [];
             if($_SERVER['REQUEST_METHOD'] == "POST") {
+
                 $val = new Validations();
                 $val->name('email')->value($_POST['email'])->pattern('email')->required();
                 $val->name('contraseña')->value($_POST['password'])->min(6)->max(20)->pattern('alphanum')->required();
+                
                 // Si todo esta bien se logea 
                 if($val->isSuccess()){
                     // Logearse
                     $usuario = loginModel::login(clear($_POST['email']), hash("sha256", clearPass($_POST['password'])));
+
 
                     if (empty($usuario)) {
                         $arrJson = ['error'=>'El usuario no existe o la contraseña es incorrecta'];
                     } else {
                         // Crear nuestras sesiones
                         $_SESSION['iduser'] = $usuario['id_usuario'];
-                        $_SESSION['name'] = $usuario['nombre'];
+                        $_SESSION['name'] = $usuario['usuario'];
                         $_SESSION['email'] = $usuario['email'];
                         $_SESSION['login'] = true;
                         Auth::sessionUser($_SESSION['iduser']);

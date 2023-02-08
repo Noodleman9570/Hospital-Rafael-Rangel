@@ -12,6 +12,7 @@ async function login(){
             method: "POST",
             body: datos
         })
+
         const result = await res.json();
         
         if(result.error){
@@ -32,10 +33,7 @@ async function login(){
             setTimeout(()=>{
                 window.location.href = `${base_url}/Home`;
             },2500);
-
         }
-
-        
     } catch (err) {
         console.log(err);
     }

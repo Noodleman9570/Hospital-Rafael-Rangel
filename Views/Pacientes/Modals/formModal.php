@@ -27,6 +27,14 @@
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>
+
+              <div class="formulario__grupo" id="grupo__correo">
+                <label for="correo" class="formulario__label">Correo</label>
+                <div class="formulario__grupo-input">
+                  <input type="text" class="formulario__input" name="correo" id="correo" placeholder="example@example.com">
+                  <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+              </div>
               
               <!-- Grupo: Apellido -->
               <div class="formulario__grupo" id="grupo__ap">
@@ -74,7 +82,7 @@
               <div class="formulario__grupo" id="grupo__direccion">
                 <label for="dir" class="formulario__label">Direccion</label>
                 <div class="formulario__grupo-input">
-                  <input type="textarea" title="Breve descripcion" class="formulario__input" name="direccion" id="dir" placeholder="Avienida principal">
+                  <input type="textarea" title="Breve descripcion" class="formulario__input" name="direccion" id="dir" placeholder="Avenida principal">
                   <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
               </div>

@@ -32,13 +32,8 @@
                 <th>Cedúla</th>
                 <th>Apellido</th>
                 <th>Nombre</th>
-                <th>Sexo</th>
-                <th>Codigo Estado</th>
-                <th>Codigo Municipio</th>
                 <th>Municipio</th>
-                <th>Dirección</th>
-                <th>Fecha de nacimiento</th>
-                <th>Número telefónico</th>
+                <th>Correo electronico</th> 
                 <th>Acciones</th>               
               </tr>
             </thead>

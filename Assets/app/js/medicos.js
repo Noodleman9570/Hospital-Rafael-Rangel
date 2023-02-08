@@ -19,17 +19,12 @@ document.addEventListener("DOMContentLoaded",function(){
         //Datos desde el servidor
         columns:[
             {data: `id`},
-            {data: `ced`},
-            {data: `ap`},
-            {data: `no`},
-            {data: `nesp`},
-            {data: `esp`},
-            {data: `code`},
-            {data: 'cedo'},
-            {data: 'cmun'},
-            {data: 'mnom'},
-            {data: `dir`},
-            {data: `tf`},
+            {data: `cedula`},
+            {data: `apellido`},
+            {data: `nombre`},
+            {data: `nom_esp`},
+            {data: `nom_mun`},
+            {data: `telefono`},
             {
                 defaultContent:"<div><button type='button' class='editarFnt btn btn-warning btn-xs'><i class='fa fa-edit'></i></button><button type='button' class='eliminarFnt btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></div>"
             },
@@ -37,12 +32,12 @@ document.addEventListener("DOMContentLoaded",function(){
         //Ocultar columnas
         columnDefs:[
             {
-                targets:[0,6,7,8],
+                targets:[0],
                 visible:false,
                 serchable:false,
             },
             { responsivePriority: 1, targets:  0},
-            { responsivePriority: 2, targets:  12},
+            { responsivePriority: 2, targets:  7},
         ],
         //Mostrar botones de exportacion
         responsive: "true",
@@ -99,20 +94,24 @@ const formulario = document.getElementById('formRegister');
 const inputs = document.querySelectorAll('#formRegister input');
 
 const expresiones = {
+    usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
-    cedula: /([0-9]{6,8})/,
+    cedula: /^[0-9]{7,8}$/,
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 }
 
 const campos = {
+    usuario: false,
 	nom: false,
 	ced: false,
 	correo: false,
-	telefono: false
+	telefono: false,
+    direccion: false
 }
 
 const validarFormulario = (e) => {
-	switch (e.target.name) {
+	switch (e.target.id) {
 		case "ced":
 			validarCampo(expresiones.cedula, e.target, 'ced');
 		break;
@@ -124,6 +123,15 @@ const validarFormulario = (e) => {
 		break;
 		case "tf":
 			validarCampo(expresiones.telefono, e.target, 'tf');
+		break;
+        case "usuario":
+			validarCampo(expresiones.usuario, e.target, 'usuario');
+		break;
+        case "correo":
+			validarCampo(expresiones.correo, e.target, 'correo');
+		break;
+        case "direccion":
+			validarCampo(expresiones.nombre, e.target, 'direccion');
 		break;
 	}
 }
@@ -144,19 +152,7 @@ const validarCampo = (expresion, input, campo) => {
 	}
 }
 
-// const validarPassword2 = () => {
-// 	const inputPassword1 = document.getElementById('password');
-// 	const inputPassword2 = document.getElementById('password2');
 
-// 	if(inputPassword1.value !== inputPassword2.value){
-// 		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-incorrecto');
-// 		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-correcto');
-// 		campos['password'] = false;
-// 	} else {
-// 		document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
-// 		document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
-// 		campos['password'] = true;
-// 	}
 // }
 
 inputs.forEach((input) => {
@@ -271,25 +267,50 @@ $("#tblMed tbody").on(
         $("#delete").show();
         let data_tabla = tblMed.row($(this).parents("tr")).data();
         var id = data_tabla.id
-        let ced = data_tabla.ced;
-        let ap = data_tabla.ap;
-        let nom = data_tabla.no;
-        let esp = data_tabla.code;
-        let edo = data_tabla.cedo;
-        let mun = data_tabla.cmun;
-        let dir = data_tabla.dir;
-        let tf = data_tabla.tf
 
-        $(".id").text('Paciente Nro '+id);
-        $("#id").val(id);
-        $("#ced").val(ced);
-        $("#ap").val(ap);
-        $("#nom").val(nom);
-        $("#sel_esp").val(esp); 
-        $("#sel_edo").val(edo);
-        changeEDO(mun);
-        $("#dir").val(dir);
-        $("#tf").val(tf);
+
+        const url = `${base_url}/Medicos/onePaciente`;
+
+        const datos = new FormData();
+
+        datos.append('id', id);
+    
+        const respuesta = await fetch(url,{
+            method: "POST",
+            body: datos,
+        });
+    
+        const result = await respuesta.json();
+
+        console.log(result);
+
+        if(result){
+            let ced = result[0]['cedula'];
+            let ap = result[0]['apellido'];
+            let nom = result[0]['nombre'];
+            let usuario = result[0]['usuario'];
+            let email = result[0]['email'];
+            let esp = result[0]['id_esp'];
+            let edo = result[0]['cod_edo'];
+            let mun = result[0]['cod_mun'];
+            let dir = result[0]['direccion'];
+            let tf = result[0]['telefono'];   
+
+
+            $(".id").text('Medico Nro '+id);
+            $("#id").val(id);
+            $("#ced").val(ced);
+            $("#ap").val(ap);
+            $("#nom").val(nom);
+            $("#usuario").val(usuario);
+            $("#correo").val(email);
+            $("#sel_esp").val(esp); 
+            $("#sel_edo").val(edo);
+            changeEDO(mun);
+            $("#direccion").val(dir);
+            $("#tf").val(tf);
+
+        }
 
     }
 );

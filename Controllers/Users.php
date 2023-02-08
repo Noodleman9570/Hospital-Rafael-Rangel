@@ -18,6 +18,7 @@
             $data['page_title'] = "Hospital";
             $data['function_js'] = "/users.js";
             $data['style_css'] = "/user.css";
+
            $this->views->getView($this,"users",$data);
         }
 
@@ -56,6 +57,7 @@
                         $email = usersModel::verifyEmail(clear($_POST['correo']));
 
                         if (!$email) {
+                            
                             $pass = passGenerator();
                         
                             $passHash = hash("sha256", $pass);
@@ -69,6 +71,10 @@
         
                                 //arreglar el eliminar espacios de la contraseña
                             ];
+
+
+
+                            
                             try {
                                 $idInsert = usersModel::insert('usuarios', $data);
                                 usersModel::sendEmail($_POST['correo'], $_POST['usuario'], 'Clave aleatoria para Hospital', 'Tu Clave de acceso es: <strong>'.$pass.'</strong> Te recomendamos que inicies session y la cambies en el apartado de perfil', true);
@@ -104,9 +110,6 @@
                 $val->name('email')->value(clear($_POST['correo']))->pattern('email')->required();
                 $val->name('telefono')->value(clear($_POST['telefono']))->required();
 
-                
-                
-                
                 //Comprobar si se Cumplen todas las validaciones
                 
                 if($val->isSuccess()){

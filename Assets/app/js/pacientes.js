@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded",function(){
     tblPac = new DataTable("#tblPac",{
         aProcessing: true,
         aServerSide: true,
+        responsive: true,
         //Opciones de lenguaje
         language: {
             url: `${base_url}/Assets/app/js/dataTables.spanish.json`
@@ -24,13 +25,8 @@ document.addEventListener("DOMContentLoaded",function(){
             {data: `ced`},
             {data: `ap`},
             {data: `no`},
-            {data: `sx`},
-            {data: 'cedo'},
-            {data: 'cmun'},
-            {data: 'mnom'},
-            {data: `dir`},
-            {data: `fn`},
-            {data: `tf`},
+            {data: `mnom`},
+            {data: `correo`},
             {
                 defaultContent:"<div><button type='button' class='editarFnt btn btn-warning btn-xs'><i class='fa-regular fa-address-book'></i></button><button type='button' class='eliminarFnt btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></div>"
             },
@@ -39,14 +35,14 @@ document.addEventListener("DOMContentLoaded",function(){
         //Ocultar columnas
         columnDefs:[
             {
-                targets:[0,5,6],
+                targets:[0],
                 visible:false,
                 serchable:false,
                 extend: false
 
             },
-            { responsivePriority: 1, targets:  0},
-            { responsivePriority: 2, targets:  11},
+            { responsivePriority: 1, targets:  1},
+            { responsivePriority: 2, targets:  6},
         ],
         //Mostrar botones de exportacion
         dom:"lBfrtip",
@@ -89,6 +85,7 @@ const inputs = document.querySelectorAll('#formRegister input');
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	telefono: /^[01246]{4}-[0-9]{7}$/, // 7 a 14 numeros.
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     cedula: /^[0-9]{7,8}$/
 }
 
@@ -113,6 +110,9 @@ const validarFormulario = (e) => {
 		break;
 		case "tf":
 			validarCampo(expresiones.telefono, e.target, 'tf');
+		break;
+        case "correo":
+			validarCampo(expresiones.correo, e.target, 'correo');
 		break;
 	}
 }
@@ -223,6 +223,92 @@ async function save(e){
 }
 
 
+
+//agregar
+$("#buttonAdd").on(
+    "click",
+    "button.btn",function(){
+        openModal();
+        $('#modal-header').css('background', '#4FCFC3')
+        $(".modal-title").text('Nuevo paciente');
+        $(".id").hide();
+        $("#enviar").show();
+        document.getElementById("enviar").style.width = '100vh';
+        $("#edit").hide();
+        $("#delete").hide();
+        formulario.reset();
+        listarEDO();
+        
+    }
+    );
+
+
+//editar
+$("#tblPac tbody").on(
+    "click",
+    "button.editarFnt",
+    async function()
+    {
+
+        openModal();
+        $('#modal-header').css('background', '#FFD24C')
+        $(".modal-title").text('Editar Paciente');
+        $(".id").show();
+        $("#enviar").hide();
+        document.getElementById("enviar").style.width = '13vh';
+        $("#edit").show();
+        $("#delete").show();
+        let data_tabla = tblPac.row($(this).parents("tr")).data();
+
+        var id = data_tabla.id
+
+
+        const url = `${base_url}/Pacientes/onePaciente`;
+
+        const datos = new FormData();
+
+            datos.append('id', id);
+    
+        const respuesta = await fetch(url,{
+            method: "POST",
+            body: datos,
+        });
+    
+        const result = await respuesta.json();
+
+       console.log(result);
+
+        if(result){
+            let ced = result[0]['TMPAC_CI'];
+            let ap = result[0]['TMPAC_AP'];
+            let nom = result[0]['TMPAC_NO'];
+            let correo = result[0]['TMPAC_COR'];
+            let sx = result[0]['TMPAC_SX'];
+            let edo = result[0]['TMEDO_CE'];
+            let mun = result[0]['TMMUN_CM'];
+            let dir = result[0]['TMPAC_DIR'];
+            let fn = result[0]['TMPAC_FN'];
+            let tf = result[0]['TMPAC_TF']
+    
+            $(".id").text('Paciente Nro '+id);
+            $("#id").val(id);
+            $("#correo").val(correo);
+            $("#ced").val(ced);
+            $("#ap").val(ap);
+            $("#nom").val(nom);
+            $("#sx").val(sx); 
+            $("#sel_edo").val(edo);
+            changeEDO(mun);
+            $("#dir").val(dir);
+            $("#fn").val(fn);
+            $("#tf").val(tf);
+        }
+
+        
+    }
+);
+
+
 //Editar
 
 $("#formRegister").on(
@@ -242,6 +328,7 @@ async function edit(e){
     
     try {
         const url = `${base_url}/Pacientes/edit`;
+        
         
         const respuesta = await fetch(url,{
             method: "POST",
@@ -277,66 +364,6 @@ async function edit(e){
         console.log(err);
     }
 }
-
-//agregar
-$("#buttonAdd").on(
-    "click",
-    "button.btn",function(){
-        openModal();
-        $('#modal-header').css('background', '#4FCFC3')
-        $(".modal-title").text('Nuevo paciente');
-        $(".id").hide();
-        $("#enviar").show();
-        document.getElementById("enviar").style.width = '100vh';
-        $("#edit").hide();
-        $("#delete").hide();
-        formulario.reset();
-        listarEDO();
-        
-    }
-    );
-
-
-//editar
-$("#tblPac tbody").on(
-    "click",
-    "button.editarFnt",
-    async function()
-    {
-        openModal();
-        $('#modal-header').css('background', '#FFD24C')
-        $(".modal-title").text('Editar Paciente');
-        $(".id").show();
-        $("#enviar").hide();
-        document.getElementById("enviar").style.width = '13vh';
-        $("#edit").show();
-        $("#delete").show();
-        let data_tabla = tblPac.row($(this).parents("tr")).data();
-        var id = data_tabla.id
-        let ced = data_tabla.ced;
-        let ap = data_tabla.ap;
-        let nom = data_tabla.no;
-        let sx = data_tabla.sx;
-        let edo = data_tabla.cedo;
-        let mun = data_tabla.cmun;
-        let dir = data_tabla.dir;
-        let fn = data_tabla.fn;
-        let tf = data_tabla.tf
-
-        $(".id").text('Paciente Nro '+id);
-        $("#id").val(id);
-        $("#ced").val(ced);
-        $("#ap").val(ap);
-        $("#nom").val(nom);
-        $("#sx").val(sx); 
-        $("#sel_edo").val(edo);
-        changeEDO(mun);
-        $("#dir").val(dir);
-        $("#fn").val(fn);
-        $("#tf").val(tf);
-
-    }
-);
 
 //Eliminar
 

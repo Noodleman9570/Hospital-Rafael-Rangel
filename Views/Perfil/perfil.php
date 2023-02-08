@@ -5,9 +5,11 @@
           <div class="profile">
             <div class="info"><img class="user-img" src="<?= IMG ?>/default_avatar.png"">
               <h4><?=$_SESSION['name'];?></h4>
-              <p><?=$_SESSION['permisos'][1]['Rol'];?></p>
+              <p><?=$_SESSION['userData']['nombre_rol']?></p>
             </div>
-            <div class="cover-image"></div>
+            <div class="cover-image">
+              
+            </div>
           </div>
         </div>
         <div class="col-md-3">

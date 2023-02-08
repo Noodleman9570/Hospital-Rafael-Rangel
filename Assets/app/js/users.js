@@ -190,7 +190,7 @@ async function save(e){
                 layout: "center",
                 modal: "true",
                 buttons: [
-                    Noty.button('YES', 'btn btn-success', async function () {
+                    Noty.button('ACEPTAR', 'btn btn-success', async function () {
                     window.location.href = `${base_url}/Users`;  
                     }, {id: 'button1', 'data-status': 'ok'}),
                 ]
