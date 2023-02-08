@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 30, 2023 at 11:43 AM
+-- Generation Time: Feb 08, 2023 at 09:30 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -22,6 +22,34 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `bdch` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `bdch`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `citas`
+--
+
+CREATE TABLE `citas` (
+  `id_cita` int(11) NOT NULL,
+  `title` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `note` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `message` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `date_at` date NOT NULL,
+  `time_at` time NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_paciente` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_medic` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `citas`
+--
+
+INSERT INTO `citas` (`id_cita`, `title`, `note`, `message`, `date_at`, `time_at`, `created_at`, `id_paciente`, `id_user`, `id_medic`, `status`) VALUES
+(34, 'asfasfafsaf', 'asdfascvave', NULL, '2023-02-09', '01:25:00', '2023-02-08 00:20:45', 93, 11, 9, 0),
+(35, 'sadfasf', 'asdfasfaf', NULL, '2023-02-23', '04:05:00', '2023-02-08 00:49:21', 93, 11, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -49,11 +77,12 @@ INSERT INTO `pages` (`id`, `menu_id`, `titulo`, `page`, `descripcion`, `icono`, 
 (2, NULL, 'Archivos maestros', '#', '', 'fa-solid fa-book', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
 (3, 2, 'Pacientes', 'pacientes', '', '', 1, '2022-05-07 02:27:04', '2022-05-06 20:27:25'),
 (4, 2, 'Medicos', 'medicos', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
-(5, 2, 'Vacunas', 'vacunas', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
+(5, 2, 'Vacunas', 'vacunas', '', '', 0, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
 (6, 2, 'Especialidades', 'especialidades', '', '', 1, '2022-05-07 02:48:05', '2022-05-06 20:50:59'),
-(7, NULL, 'Consulta', 'consulta', 'Sección para insertar datos de la consulta realizada', 'fa-solid fa-stethoscope', 1, '2022-07-01 18:13:35', '2022-07-01 12:16:14'),
-(8, NULL, 'Área Covid-19', 'hospitalizacion', 'Ingreso, chequeo diario y alta del paciente', 'fa-solid fa-virus-covid', 1, '2022-06-30 01:49:28', '2022-06-29 20:03:52'),
-(9, NULL, 'Usuarios', 'users', '', 'fa-solid fa-users', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35');
+(7, NULL, 'Citas', 'citas', 'Sección para crear una cita', 'fa-solid fa-stethoscope', 1, '2022-07-01 18:13:35', '2022-07-01 12:16:14'),
+(8, NULL, 'Área Covid-19', 'hospitalizacion', 'Ingreso, chequeo diario y alta del paciente', 'fa-solid fa-virus-covid', 0, '2022-06-30 01:49:28', '2022-06-29 20:03:52'),
+(9, NULL, 'Usuarios', 'users', '', 'fa-solid fa-users', 1, '2022-04-19 23:20:11', '2022-04-19 17:21:35'),
+(10, NULL, 'Consulta', 'consulta', 'Pagina de consultas medicas', 'fas fa-user-md', 1, '2023-02-08 01:14:10', '2023-02-07 20:37:32');
 
 -- --------------------------------------------------------
 
@@ -85,7 +114,9 @@ INSERT INTO `permisos` (`id`, `id_rol`, `id_page`, `c`, `r`, `u`, `d`, `creado`,
 (6, 1, 6, 1, 1, 1, 1, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
 (7, 1, 7, 1, 1, 1, 1, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
 (8, 1, 8, 1, 1, 1, 1, '2022-05-01 16:11:58', '2022-05-01 10:13:24'),
-(9, 1, 9, 1, 1, 1, 1, '2022-06-30 02:10:29', '2022-06-29 20:11:02');
+(9, 1, 9, 1, 1, 1, 1, '2022-06-30 02:10:29', '2022-06-29 20:11:02'),
+(14, 1, 10, 1, 1, 1, 1, '2023-02-08 01:41:28', '2023-02-07 20:41:44'),
+(15, 3, 10, 1, 1, 1, 1, '2023-02-08 05:46:51', '2023-02-08 00:47:06');
 
 -- --------------------------------------------------------
 
@@ -97,7 +128,7 @@ CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
   `nombre_rol` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `status` int(11) NOT NULL
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -107,7 +138,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `descripcion`, `status`) VALUES
 (1, 'Administrador', '', 1),
 (2, 'Secretari@', '', 1),
-(3, 'Medico', '', 1);
+(3, 'Medico', 'Medico, doctores, etc', 1);
 
 -- --------------------------------------------------------
 
@@ -228,6 +259,7 @@ INSERT INTO `TMBCH_ESP` (`TMESP_ID`, `TMESP_CE`, `TMESP_NO`, `TMESP_DE`) VALUES
 CREATE TABLE `TMBCH_MED` (
   `TMMED_MID` int(11) NOT NULL,
   `TMMED_CI` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `TMMUN_CM` int(11) NOT NULL,
   `TMMED_DIR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMMED_AP` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -240,11 +272,9 @@ CREATE TABLE `TMBCH_MED` (
 -- Dumping data for table `TMBCH_MED`
 --
 
-INSERT INTO `TMBCH_MED` (`TMMED_MID`, `TMMED_CI`, `TMMUN_CM`, `TMMED_DIR`, `TMMED_AP`, `TMMED_NO`, `TMMED_TF`, `TMESP_ID`) VALUES
-(1, 'V-27394396', 6, 'Centro, carrera 8, entre calles 9 y 10', 'Saavedraa', 'kevin', '04165026559', 1),
-(3, 'V-27364259', 2, 'Centro diagonal a al iglesia coromoto', 'Carmona', 'Maria Evita', '4265740027', 1),
-(6, 'V-27495433', 2, 'aadsfsad', 'Lius', 'Alejandro', '432423424', 1),
-(7, 'V-32594658', 350, 'El abejal vereda 10 parte alta, sector la flores', 'Paredes Jacome', 'Orlando JosÃ©', '657857', 1);
+INSERT INTO `TMBCH_MED` (`TMMED_MID`, `TMMED_CI`, `id_usuario`, `TMMUN_CM`, `TMMED_DIR`, `TMMED_AP`, `TMMED_NO`, `TMMED_TF`, `TMESP_ID`) VALUES
+(9, '24697332', 48, 66, 'centrico', 'Zapatas', 'Jorge', '0416-5026159', 5),
+(11, '2754876', 50, 363, 'asdfasf', 'Saavedra', 'Kevin', '0416-5026559', 1);
 
 -- --------------------------------------------------------
 
@@ -613,6 +643,7 @@ CREATE TABLE `TMBCH_PAC` (
   `TMPAC_AP` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_SX` enum('m','f') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TMPAC_DIR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TMPAC_COR` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `TMPAC_FN` date NOT NULL,
   `TMPAC_TF` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -621,17 +652,8 @@ CREATE TABLE `TMBCH_PAC` (
 -- Dumping data for table `TMBCH_PAC`
 --
 
-INSERT INTO `TMBCH_PAC` (`TMPAC_PID`, `TMPAC_CI`, `TMMUN_CM`, `TMPAC_NO`, `TMPAC_AP`, `TMPAC_SX`, `TMPAC_DIR`, `TMPAC_FN`, `TMPAC_TF`) VALUES
-(2, '24896666', 6, 'Maria Antonieta', 'Sanchez', 'f', 'Capacho', '1998-04-17', '04248963333'),
-(5, '27364259', 4, 'Camila ', 'Becerra', 'f', 'Barrio obrero', '2004-04-22', '04248965545'),
-(7, '27394396', 2, 'Kevin Leonardo', 'Saavedra Carmona', 'm', 'Avenida principal', '2000-07-13', '04165026559'),
-(35, '27456789', 6, 'John', 'Becerra', 'm', 'Barrio obrero', '1997-06-26', '04165026559'),
-(51, '26548693', 370, 'Morbius', 'Michael', 'm', 'Centro, carrera 8, entre calles 9 y 10', '1980-06-18', '04165895214'),
-(60, '32594658', 1, 'Orlando José', 'Paredes Jacome', 'm', 'El abejal vereda 10 parte alta, sector la flores', '2007-12-08', '54564564'),
-(61, '27395367', 1, 'Fermina', 'Michael', 'f', 'Centro, carrera 8, entre calles 9 y 10', '1995-07-13', '0416-5026559'),
-(62, '26541693', 370, 'Morbius', 'Michael', 'm', 'Centro, carrera 8, entre calles 9 y 10', '1980-06-18', '0416-5895214'),
-(67, '22589368', 149, 'Orlando', 'Hopkins', 'm', 'sdafasfd', '1992-07-01', '0414-8965742'),
-(89, '24896145', 29, 'Ayala', 'Alberto', 'm', 'asfasef', '2004-06-10', '0414-8885552');
+INSERT INTO `TMBCH_PAC` (`TMPAC_PID`, `TMPAC_CI`, `TMMUN_CM`, `TMPAC_NO`, `TMPAC_AP`, `TMPAC_SX`, `TMPAC_DIR`, `TMPAC_COR`, `TMPAC_FN`, `TMPAC_TF`) VALUES
+(93, '27394396', 363, 'Kevin', 'Saavedra', 'm', 'Centro', 'kevinsaavedra55@gmail.com', '2000-07-13', '0416-5026559');
 
 -- --------------------------------------------------------
 
@@ -691,23 +713,18 @@ CREATE TABLE `TTBCH_CHD` (
 
 CREATE TABLE `TTBCH_CON` (
   `TTCON_CC` int(11) NOT NULL,
-  `TMPAC_PID` int(11) NOT NULL,
-  `TTCON_FE` datetime NOT NULL DEFAULT current_timestamp(),
-  `TTCON_PC` enum('positivo','negativo') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TTCON_TP` float NOT NULL,
-  `TTCON_PE` float NOT NULL,
+  `id_cita` int(11) NOT NULL,
   `TTCON_SI` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `TTCON_DI` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TTCON_TM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TMMED_MID` int(11) DEFAULT NULL
+  `TTCON_TM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `TTBCH_CON`
 --
 
-INSERT INTO `TTBCH_CON` (`TTCON_CC`, `TMPAC_PID`, `TTCON_FE`, `TTCON_PC`, `TTCON_TP`, `TTCON_PE`, `TTCON_SI`, `TTCON_DI`, `TTCON_TM`, `TMMED_MID`) VALUES
-(19, 2, '2022-07-03 18:40:57', 'positivo', 38, 66, 'Dolor de cabeza y diarrea', 'Tiene Covid', 'Cama reposo oxigeno y un unguento', 1);
+INSERT INTO `TTBCH_CON` (`TTCON_CC`, `id_cita`, `TTCON_SI`, `TTCON_DI`, `TTCON_TM`) VALUES
+(6, 35, 'gfdgfsg', 'dsfgsdgsd', 'sdgsdg');
 
 -- --------------------------------------------------------
 
@@ -722,14 +739,6 @@ CREATE TABLE `TTBCH_HIFO` (
   `TMPAC_PID` int(11) NOT NULL,
   `TTHIFO_ST` enum('HOSPITALIZADO','DE ALTA') CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `TTBCH_HIFO`
---
-
-INSERT INTO `TTBCH_HIFO` (`TTHIFO_CDH`, `TTHIFO_FI`, `TTHIFO_NC`, `TMPAC_PID`, `TTHIFO_ST`) VALUES
-(6, '2022-07-06 17:23:26', 7, 7, 'HOSPITALIZADO'),
-(7, '2022-07-07 05:49:25', 3, 5, 'HOSPITALIZADO');
 
 -- --------------------------------------------------------
 
@@ -789,25 +798,36 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `telefono` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL
+  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `image` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `Id_rol`, `usuario`, `email`, `telefono`, `password`) VALUES
-(11, 1, 'kevin', 'kevinsaavedra55@gmail.com', '04165026559', '9a76db68a30bebc9d0b74caff652000fb2aa9ea301f915388efb590035ab6404'),
-(12, 2, 'Maria Evita', 'mariaevita06@gmail.com', '04265740027', '5260b47cf81aa8cf442431536dd516f05254d2be64e6037dd99c67c93e008c16'),
-(13, 3, 'Oriany', 'oriany9570@gmail.com', '04265702722', 'a61d357b8275d2c738f9aa7c58e79316c8d82edc18044c09698ebbfaae5ac5e9'),
-(14, 1, 'Admin', 'admin@admin.com', '04165026559', '41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb'),
-(15, 1, 'Orlando', 'tatoparedes0812@gmail.com', '0416852468', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(45, 1, 'yopo', 'yopo@yopo.com', '2132323', 'c8b60a7ad8a3abe707808c6b2590a367da0d1f01e8482c27b5d61896cdaafd3f'),
-(46, 3, 'Leonardos', 'kevinsaavedra00@hotmail.com', '0414-4589963', 'bc3abb665f4f37ae453989b9b8620e5fe7b3bb6fc70ce60e61797105856ebb18');
+INSERT INTO `usuarios` (`id_usuario`, `Id_rol`, `usuario`, `email`, `telefono`, `password`, `image`) VALUES
+(11, 1, 'kevin', 'kevinsaavedra55@gmail.com', '04165026559', '9a76db68a30bebc9d0b74caff652000fb2aa9ea301f915388efb590035ab6404', NULL),
+(12, 2, 'Maria Evita', 'mariaevita06@gmail.com', '04265740027', '5260b47cf81aa8cf442431536dd516f05254d2be64e6037dd99c67c93e008c16', NULL),
+(14, 1, 'Admin', 'admin@admin.com', '04165026559', '41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb', NULL),
+(15, 1, 'Orlando', 'tatoparedes0812@gmail.com', '0416852468', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', NULL),
+(45, 1, 'yopo', 'yopo@yopo.com', '2132323', 'c8b60a7ad8a3abe707808c6b2590a367da0d1f01e8482c27b5d61896cdaafd3f', NULL),
+(47, 1, 'Leonardo', 'leo@gmail.com', '0416-5026559', 'ff6816bbb8f2deeebd05629bdca6bf7bf2b4eb41eb9b1cd4ebff0815e3f21efc', NULL),
+(48, 3, 'Jorgex', 'jorgex@gmail.com', '0416-5026159', '5c9bba66c7ab51c9756b23efe6036dc29d3793e90e1b14544049db876d880243', NULL),
+(50, 3, 'kevin123', 'kevinsaavedra00@hotmail.com', '0416-5026559', '93f87fb99bc6b07216ff61e38b29abc238767d4682be2cedcc536b5394e0b411', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `citas`
+--
+ALTER TABLE `citas`
+  ADD PRIMARY KEY (`id_cita`),
+  ADD KEY `id_paciente` (`id_paciente`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_medic` (`id_medic`);
 
 --
 -- Indexes for table `pages`
@@ -864,6 +884,8 @@ ALTER TABLE `TMBCH_MED`
   ADD UNIQUE KEY `TMMED_IC` (`TMMED_CI`),
   ADD UNIQUE KEY `TMMED_CI` (`TMMED_CI`),
   ADD UNIQUE KEY `TMMED_CI_2` (`TMMED_CI`),
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`),
+  ADD UNIQUE KEY `id_usuario_2` (`id_usuario`),
   ADD KEY `TMESP-CE_idx` (`TMESP_ID`),
   ADD KEY `TMMUN-CM` (`TMMUN_CM`);
 
@@ -908,9 +930,7 @@ ALTER TABLE `TTBCH_CHD`
 --
 ALTER TABLE `TTBCH_CON`
   ADD PRIMARY KEY (`TTCON_CC`),
-  ADD KEY `TMPAC-CI_idx` (`TMPAC_PID`),
-  ADD KEY `TMMED-CCI_idx` (`TMMED_MID`),
-  ADD KEY `TMMED_MID` (`TMMED_MID`);
+  ADD UNIQUE KEY `id_cita` (`id_cita`);
 
 --
 -- Indexes for table `TTBCH_HIFO`
@@ -945,6 +965,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT for table `citas`
+--
+ALTER TABLE `citas`
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
@@ -954,7 +980,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -990,7 +1016,7 @@ ALTER TABLE `TMBCH_ESP`
 -- AUTO_INCREMENT for table `TMBCH_MED`
 --
 ALTER TABLE `TMBCH_MED`
-  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `TMMED_MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `TMBCH_MUN`
@@ -1002,7 +1028,7 @@ ALTER TABLE `TMBCH_MUN`
 -- AUTO_INCREMENT for table `TMBCH_PAC`
 --
 ALTER TABLE `TMBCH_PAC`
-  MODIFY `TMPAC_PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `TMPAC_PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `TMBCH_VAE`
@@ -1014,7 +1040,7 @@ ALTER TABLE `TMBCH_VAE`
 -- AUTO_INCREMENT for table `TTBCH_CON`
 --
 ALTER TABLE `TTBCH_CON`
-  MODIFY `TTCON_CC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `TTCON_CC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `TTBCH_HIFO`
@@ -1026,11 +1052,19 @@ ALTER TABLE `TTBCH_HIFO`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `citas`
+--
+ALTER TABLE `citas`
+  ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`),
+  ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `citas_ibfk_3` FOREIGN KEY (`id_medic`) REFERENCES `TMBCH_MED` (`TMMED_MID`);
 
 --
 -- Constraints for table `pages`
@@ -1056,7 +1090,8 @@ ALTER TABLE `TMBCH_CAM`
 --
 ALTER TABLE `TMBCH_MED`
   ADD CONSTRAINT `TMBCH_MED_ibfk_3` FOREIGN KEY (`TMMUN_CM`) REFERENCES `TMBCH_MUN` (`TMMUN_CM`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `TMBCH_MED_ibfk_4` FOREIGN KEY (`TMESP_ID`) REFERENCES `TMBCH_ESP` (`TMESP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `TMBCH_MED_ibfk_4` FOREIGN KEY (`TMESP_ID`) REFERENCES `TMBCH_ESP` (`TMESP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `TMBCH_MED_ibfk_5` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `TMBCH_MUN`
@@ -1087,8 +1122,7 @@ ALTER TABLE `TTBCH_CHD`
 -- Constraints for table `TTBCH_CON`
 --
 ALTER TABLE `TTBCH_CON`
-  ADD CONSTRAINT `TTBCH_CON_ibfk_2` FOREIGN KEY (`TMMED_MID`) REFERENCES `TMBCH_MED` (`TMMED_MID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `TTBCH_CON_ibfk_3` FOREIGN KEY (`TMPAC_PID`) REFERENCES `TMBCH_PAC` (`TMPAC_PID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `TTBCH_CON_ibfk_4` FOREIGN KEY (`id_cita`) REFERENCES `citas` (`id_cita`);
 
 --
 -- Constraints for table `TTBCH_HIFO`

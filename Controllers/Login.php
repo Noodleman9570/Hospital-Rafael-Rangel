@@ -39,6 +39,7 @@
                         $_SESSION['iduser'] = $usuario['id_usuario'];
                         $_SESSION['name'] = $usuario['usuario'];
                         $_SESSION['email'] = $usuario['email'];
+                        $_SESSION['user_image'] = $usuario['image'];
                         $_SESSION['login'] = true;
                         Auth::sessionUser($_SESSION['iduser']);
                         $arrJson = ['msg'=>'Inicio de sesion exitoso!'];

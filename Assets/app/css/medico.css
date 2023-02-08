@@ -55,16 +55,20 @@ tbody tr td{
     margin: 20px 10px;
 }
 
-tbody tr td:nth-child(9){
+tbody tr td:nth-child(7){
     width: 6.5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-tbody tr td:nth-child(9) div {
+tbody tr td:nth-child(7) div {
     width: 100%;
     display: flex;
     justify-content: space-around;
+}
+
+tbody tr {
+    width: 36px;
 }
 
 .editarFnt{

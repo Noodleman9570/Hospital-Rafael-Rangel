@@ -15,6 +15,7 @@
             $data['page_title'] = "Página principal";
             $data['page_name'] = "home";
             $data['style_css'] = "/home.css";
+            $data['style2_css'] = "/home/main.css";
             $this->views->getView($this,"home",$data);
         }
 

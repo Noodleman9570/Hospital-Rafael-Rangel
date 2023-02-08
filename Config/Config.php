@@ -33,6 +33,7 @@
     define('VIEW', ROOT.DS."Views");
     define('TEMPLATE', VIEW.DS."Template");
     define('IMAGE_PATH', ROOT.DS."Assets".DS."images");
+    define('PROFILE_IMG', IMAGE_PATH."profile");
 
     
     //Archivos publicos

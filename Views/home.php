@@ -9,8 +9,9 @@
           <li class="breadcrumb-item"><a href="#">Blank Page</a></li>
         </ul>
       </div>
-    
-        <div class="jumbotron">
+
+      <div class="row">
+        <div class="col-md-6">
           <h1 class="display-4">Hospital Rafael Rangel</h1>
           <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -21,7 +22,7 @@
             
             <div class="carousel-inner" >
               <div class="carousel-item active">
-                <img src="<?=HOME_IMG?>/entrance.jpeg"  class="d-block w-50" alt="camilla">
+                <img src="<?=HOME_IMG?>/entrance.jpeg"  class="d-block w-100" alt="camilla">
                 <div class="carousel-caption d-none d-md-block">
                   <h5>First slide label</h5>
                 </div>
@@ -48,7 +49,94 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+          
         </div>
+        
+        <div class="col-md-6 mt-auto text-center" style="margin-bottom: 100px;">
+            <article class="full-box tile">
+                <div class="full-box tile-title text-center text-titles text-uppercase">
+                    Medicos
+                </div>
+                <div class="full-box tile-icon text-center">
+                  <i style="padding-top: 8px;" class="fas fa-user-md fa-8x"></i>
+                </div>
+                <div class="full-box tile-number text-titles">
+                    <p class="full-box">
+                        <?php
+                        $conexion = mysqli_connect("localhost", "root", "", "bdch") or die ("error de conexion");
+                        $consulta = "SELECT COUNT(*) AS TOTAL FROM  `TMBCH_MED` ";
+                        $resultado = mysqli_query($conexion, $consulta);
+                        $row = mysqli_fetch_array($resultado);
+                            echo $row['TOTAL'];
+                        ?>
+                    </p>
+                    <small>Registrados</small>
+                </div>
+            </article>
+            <article class="full-box tile tile2">
+                <div class="full-box tile-title text-center text-titles text-uppercase">
+                    Pacientes
+                </div>
+                <div class="full-box tile-icon text-center">
+                  <i style="padding-top: 8px;" class="fas fa-user-injured fa-8x"></i>
+                </div>
+                <div class="full-box tile-number text-titles">
+                    <p class="full-box">
+                    <?php
+                        $conexion = mysqli_connect("localhost", "root", "", "bdch") or die ("error de conexion");
+                        $consulta = "SELECT COUNT(*) AS TOTAL FROM  `TMBCH_PAC` ";
+                        $resultado = mysqli_query($conexion, $consulta);
+                        $row = mysqli_fetch_array($resultado);
+                            echo $row['TOTAL'];
+                        ?>
+                    </p>
+                    <small>Registrados</small>
+                </div>
+            </article>
+            <article class="full-box tile tile3">
+                <div class="full-box tile-title text-center text-titles text-uppercase">
+                    Usuarios
+                </div>
+                <div class="full-box tile-icon text-center">
+                  <i style="padding-top: 15px;" class="fas fa-users fa-7x"></i>
+                </div>
+                <div class="full-box tile-number text-titles">
+                    <p class="full-box">
+                    <?php
+                        $conexion = mysqli_connect("localhost", "root", "", "bdch") or die ("error de conexion");
+                        $consulta = "SELECT COUNT(*) AS TOTAL FROM  `usuarios` ";
+                        $resultado = mysqli_query($conexion, $consulta);
+                        $row = mysqli_fetch_array($resultado);
+                            echo $row['TOTAL'];
+                        ?>
+                    </p>
+                    <small>Registrados</small>
+                </div>
+            </article>
+            <article class="full-box tile tile3">
+                <div class="full-box tile-title text-center text-titles text-uppercase">
+                    Consultas
+                </div>
+                <div class="full-box tile-icon text-center">
+                  <i style="padding-top: 15px;"  class="fas fa-file-medical fa-6x"></i>
+                </div>
+                <div class="full-box tile-number text-titles">
+                    <p class="full-box">
+                    <?php
+                        $conexion = mysqli_connect("localhost", "root", "", "bdch") or die ("error de conexion");
+                        $consulta = "SELECT COUNT(*) AS TOTAL FROM  `citas` ";
+                        $resultado = mysqli_query($conexion, $consulta);
+                        $row = mysqli_fetch_array($resultado);
+                            echo $row['TOTAL'];
+                        ?>
+                    </p>
+                    <small>Registrados</small>
+                </div>
+            </article>
+        </div>
+      </div>
+    
+        
 
     </main>
     <?php footerAdmin($data); ?>
