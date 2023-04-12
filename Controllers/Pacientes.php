@@ -63,7 +63,7 @@
                     $val->name('apellido')->value(clear($_POST['apellido']))->required();
                     $val->name('nombre')->value(clear($_POST['nombre']))->required();
                     $val->name('email')->value(clear($_POST['correo']))->pattern('email')->required();
-                    $val->name('Fecha de nacimiento')->value(clear($_POST['fechaNacimiento']))->dateLimit()->required();
+                    $val->name('Fecha de nacimiento')->value(clear($_POST['fechaNacimiento']))->yearLimit(5, 105)->required();
                     $val->name('telefono')->value(clear($_POST['telefono']))->pattern('tel')->required();
                     if($val->isSuccess()){
 

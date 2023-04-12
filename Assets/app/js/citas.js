@@ -80,6 +80,7 @@ function listarMed(){
     cedula: /^[0-9]{7,8}$/,
     temp: /^[3][5-9]$/,
     peso: /^[2-9][1-9]$/,
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 }
 
 const campos = {
@@ -116,6 +117,9 @@ const validarFormulario = (e) => {
 		break;
 		case "telefono":
 			validarCampo2(expresiones.telefono, e.target, 'telefono');
+		break;
+        case "correo":
+			validarCampo2(expresiones.correo, e.target, 'correo');
 		break;
 	}
 }

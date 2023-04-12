@@ -130,7 +130,15 @@
                     </div>
                   </div>
 
+              <div class="formulario__grupo" id="grupo__correo">
+                <label for="correo" class="formulario__label">Correo</label>
+                <div class="formulario__grupo-input">
+                  <input type="text" class="formulario__input" name="correo" id="correo" placeholder="example@example.com">
+                  <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+              </div>
 
+                
               
               <div class="row">
               <!-- Grupo: Apellido -->
